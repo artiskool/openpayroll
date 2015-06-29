@@ -88,6 +88,7 @@ function login() {
 	myForm.setFocusOnFirstActive();
 	myForm.attachEvent("onButtonClick", function(id){
 		if (myForm.validate()) { // success
+			do_login();
 			w1.close();
 		}
 		else {
@@ -351,7 +352,34 @@ function hr_201File()
 	myTabbar.tabs("t5").attachForm(school_work, true);
 }
 
-function login()
+function do_login()
 {
-	
+	id = "testclient";
+	secret = "$2y$10$1JBA.GB1ENaOudjwE2GUwuSveJk9eoNhxOSvAvzj4In8Yb83bbW5i";
+	uname = "testuser";
+	pass = "$2y$10$1JBA.GB1ENaOudjwE2GUwuSveJk9eoNhxOSvAvzj4In8Yb83bbW5i";
+
+	var request = new XMLHttpRequest();
+	path = "http://localhost:8888/grant_type=password&client_id="+id+"&client_secret="+secret+"&username="+uname+"&password="+pass+"";
+	request.onreadystatechange = state_change;
+
+	request.open("POST", path, true);
+	request.setRequestHeader("POST", "/oauth HTTP/1.1");
+	request.setRequestHeader("Accept", "application/json");
+	request.setRequestHeader("Authorization", "Basic dGVzdHVzZXI6dGVzdHBhc3M=");
+	request.setRequestHeader("Content-Type", "application/json");
+	request.setRequestHeader("Access-Control-Allow-Headers", "X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method, Authorization");
+	request.setRequestHeader("Access-Control-Allow-Origin", "*");
+
+	//request.send(null);
+	console.log(path);
+	function state_change()
+	{
+		if (request.readyState == 4) {
+			if (request.status==200) {
+				alert(1);
+			}
+		}
+	}
+
 }
