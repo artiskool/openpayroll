@@ -1,0 +1,32 @@
+{
+	"name": "artiskool/cloud",
+	"description": "Cloud",
+	"type": "project",
+	"license": "AntHub Corporation Proprietary License",
+	"keywords": [
+		"anthub",
+		"cloud"
+	],
+	"homepage": "https://anthub.io/",
+	"support": {
+		"email": "support@anthub.io",
+		"source": "https://bitbucket.org/artiskool/cloud",
+		"issues": "https://bitbucket.org/artiskool/cloud/issues"
+	},
+	"repositories": [
+		{
+			"type": "vcs",
+			"url":  "git@bitbucket.org:artiskool/anthill.git"
+		}
+	],
+	"require": {
+		"php": ">=5.3.3",
+		"zendframework/zendframework": "~2.4",
+		"doctrine/annotations": "dev-master",
+		"zendframework/zendpdf": "dev-master",
+		"zendframework/zendservice-recaptcha": "dev-master",
+		"artiskool/anthill": "dev-master"
+	},
+	"require-dev": {
+	}
+}

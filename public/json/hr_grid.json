@@ -1,0 +1,55 @@
+{
+  head:[
+       { width:100,  type:"ro",   align:"center",  value:"Image"},
+       { width:100,  type:"ro",   align:"center",  value:"Employee ID"},
+       { width:100,  type:"ro",   align:"center",  value:"First Name"},
+       { width:100, type:"ro",    align:"center", value:"Last Name"},
+       { width:100, type:"ro",    align:"center",   value:"Birthdate"},
+       { width:100, type:"ro",    align:"center",   value:"Mobile"},
+       { width:235,  type:"ro", align:"center",  value:"Address"},
+       { width:100,  type:"ro",    align:"center", value:"City"},
+       { width:100,  type:"ro",    align:"center",  value:"Province"},
+       { width:100,  type:"ro",    align:"center",  value:"Created By"},
+   ],
+    rows:[
+        {  id:1001,
+          data:[
+               "<img src='./img/dokmate.png'/>",
+               "1001",
+               "Ray",
+               "Abanid",
+               "05/05/05",
+               "0999123456",
+               "Cogon, Pardo",
+               "Cebu City",
+               "Cebu",
+               "jong"
+               ] },
+       {  id:1002, 
+          data:[
+                "<img src='./img/48x48-logo.png'/>",
+               "1002",
+               "Raymart",
+               "Obeso",
+               "05/05/05",
+               "0999123456",
+               "Lawa-an, Talisay",
+               "Talisay City",
+               "Cebu",
+               "jong"
+               ] },
+
+      {  id:1003, 
+        data:[
+              "<img src='./img/dokmate.png'/>",
+             "1003",
+             "Jhanin",
+             "Briones",
+             "05/05/05",
+             "0999123456",
+             "Sangat, San Fernando",
+             "-",
+             "Cebu",
+             "jong"
+             ] },
+]}

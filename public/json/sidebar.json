@@ -1,0 +1,11 @@
+{items: [
+	{id: "dashboard", text: "Dashboard", icon: "disk_c.png", selected: true},
+	{id: "pim", text: "PIM", icon: "recent.png"},
+	{id: "leave", text: "Leave", icon: "desktop.png"},
+	{id: "time", text: "Time", icon: "downloads.png"},
+	{type: "separator"},
+	{id: "recruitment", text: "Recruitment", icon: "documents.png"},
+	{id: "performance", text: "Performance", icon: "pictures.png"},
+	{id: "reports", text: "Reports", icon: "video.png"},
+	{id: "admin", text: "Admin", icon: "music.png"}
+]}

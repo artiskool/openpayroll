@@ -1,0 +1,29 @@
+html, body {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+	background-color: #fcfff5;
+}
+
+/* sidebar shadow */
+div.dhxsidebar_cont {
+	box-shadow: 0 2px 7px rgba(0, 0, 0, 0.1);
+}
+
+/* change toolbar's bottom_4px color to body's */
+.dhxsidebar_base_dhx_skyblue div.dhxcelltop_toolbar {
+	background-color: inherit;
+}
+
+.dhxform_item_label_left.btnSub div.dhxform_btn_txt {
+	background-image: url('../img/save.gif');
+	background-repeat: no-repeat;
+	background-position: 0px 3px;
+	padding: 0 10px 0 22px;
+}
+
+.dhxform_obj_dhx_skyblue .btnSub div.dhxform_btn {
+	float: right !important;
+}
