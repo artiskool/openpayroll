@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="./dhtmlx/dhtmlx.css"/>
 	<link rel="stylesheet" type="text/css" href="./css/style.css"/>
 
+	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>	
 	<script src="./dhtmlx/dhtmlx.js"></script>
 	<script src="./js/cloud.js"></script>
 </head>

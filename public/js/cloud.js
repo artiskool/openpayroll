@@ -88,8 +88,9 @@ function login() {
 	myForm.setFocusOnFirstActive();
 	myForm.attachEvent("onButtonClick", function(id){
 		if (myForm.validate()) { // success
-			do_login();
-			w1.close();
+			if(do_login() == 1) {
+				w1.close();
+			}
 		}
 		else {
 		}
@@ -175,7 +176,6 @@ function hr()
 	myMenu.attachEvent("onClick", function(id) {
 		if("201_new" == id) {
 			hr_201File();
-			formData.hideItem("basic_button");
 		}
 	});
 }
@@ -277,7 +277,7 @@ function hr_201File()
 		{ type:"block", width: 743, list: [
 			{type: "select", name: "province", label: "Province", inputWidth: 302, position: "label-top" },
 			{ type: "newcolumn" },
-			{type: "select", name: "country", offsetLeft: 85, label: "Country", inputWidth: 302, position: "label-top" },
+			{type: "select", name: "country", offsetLeft: 88, label: "Country", inputWidth: 302, position: "label-top" },
 		]},
 		]},// end Contact details
 		{ type: "button", value: "Submit", className: "btnSub" }
@@ -298,7 +298,7 @@ function hr_201File()
 		{ type:"block", width: 743, list: [
 			{type: "calendar", name: "date_hired", label: "Date Hired", inputWidth: 302, position: "label-top" },
 			{ type: "newcolumn" },
-			{type: "calendar", name: "date_ended", offsetLeft: 85, label: "Date Ended", inputWidth: 302, position: "label-top" },
+			{type: "calendar", name: "date_ended", offsetLeft: 80, label: "Date Ended", inputWidth: 302, position: "label-top" },
 		]},
 
 		]},// end Employment details
@@ -354,32 +354,39 @@ function hr_201File()
 
 function do_login()
 {
-	id = "testclient";
-	secret = "$2y$10$1JBA.GB1ENaOudjwE2GUwuSveJk9eoNhxOSvAvzj4In8Yb83bbW5i";
-	uname = "testuser";
-	pass = "$2y$10$1JBA.GB1ENaOudjwE2GUwuSveJk9eoNhxOSvAvzj4In8Yb83bbW5i";
-
-	var request = new XMLHttpRequest();
-	path = "http://localhost:8888/grant_type=password&client_id="+id+"&client_secret="+secret+"&username="+uname+"&password="+pass+"";
-	request.onreadystatechange = state_change;
-
-	request.open("POST", path, true);
-	request.setRequestHeader("POST", "/oauth HTTP/1.1");
-	request.setRequestHeader("Accept", "application/json");
-	request.setRequestHeader("Authorization", "Basic dGVzdHVzZXI6dGVzdHBhc3M=");
-	request.setRequestHeader("Content-Type", "application/json");
-	request.setRequestHeader("Access-Control-Allow-Headers", "X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method, Authorization");
-	request.setRequestHeader("Access-Control-Allow-Origin", "*");
-
-	//request.send(null);
-	console.log(path);
-	function state_change()
-	{
-		if (request.readyState == 4) {
-			if (request.status==200) {
-				alert(1);
-			}
-		}
-	}
-
+	var user = $("input[name='username']").val();
+	var pass = $("input[name='password']").val();
+	
+	$.ajax({
+		type: "POST",
+		headers: {
+			"Accept": "application/json",
+			"Content-Type": "application/json",
+			'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8',
+			"Authorization": "Basic " + "dGVzdGNsaWVudDp0ZXN0cGFzcw=="
+		},
+		url: "http://localhost:8888/oauth",
+		data: {
+			grant_type: "password",
+			username: user,
+			password: pass,
+			client_id: "testclient"
+		},
+		dataType: "json",
+		success: function(response)
+		 {
+		 	console.log(response);
+		 	return 1;
+		 },
+		 error: function(jqXHR, textStatus)
+		 {
+		 	if(jqXHR.statusText == "invalid_client") {
+		 		dhtmlx.alert({
+			 		title: "Invalid Credentials",
+					text: "Username or Password is Incorrect",
+				});
+		 	}
+		 	return 0;
+		 }
+	});
 }
