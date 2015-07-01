@@ -2,6 +2,8 @@ var mySidebar;
 var myToolbar;
 var loginPopup;
 var loginForm;
+var token;
+
 function doOnLoad() {
 	mySidebar = new dhtmlXSideBar({
 		parent: document.body,
@@ -88,9 +90,7 @@ function login() {
 	myForm.setFocusOnFirstActive();
 	myForm.attachEvent("onButtonClick", function(id){
 		if (myForm.validate()) { // success
-			if(do_login() == 1) {
-				w1.close();
-			}
+			do_login(w1);
 		}
 		else {
 		}
@@ -352,11 +352,11 @@ function hr_201File()
 	myTabbar.tabs("t5").attachForm(school_work, true);
 }
 
-function do_login()
+function do_login(w1)
 {
 	var user = $("input[name='username']").val();
 	var pass = $("input[name='password']").val();
-	
+
 	$.ajax({
 		type: "POST",
 		headers: {
@@ -375,18 +375,51 @@ function do_login()
 		dataType: "json",
 		success: function(response)
 		 {
-		 	console.log(response);
-		 	return 1;
+		 	var getRefreshToken = get_new_access_token(response.refresh_token, w1);
 		 },
-		 error: function(jqXHR, textStatus)
+		 error: function(jqXHR)
 		 {
 		 	if(jqXHR.statusText == "invalid_client") {
 		 		dhtmlx.alert({
 			 		title: "Invalid Credentials",
 					text: "Username or Password is Incorrect",
 				});
+		 	} else if(jqXHR.statusText == "invalid_grant") {
+		 		dhtmlx.alert({
+			 		title: "Invalid Grant",
+					text: "The Authorization is Invalid",
+				});
 		 	}
-		 	return 0;
 		 }
+	});
+}
+
+function get_new_access_token(getRefreshToken, w1)
+{
+	$.ajax({
+		type: "POST",
+		headers: {
+			"Accept": "application/json",
+			"Content-Type": "application/json",
+			'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8',
+		},
+		url: "http://localhost:8888/oauth",
+		data: {
+			grant_type: "refresh_token",
+			refresh_token: getRefreshToken,
+			client_id: "testclient",
+			client_secret: "testpass"
+		},
+		dataType: "json",
+		success: function(response)
+		{
+			token = response.access_token;
+			w1.close();
+		},
+		error: function(jqXHR)
+		{
+			console.log(jqXHR);
+		}
+
 	});
 }
