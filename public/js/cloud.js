@@ -52,6 +52,7 @@ function doOnLoad() {
 	myToolbar.attachEvent("onClick", function(id) {
 		if("hr" == id) {
 			hr();
+			get_all_employees();
 		}
 	});
 
@@ -345,11 +346,17 @@ function hr_201File()
 		{ type: "button", value: "Submit", className: "btnSub" }
 	];
 
-	myTabbar.tabs("t1").attachForm(formData, true);
+	saveBasic = myTabbar.tabs("t1").attachForm(formData, true);
 	myTabbar.tabs("t2").attachForm(contact_details, true);
 	myTabbar.tabs("t3").attachForm(employment_details, true);
 	myTabbar.tabs("t4").attachForm(government_details, true);
 	myTabbar.tabs("t5").attachForm(school_work, true);
+
+	saveBasic.attachEvent('onButtonClick', function(id) {
+		if(id == 'basic_button') {
+			save_basic_information();
+		}
+	});
 }
 
 function do_login(w1)
@@ -357,40 +364,44 @@ function do_login(w1)
 	var user = $("input[name='username']").val();
 	var pass = $("input[name='password']").val();
 
-	$.ajax({
-		type: "POST",
-		headers: {
-			"Accept": "application/json",
-			"Content-Type": "application/json",
-			'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8',
-			"Authorization": "Basic " + "dGVzdGNsaWVudDp0ZXN0cGFzcw=="
-		},
-		url: "http://localhost:8888/oauth",
-		data: {
-			grant_type: "password",
-			username: user,
-			password: pass,
-			client_id: "testclient"
-		},
-		dataType: "json",
-		success: function(response)
-		 {
-		 	var getRefreshToken = get_new_access_token(response.refresh_token, w1);
-		 },
-		 error: function(jqXHR)
-		 {
-		 	if(jqXHR.statusText == "invalid_client") {
-		 		dhtmlx.alert({
-			 		title: "Invalid Credentials",
-					text: "Username or Password is Incorrect",
-				});
-		 	} else if(jqXHR.statusText == "invalid_grant") {
-		 		dhtmlx.alert({
-			 		title: "Invalid Grant",
-					text: "The Authorization is Invalid",
-				});
-		 	}
-		 }
+	jQuery(document).ready(function() {
+		$.ajax({
+			type: "POST",
+			headers: {
+				"Accept": "application/json",
+				"Content-Type": "application/json",
+				"Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8",
+				"Authorization": "Basic " + "dGVzdGNsaWVudDp0ZXN0cGFzcw=="
+			},
+			url: "http://localhost:8888/oauth",
+			data: {
+				grant_type: "password",
+				username: user,
+				password: pass,
+				client_id: "testclient"
+			},
+			dataType: "json",
+			success: function(response)
+			 {
+			 	if(response) {
+			 		var getRefreshToken = get_new_access_token(response.refresh_token, w1);
+			 	}
+			 },
+			 error: function(jqXHR)
+			 {
+			 	if(jqXHR.statusText == "invalid_client") {
+			 		dhtmlx.alert({
+				 		title: "Invalid Credentials",
+						text: "Username or Password is Incorrect",
+					});
+			 	} else if(jqXHR.statusText == "invalid_grant") {
+			 		dhtmlx.alert({
+				 		title: "Invalid Grant",
+						text: "The Authorization is Invalid",
+					});
+			 	}
+			 }
+		});
 	});
 }
 
@@ -401,7 +412,7 @@ function get_new_access_token(getRefreshToken, w1)
 		headers: {
 			"Accept": "application/json",
 			"Content-Type": "application/json",
-			'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8',
+			"Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8",
 		},
 		url: "http://localhost:8888/oauth",
 		data: {
@@ -413,6 +424,7 @@ function get_new_access_token(getRefreshToken, w1)
 		dataType: "json",
 		success: function(response)
 		{
+			console.log(response);
 			token = response.access_token;
 			w1.close();
 		},
@@ -421,5 +433,59 @@ function get_new_access_token(getRefreshToken, w1)
 			console.log(jqXHR);
 		}
 
+	});
+}
+
+function get_all_employees()
+{
+	$.ajax({
+		type: "GET",
+		headers: {
+			"Accept": "application/json",
+			"Content-Type": "application/json",
+			"Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8",
+			"Authorization": "Bearer " + window.token,
+		},
+		url: "http://localhost:8888/employees",
+		data: {
+			
+		},
+		dataType: "json",
+		success: function(response)
+		{
+			console.log(response);
+		},
+		error: function(jqXHR)
+		{
+			console.log(jqXHR);
+		}
+	});
+}
+
+function save_basic_information()
+{
+	var empid = $("input[name='employee_id']").val();
+
+	$.ajax({
+		type: "POST",
+		headers: {
+			"Accept": "application/json",
+			"Content-Type": "application/json",
+			"Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8",
+			"Authorization": "Bearer " + window.token,
+		},
+		url: "http://localhost:8888/employees/"+empid,
+		data: {
+			
+		},
+		dataType: "json",
+		success: function(response)
+		{
+			console.log(response);
+		},
+		error: function(jqXHR)
+		{
+			console.log(jqXHR);
+		}
 	});
 }
