@@ -191,7 +191,7 @@ function removeItem(menuItemId)
 		case "remove":
 			dhtmlx.message({
 				type: "confirm",
-				text: "Are you sure you wan to remove this?",
+				text: "Are you sure you want to remove this?",
 				callback: function(response) {
 					if(response == true) {
 						window.setTimeout("myGrid.deleteRow("+rowId+");",200);
@@ -249,7 +249,7 @@ function hr_201File()
 			{type: "input", name: "gender", offsetLeft: 85, label: "Gender", inputWidth: 300, position: "label-top" },
 		]},
 		{ type:"block", width: 743, list: [
-			{type: "input", name: "marital_status", label: "Marital Status", inputWidth: 300, position: "label-top" },
+			{type: "select", name: "marital_status", label: "Marital Status", inputWidth: 300, position: "label-top" },
 			{ type: "newcolumn" },
 			{type: "select", name: "active", offsetLeft: 85, label: "Active", inputWidth: 300, position: "label-top" },
 		]},
@@ -424,7 +424,6 @@ function get_new_access_token(getRefreshToken, w1)
 		dataType: "json",
 		success: function(response)
 		{
-			console.log(response);
 			token = response.access_token;
 			w1.close();
 		},
@@ -465,18 +464,242 @@ function get_all_employees()
 function save_basic_information()
 {
 	var empid = $("input[name='employee_id']").val();
+	var first_name = $("input[name='Fname']").val();
+	var last_name = $("input[name='Lname']").val();
+	var middle_name = $("input[name='Mname']").val();
+	var birthdate = $("input[name='birthdate']").val();
+	var gender = $("input[name=gender]").val();
+	var marital_status = $("input[name=marital_status]").val();
+	var active = $("input[name=active]").val();
 
 	$.ajax({
 		type: "POST",
 		headers: {
 			"Accept": "application/json",
 			"Content-Type": "application/json",
-			"Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8",
 			"Authorization": "Bearer " + window.token,
 		},
-		url: "http://localhost:8888/employees/"+empid,
+		url: "http://localhost:8888/employees",
 		data: {
-			
+		"employee_id": 5,
+		"first_name": "Raymart",
+		"last_name": "Obeso"
+		},
+		dataType: "json",
+		success: function(response)
+		{
+			console.log(response);
+		},
+		error: function(jqXHR)
+		{
+			console.log(jqXHR);
+		}
+	});
+}
+
+function save_contact_details()
+{
+	var empid = $("input[name='employee_id']").val();
+	var first_name = $("input[name='Fname']").val();
+	var last_name = $("input[name='Lname']").val();
+	var middle_name = $("input[name='Mname']").val();
+	var birthdate = $("input[name='birthdate']").val();
+	var gender = $("input[name=gender]").val();
+	var marital_status = $("input[name=marital_status]").val();
+	var active = $("input[name=active]").val();
+
+	$.ajax({
+		type: "POST",
+		headers: {
+			"Accept": "application/json",
+			"Content-Type": "application/json",
+			"Authorization": "Bearer " + window.token,
+		},
+		url: "http://localhost:8888/employees",
+		data: {
+		"employee_id": 5,
+		"first_name": "Raymart",
+		"last_name": "Obeso"
+		},
+		dataType: "json",
+		success: function(response)
+		{
+			console.log(response);
+		},
+		error: function(jqXHR)
+		{
+			console.log(jqXHR);
+		}
+	});
+}
+
+function save_employment_details()
+{
+	var empid = $("input[name='employee_id']").val();
+	var first_name = $("input[name='Fname']").val();
+	var last_name = $("input[name='Lname']").val();
+	var middle_name = $("input[name='Mname']").val();
+	var birthdate = $("input[name='birthdate']").val();
+	var gender = $("input[name=gender]").val();
+	var marital_status = $("input[name=marital_status]").val();
+	var active = $("input[name=active]").val();
+
+	$.ajax({
+		type: "POST",
+		headers: {
+			"Accept": "application/json",
+			"Content-Type": "application/json",
+			"Authorization": "Bearer " + window.token,
+		},
+		url: "http://localhost:8888/employees",
+		data: {
+		"employee_id": 5,
+		"first_name": "Raymart",
+		"last_name": "Obeso"
+		},
+		dataType: "json",
+		success: function(response)
+		{
+			console.log(response);
+		},
+		error: function(jqXHR)
+		{
+			console.log(jqXHR);
+		}
+	});
+}
+
+function save_government_details()
+{
+	var empid = $("input[name='employee_id']").val();
+	var first_name = $("input[name='Fname']").val();
+	var last_name = $("input[name='Lname']").val();
+	var middle_name = $("input[name='Mname']").val();
+	var birthdate = $("input[name='birthdate']").val();
+	var gender = $("input[name=gender]").val();
+	var marital_status = $("input[name=marital_status]").val();
+	var active = $("input[name=active]").val();
+
+	$.ajax({
+		type: "POST",
+		headers: {
+			"Accept": "application/json",
+			"Content-Type": "application/json",
+			"Authorization": "Bearer " + window.token,
+		},
+		url: "http://localhost:8888/employees",
+		data: {
+		"employee_id": 5,
+		"first_name": "Raymart",
+		"last_name": "Obeso"
+		},
+		dataType: "json",
+		success: function(response)
+		{
+			console.log(response);
+		},
+		error: function(jqXHR)
+		{
+			console.log(jqXHR);
+		}
+	});
+}
+
+function save_School_work()
+{
+	var empid = $("input[name='employee_id']").val();
+	var first_name = $("input[name='Fname']").val();
+	var last_name = $("input[name='Lname']").val();
+	var middle_name = $("input[name='Mname']").val();
+	var birthdate = $("input[name='birthdate']").val();
+	var gender = $("input[name=gender]").val();
+	var marital_status = $("input[name=marital_status]").val();
+	var active = $("input[name=active]").val();
+
+	$.ajax({
+		type: "POST",
+		headers: {
+			"Accept": "application/json",
+			"Content-Type": "application/json",
+			"Authorization": "Bearer " + window.token,
+		},
+		url: "http://localhost:8888/employees",
+		data: {
+		"employee_id": 5,
+		"first_name": "Raymart",
+		"last_name": "Obeso"
+		},
+		dataType: "json",
+		success: function(response)
+		{
+			console.log(response);
+		},
+		error: function(jqXHR)
+		{
+			console.log(jqXHR);
+		}
+	});
+}
+
+function update_employee()
+{
+	var empid = $("input[name='employee_id']").val();
+	var first_name = $("input[name='Fname']").val();
+	var last_name = $("input[name='Lname']").val();
+	var middle_name = $("input[name='Mname']").val();
+	var birthdate = $("input[name='birthdate']").val();
+	var gender = $("input[name=gender]").val();
+	var marital_status = $("input[name=marital_status]").val();
+	var active = $("input[name=active]").val();
+
+	$.ajax({
+		type: "POST",
+		headers: {
+			"Accept": "application/json",
+			"Content-Type": "application/json",
+			"Authorization": "Bearer " + window.token,
+		},
+		url: "http://localhost:8888/employees",
+		data: {
+		"employee_id": 5,
+		"first_name": "Raymart",
+		"last_name": "Obeso"
+		},
+		dataType: "json",
+		success: function(response)
+		{
+			console.log(response);
+		},
+		error: function(jqXHR)
+		{
+			console.log(jqXHR);
+		}
+	});
+}
+
+function delete_employee()
+{
+	var empid = $("input[name='employee_id']").val();
+	var first_name = $("input[name='Fname']").val();
+	var last_name = $("input[name='Lname']").val();
+	var middle_name = $("input[name='Mname']").val();
+	var birthdate = $("input[name='birthdate']").val();
+	var gender = $("input[name=gender]").val();
+	var marital_status = $("input[name=marital_status]").val();
+	var active = $("input[name=active]").val();
+
+	$.ajax({
+		type: "POST",
+		headers: {
+			"Accept": "application/json",
+			"Content-Type": "application/json",
+			"Authorization": "Bearer " + window.token,
+		},
+		url: "http://localhost:8888/employees",
+		data: {
+		"employee_id": 5,
+		"first_name": "Raymart",
+		"last_name": "Obeso"
 		},
 		dataType: "json",
 		success: function(response)
