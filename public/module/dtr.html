@@ -1,0 +1,20 @@
+<script>
+	myContext = new dhtmlXMenuObject();
+	myContext.renderAsContextMenu();
+	myContext.attachEvent("onClick",removeItem);
+	myContext.loadStruct("./json/hr_context-menu.json", "json");
+
+	myMenu = mySidebar.cells("dashboard").attachMenu({
+		json: "./json/dtr_menu.json",
+		icons_path: "./img/dhtmlxSidebar/toolbar_18/",
+	});
+
+	myGrid = mySidebar.cells("dashboard").attachGrid();
+	myGrid.load("./json/dtr_grid.json", "json");
+	myGrid.enableContextMenu(myContext);
+	myGrid.init();
+
+	myGrid.attachEvent("onRowDblClicked", function(rowId, cell_index) {
+		alert(rowId);
+	});
+</script>

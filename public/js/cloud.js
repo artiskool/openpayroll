@@ -51,13 +51,20 @@ function doOnLoad() {
 
 	myToolbar.attachEvent("onClick", function(id) {
 		if("hr" == id) {
+			myMenu = mySidebar.cells("dashboard").detachMenu();
 			hr();
-			get_all_employees();
+			//get_all_employees();
+		} else if("payroll" == id) {
+			myMenu = mySidebar.cells("dashboard").detachMenu();
+			payroll_menu();
+		} else if("dtr" == id) {
+			myMenu = mySidebar.cells("dashboard").detachMenu();
+			dtr_menu();
 		}
 	});
 
-	if (true)
-		login();
+	// if (true)
+	// 	login();
 }
 
 function setStatusBar(msg) {
@@ -151,6 +158,16 @@ function misc() {
 	myGrid.enablePaging(true, 10, 3, "pagingArea");
 	myGrid.setPagingSkin("toolbar");
 	myGrid.loadXML("./samples/dhtmlxGrid/common/grid_layout.xml?etc="+new Date().getTime());
+}
+
+function payroll_menu()
+{
+	myMenu = mySidebar.cells("dashboard").attachURL("./module/payroll.html", true);
+}
+
+function dtr_menu()
+{
+	myMenu = mySidebar.cells("dashboard").attachURL("./module/dtr.html", true);
 }
 
 function hr()

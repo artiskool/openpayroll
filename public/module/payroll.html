@@ -1,0 +1,63 @@
+<script>
+	myContext = new dhtmlXMenuObject();
+	myContext.renderAsContextMenu();
+	myContext.attachEvent("onClick",removeItem);
+	myContext.loadStruct("./json/hr_context-menu.json", "json");
+	
+	myMenu = mySidebar.cells("dashboard").attachMenu({
+		json: "./json/payroll_menu.json",
+		icons_path: "./img/dhtmlxSidebar/toolbar_18/",
+	});
+
+	myGrid = mySidebar.cells("dashboard").attachGrid();
+	myGrid.load("./json/payroll_grid.json", "json");
+	myGrid.enableContextMenu(myContext);
+	myGrid.init();
+
+	myGrid.attachEvent("onRowDblClicked", function(rowId, cell_index) {
+		alert(rowId);
+	});
+
+	myMenu.attachEvent("onClick", function(id) {
+		generate_payroll();
+	});
+
+	function generate_payroll()
+	{
+		dhxWins = new dhtmlXWindows();
+			w1 = dhxWins.createWindow({
+			id: "w1",
+			width: 450,
+			height: 300,
+			move: false,
+			center: true,
+			resize: false,
+			caption: 'Generate Payroll'
+		});
+		w1.button("minmax").hide();
+
+		formData = [
+			{type: "settings", position: "label-left", labelWidth: 100, inputWidth: 250},
+			{type: "block", inputWidth: "auto", offsetTop: 20, list: [
+				{type: "select", label: "Payroll Group", name: "payroll_group", value: "", required:true, validate:"NotEmpty" , offsetTop: 15,options:[
+						{text: "Regular", value: "regular", selected: true},
+						{text: "Group1", value: "group1"},
+				]},
+				{type: "select", label: "Payroll Date", name: "payroll_date", value: "", required:true, validate:"NotEmpty", offsetTop: 15, options:[
+						{text: "July 5, 2015", value: "regular", selected: true},
+						{text: "July 10, 2015", value: "group1"},
+						{text: "July 15, 2015", value: "group1"},
+						{text: "July 20, 2015", value: "group1"},
+						{text: "July 30, 2015", value: "group1"},
+						{text: "Custom", value: "group1"},
+				]},
+				{type: "select", label: "Date From", name: "date_from", offsetTop: 15},
+				{type: "select", label: "Date To", name: "date_to", offsetTop: 15},
+				{type: "button", value: "Generate", name: "generate", offsetLeft: 260, offsetTop: 14}
+			]}
+		];
+
+		payroll = w1.attachForm(formData, true);
+	}
+	
+</script>

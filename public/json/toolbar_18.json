@@ -1,9 +1,9 @@
 [
 	{type: "button", text: "CloudNet", img: "../../32x32-logo.png", imgdis: "../../32x32-logo.png", disabled: true},
-	{type: "button", text: "DTR", img: "folder_create.gif"},
+	{type: "button", id: "dtr", text: "DTR", img: "folder_create.gif"},
 	{type: "button", id: "hr", text: "HR", img: "folder_sync.gif"},
 	{type: "separator"},
-	{type: "button", text: "Payroll", img: "file_upload.gif"},
+	{type: "button", id: "payroll", text: "Payroll", img: "file_upload.gif"},
 	{type: "button", text: "Project Management", img: "file_download.gif"},
 	{type: "separator"},
 	{type: "spacer"},
