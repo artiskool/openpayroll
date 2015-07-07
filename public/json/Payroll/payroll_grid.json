@@ -10,7 +10,6 @@
        { width:105,  type:"ro",    align:"center", value:"Withholding Tax"},
        { width:105,  type:"ro",    align:"center",  value:"Deductions"},
        { width:100,  type:"ro",    align:"center",  value:"Net Pay"},
-       { width:100,  type:"ro",    align:"center",  value:"Details"},
    ],
     rows:[
         {  id:1001,
@@ -25,7 +24,6 @@
                "122.35",
                "2356",
                "4,298.75",
-               "View"
                ] },
        {  id:1002, 
           data:[
@@ -39,7 +37,6 @@
                "122.35",
                "2356",
                "4,298.75",
-               "View"
                ] },
 
       {  id:1003, 
@@ -54,6 +51,5 @@
              "122.35",
              "2356",
              "4,298.75",
-             "View"
              ] },
 ]}

@@ -2,19 +2,83 @@
 	myContext = new dhtmlXMenuObject();
 	myContext.renderAsContextMenu();
 	myContext.attachEvent("onClick",removeItem);
-	myContext.loadStruct("./json/hr_context-menu.json", "json");
+	myContext.loadStruct("./json/HR/hr_context-menu.json", "json");
 
 	myMenu = mySidebar.cells("dashboard").attachMenu({
-		json: "./json/dtr_menu.json",
+		json: "./json/DTR/dtr_menu.json",
 		icons_path: "./img/dhtmlxSidebar/toolbar_18/",
 	});
 
 	myGrid = mySidebar.cells("dashboard").attachGrid();
-	myGrid.load("./json/dtr_grid.json", "json");
+	myGrid.load("./json/DTR/dtr_grid.json", "json");
 	myGrid.enableContextMenu(myContext);
 	myGrid.init();
 
 	myGrid.attachEvent("onRowDblClicked", function(rowId, cell_index) {
 		alert(rowId);
 	});
+
+	myMenu.attachEvent("onClick", function(id) {
+		if("add_time" == id) {
+			add_time_record();
+		} else if("imp_timesheet" == id) {
+			import_records();
+		}
+	});
+
+	function add_time_record()
+	{
+		dhxWins = new dhtmlXWindows();
+			w1 = dhxWins.createWindow({
+			id: "w1",
+			width: 420,
+			height: 250,
+			move: false,
+			center: true,
+			resize: false,
+			caption: 'Add Time Record'
+		});
+		w1.button("minmax").hide();
+
+		formData = [
+			{type: "settings", position: "label-left", labelWidth: 100, inputWidth: 250},
+			{type: "block", inputWidth: "auto", offsetTop: 20, list: [
+				{type: "combo", label: "Employee", name: "random", serverFiltering: "", filterCache: true, filterSubLoad: true},
+				{type: "calendar", label: "Date", name: "date_from", offsetTop: 10, inputWidth: 245},
+				{type: "input", label: "Time", name: "time", offsetTop: 10, inputWidth: 245},
+				{type: "select", label: "Status", name: "status", value: "", offsetTop: 10,options:[
+						{text: "Clock In", value: "clock_in", name: "employee", selected: true},
+						{text: "Clock Out", value: "clock_in", name: "group1"},
+				]},
+				{type: "button", value: "Save", name: "save", offsetLeft: 285, offsetTop: 15}
+			]}
+		];
+
+		myForm = w1.attachForm(formData, true);
+	}
+
+	function import_records()
+	{
+		dhxWins = new dhtmlXWindows();
+			w1 = dhxWins.createWindow({
+			id: "w1",
+			width: 430,
+			height: 180,
+			move: false,
+			center: true,
+			resize: false,
+			caption: 'Import Time Record'
+		});
+		w1.button("minmax").hide();
+
+		formData = [
+			{type: "settings", position: "label-left", labelWidth: 100, inputWidth: 250},
+			{type: "block", inputWidth: "auto", offsetTop: 20, list: [
+				{type: "file", label: "Import File", name: "date_from", offsetTop: 10},
+				{type: "button", value: "Import", name: "import", offsetLeft: 270, offsetTop: 15}
+			]}
+		];
+
+		myForm = w1.attachForm(formData, true);
+	}
 </script>

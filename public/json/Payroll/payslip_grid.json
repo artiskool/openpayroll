@@ -1,0 +1,34 @@
+{
+  head:[
+       { width:100,  type:"ro",   align:"center",  value:"Payroll Group"},
+       { width:100,  type:"ro",   align:"center",  value:"Period"},
+       { width:105, type:"ro",    align:"center",   value:"Last Name"},
+       { width:105, type:"ro",    align:"center",   value:"First Name"},
+   ],
+    rows:[
+        {  id:1001,
+          data:[
+               "Regular",
+               "July 31, 2015",
+               "Abanid",
+               "Ray",
+               "11",
+               ] },
+       {  id:1002, 
+          data:[
+               "Regular",
+               "July 31, 2015",
+               "Abanid",
+               "Ray",
+               "11",
+               ] },
+
+      {  id:1003, 
+        data:[
+             "Regular",
+               "July 31, 2015",
+               "Abanid",
+               "Ray",
+               "11",
+             ] },
+]}

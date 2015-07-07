@@ -175,15 +175,15 @@ function hr()
 	myContext = new dhtmlXMenuObject();
 	myContext.renderAsContextMenu();
 	myContext.attachEvent("onClick",removeItem);
-	myContext.loadStruct("./json/hr_context-menu.json", "json");
+	myContext.loadStruct("./json/HR/hr_context-menu.json", "json");
 
 	myMenu = mySidebar.cells("dashboard").attachMenu({
-		json: "./json/hr_menu.json",
+		json: "./json/HR/hr_menu.json",
 		icons_path: "./img/dhtmlxSidebar/toolbar_18/",
 	});
 
 	myGrid = mySidebar.cells("dashboard").attachGrid();
-	myGrid.load("./json/hr_grid.json", "json");
+	myGrid.load("./json/HR/hr_grid.json", "json");
 	myGrid.enableContextMenu(myContext);
 	myGrid.init();
 

@@ -3,4 +3,5 @@
 		{id: "add_time", text: "Add Time Record", img: "file_upload.gif"},
 		{id: "imp_timesheet", text: "Import Timesheet", img: "file_upload.gif"}
 	]},
+	{type: "separator"},
 ]

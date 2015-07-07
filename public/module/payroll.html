@@ -2,15 +2,15 @@
 	myContext = new dhtmlXMenuObject();
 	myContext.renderAsContextMenu();
 	myContext.attachEvent("onClick",removeItem);
-	myContext.loadStruct("./json/hr_context-menu.json", "json");
+	myContext.loadStruct("./json/HR/hr_context-menu.json", "json");
 	
 	myMenu = mySidebar.cells("dashboard").attachMenu({
-		json: "./json/payroll_menu.json",
+		json: "./json/Payroll/payroll_menu.json",
 		icons_path: "./img/dhtmlxSidebar/toolbar_18/",
 	});
 
 	myGrid = mySidebar.cells("dashboard").attachGrid();
-	myGrid.load("./json/payroll_grid.json", "json");
+	myGrid.load("./json/Payroll/payroll_grid.json", "json");
 	myGrid.enableContextMenu(myContext);
 	myGrid.init();
 
@@ -19,7 +19,11 @@
 	});
 
 	myMenu.attachEvent("onClick", function(id) {
-		generate_payroll();
+		if("payroll" == id) {
+			generate_payroll();
+		} else if("payslip" == id) {
+			view_payslip();
+		}
 	});
 
 	function generate_payroll()
@@ -27,8 +31,8 @@
 		dhxWins = new dhtmlXWindows();
 			w1 = dhxWins.createWindow({
 			id: "w1",
-			width: 450,
-			height: 300,
+			width: 420,
+			height: 250,
 			move: false,
 			center: true,
 			resize: false,
@@ -39,25 +43,45 @@
 		formData = [
 			{type: "settings", position: "label-left", labelWidth: 100, inputWidth: 250},
 			{type: "block", inputWidth: "auto", offsetTop: 20, list: [
-				{type: "select", label: "Payroll Group", name: "payroll_group", value: "", required:true, validate:"NotEmpty" , offsetTop: 15,options:[
-						{text: "Regular", value: "regular", selected: true},
-						{text: "Group1", value: "group1"},
+				{type: "select", label: "Payroll Group", name: "payroll_group", value: "", required:true, validate:"NotEmpty" , offsetTop: 10,options:[
+						{text: "Regular", value: "regular", name: "reg", selected: true},
+						{text: "Group1", value: "group1", name: "group1"},
 				]},
-				{type: "select", label: "Payroll Date", name: "payroll_date", value: "", required:true, validate:"NotEmpty", offsetTop: 15, options:[
+				{type: "select", label: "Payroll Date", name: "payroll_date", value: "", offsetTop: 10, options:[
 						{text: "July 5, 2015", value: "regular", selected: true},
 						{text: "July 10, 2015", value: "group1"},
 						{text: "July 15, 2015", value: "group1"},
 						{text: "July 20, 2015", value: "group1"},
 						{text: "July 30, 2015", value: "group1"},
-						{text: "Custom", value: "group1"},
+						{text: "Custom", value: "custom"},
 				]},
-				{type: "select", label: "Date From", name: "date_from", offsetTop: 15},
-				{type: "select", label: "Date To", name: "date_to", offsetTop: 15},
-				{type: "button", value: "Generate", name: "generate", offsetLeft: 260, offsetTop: 14}
+				{type: "calendar", label: "Date From", name: "date_from", offsetTop: 10, inputWidth: 245},
+				{type: "calendar", label: "Date To", name: "date_to", offsetTop: 10, inputWidth: 245},
+				{type: "button", value: "Generate", name: "generate", offsetLeft: 263, offsetTop: 15}
 			]}
 		];
 
-		payroll = w1.attachForm(formData, true);
+		myForm = w1.attachForm(formData, true);
+
+		myForm.disableItem("date_to");
+		myForm.disableItem("date_from");
+
+		myForm.attachEvent("onChange", function (name, value) {
+			if("payroll_date" == name && "custom" == value) {
+				myForm.enableItem("date_to");
+				myForm.enableItem("date_from");
+			} else {
+				myForm.disableItem("date_to");
+				myForm.disableItem("date_from");
+			}
+		});
 	}
 	
+	function view_payslip()
+	{
+		myGrid = mySidebar.cells("dashboard").attachGrid();
+		myGrid.load("./json/Payroll/payslip_grid.json", "json");
+		myGrid.enableContextMenu(myContext);
+		myGrid.init();
+	}
 </script>

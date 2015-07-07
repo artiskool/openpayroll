@@ -1,0 +1,6 @@
+[
+	{id:"payroll", text:"Generate Payroll", img: "folder_sync.gif" },
+	{type: "separator"},
+	{id: "payslip", text: "Payslip"},
+	{type: "separator"},
+]
