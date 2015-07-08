@@ -15,16 +15,58 @@
 	myGrid.init();
 
 	myGrid.attachEvent("onRowDblClicked", function(rowId, cell_index) {
-		alert(rowId);
+		view_employee();
 	});
 
 	myMenu.attachEvent("onClick", function(id) {
-		if("payroll" == id) {
+		if("gen_payroll" == id) {
 			generate_payroll();
 		} else if("payslip" == id) {
 			view_payslip();
+		} else if("view_payroll" == id) {
+			view_payroll();
 		}
 	});
+
+	function view_payroll()
+	{
+		myContext = new dhtmlXMenuObject();
+		myContext.renderAsContextMenu();
+		myContext.attachEvent("onClick",removeItem);
+		myContext.loadStruct("./json/HR/hr_context-menu.json", "json");
+
+		myMenu = mySidebar.cells("dashboard").attachMenu({
+			json: "./json/Payroll/payroll_menu.json",
+			icons_path: "./img/dhtmlxSidebar/toolbar_18/",
+		});
+
+		myGrid = mySidebar.cells("dashboard").attachGrid();
+		myGrid.load("./json/Payroll/payroll_grid.json", "json");
+		myGrid.enableContextMenu(myContext);
+		myGrid.init();
+
+		myGrid.attachEvent("onRowDblClicked", function(rowId, cell_index) {
+			view_employee();
+		});
+	}
+
+	function view_employee()
+	{
+		dhxWins = new dhtmlXWindows();
+			w1 = dhxWins.createWindow({
+			id: "w1",
+			width: 950,
+			height: 450,
+			move: false,
+			center: true,
+			resize: false,
+			caption: 'Employee list'
+		});
+		w1.button("minmax").hide();
+
+		myGrid = w1.attachGrid();
+		myGrid.load("./json/Payroll/employee_grid.json", "json");
+	}
 
 	function generate_payroll()
 	{
@@ -83,5 +125,31 @@
 		myGrid.load("./json/Payroll/payslip_grid.json", "json");
 		myGrid.enableContextMenu(myContext);
 		myGrid.init();
+
+		myGrid.attachEvent("onRowDblClicked", function(rowId, cell_index) {
+			dhxWins = new dhtmlXWindows();
+				w1 = dhxWins.createWindow({
+				id: "w1",
+				width: 900,
+				height: 250,
+				move: false,
+				center: true,
+				resize: false,
+				caption: 'View Payslip'
+			});
+			w1.button("minmax").hide();
+
+			myDataView = w1.attachDataView({
+				css: "borderless",
+				type:{
+					template: "http->./json/Payroll/template.html",
+					padding: 15,
+					height: 30,
+					border: 0,
+					width: 130,
+				}
+			});
+			myDataView.load("./json/Payroll/payslip.json", "json");
+		});
 	}
 </script>

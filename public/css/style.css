@@ -27,3 +27,13 @@ div.dhxsidebar_cont {
 .dhxform_obj_dhx_skyblue .btnSub div.dhxform_btn {
 	float: right !important;
 }
+
+.borderless .dhx_dataview_default_item, .borderless .dhx_dataview_default_item_selected{
+	border-bottom: none;
+	border-right: none;
+	font-size: 14px !important;
+}
+
+.dhx_dataview_borderless_item{
+    
+}

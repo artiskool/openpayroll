@@ -1,0 +1,8 @@
+[
+{
+ "id":"1", "Package":"test", "Version":"20080210-1.1", "Maintainer":"Stefano Canepa <sc@linux.it>"
+},
+{
+ "id":"2", "Package":"alien-arena-browser", "Version":"7.0-1", "Maintainer":"Debian Games Team <pkg-games-devel@lists.alioth.debian.org>"
+}
+]
