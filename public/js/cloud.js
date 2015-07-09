@@ -51,8 +51,7 @@ function doOnLoad() {
 
 	myToolbar.attachEvent("onClick", function(id) {
 		if("hr" == id) {
-			myMenu = mySidebar.cells("dashboard").detachMenu();
-			hr();
+			hr_menu();
 			//get_all_employees();
 		} else if("payroll" == id) {
 			myMenu = mySidebar.cells("dashboard").detachMenu();
@@ -170,32 +169,9 @@ function dtr_menu()
 	myMenu = mySidebar.cells("dashboard").attachURL("./module/dtr.html", true);
 }
 
-function hr()
+function hr_menu()
 {
-	myContext = new dhtmlXMenuObject();
-	myContext.renderAsContextMenu();
-	myContext.attachEvent("onClick",removeItem);
-	myContext.loadStruct("./json/HR/hr_context-menu.json", "json");
-
-	myMenu = mySidebar.cells("dashboard").attachMenu({
-		json: "./json/HR/hr_menu.json",
-		icons_path: "./img/dhtmlxSidebar/toolbar_18/",
-	});
-
-	myGrid = mySidebar.cells("dashboard").attachGrid();
-	myGrid.load("./json/HR/hr_grid.json", "json");
-	myGrid.enableContextMenu(myContext);
-	myGrid.init();
-
-	myGrid.attachEvent("onRowDblClicked", function(rowId, cell_index) {
-		hr_201File();
-	});
-
-	myMenu.attachEvent("onClick", function(id) {
-		if("201_new" == id) {
-			hr_201File();
-		}
-	});
+	myMenu = mySidebar.cells("dashboard").attachURL("./module/hr.html", true);
 }
 
 function removeItem(menuItemId)
@@ -217,163 +193,6 @@ function removeItem(menuItemId)
 			});
 			break;
 	}
-}
-
-function hr_201File()
-{
-	dhxWins = new dhtmlXWindows();
-	w1 = dhxWins.createWindow({
-		id: "w1",
-		width: 810,
-		height: 480,
-		move: false,
-		center: true,
-		resize: false,
-		caption: 'Add New 201 File'
-	});
-	w1.button("minmax").hide();
-
-	myTabbar = w1.attachTabbar({
-		tabs: [
-			{id: "t1", text: "Basic Information", active: true},
-			{id: "t2", text: "Contact Details"},
-			{id: "t3", text: "Employment Details"},
-			{id: "t4", text: "Goverment Details"},
-			{id: "t5", text: "School and Work History"},
-		]
-	});
-
-	formData = [
-		{ type: "fieldset", label: "Basic Information", list: [
-		{ type:"block", width: 743, list: [
-			{type: "label", label: "<img src='./img/64x64-logo.png' />"},
-			{ type: "newcolumn" },
-			{type: "upload", name: "myFiles", offsetLeft: 320, inputWidth: 330, url: "php/dhtmlxform_item_upload.php", _swfLogs: "enabled", swfPath: "uploader.swf", swfUrl: "php/dhtmlxform_item_upload.php"},
-		]},
-		{ type:"block", width: 743, list: [
-			{type: "input", name: "employee_id", label: "Employee No.", inputWidth: 300, position: "label-top", required:true, validate:"NotEmpty"},
-			{ type: "newcolumn" },
-			{type: "input", name: "Fname", offsetLeft: 85, label: "First Name", inputWidth: 300, position: "label-top", required:true, validate:"NotEmpty"},
-		]},
-		{ type:"block", width: 743, list: [
-			{type: "input", name: "Lname", label: "Last Name", inputWidth: 300, position: "label-top", required:true, validate:"NotEmpty"},
-			{ type: "newcolumn" },
-			{type: "input", name: "Mname", offsetLeft: 85, label: "Middle Name", inputWidth: 300, position: "label-top"},
-		]},
-		{ type:"block", width: 743, list: [
-			{type: "calendar", name: "birthdate", label: "Birthdate", inputWidth: 300, position: "label-top" },
-			{ type: "newcolumn" },
-			{type: "input", name: "gender", offsetLeft: 85, label: "Gender", inputWidth: 300, position: "label-top" },
-		]},
-		{ type:"block", width: 743, list: [
-			{type: "select", name: "marital_status", label: "Marital Status", inputWidth: 300, position: "label-top" },
-			{ type: "newcolumn" },
-			{type: "select", name: "active", offsetLeft: 85, label: "Active", inputWidth: 300, position: "label-top" },
-		]},
-
-		]}, //end basic information
-		{ type: "button", value: "Submit", name: "basic_button", className: "btnSub"}
-	];
-
-	contact_details = [
-		{ type: "fieldset", label: "Contact Details", list: [
-		{ type:"block", width: 743, list: [
-			{type: "input", name: "email", label: "Email", inputWidth: 300, position: "label-top" },
-			{ type: "newcolumn" },
-			{type: "input", name: "phone_no", offsetLeft: 85, label: "Phone No.", inputWidth: 300, position: "label-top" },
-		]},
-		{ type:"block", width: 743, list: [
-			{type: "input", name: "mobile_no", label: "Mobile No.", inputWidth: 300, position: "label-top" },
-			{ type: "newcolumn" },
-			{type: "input", name: "address1", offsetLeft: 85, label: "Address Line 1", inputWidth: 300, position: "label-top" },
-		]},
-		{ type:"block", width: 743, list: [
-			{type: "input", name: "address2", label: "Address Line 2", inputWidth: 302, position: "label-top" },
-			{ type: "newcolumn" },
-			{type: "select", name: "city", offsetLeft: 85, label: "City", inputWidth: 302, position: "label-top" },
-		]},
-		{ type:"block", width: 743, list: [
-			{type: "select", name: "province", label: "Province", inputWidth: 302, position: "label-top" },
-			{ type: "newcolumn" },
-			{type: "select", name: "country", offsetLeft: 88, label: "Country", inputWidth: 302, position: "label-top" },
-		]},
-		]},// end Contact details
-		{ type: "button", value: "Submit", className: "btnSub" }
-	];
-
-	employment_details = [
-		{ type: "fieldset", label: "Employment Details", list: [
-		{ type:"block", width: 743, list: [
-			{type: "select", name: "employment_type", label: "Employment Type", inputWidth: 300, position: "label-top" },
-			{ type: "newcolumn" },
-			{type: "select", name: "department", offsetLeft: 85, label: "Department", inputWidth: 300, position: "label-top" },
-		]},
-		{ type:"block", width: 743, list: [
-			{type: "select", name: "position", label: "Position", inputWidth: 300, position: "label-top" },
-			{ type: "newcolumn" },
-			{type: "select", name: "rank", offsetLeft: 85, label: "Rank", inputWidth: 300, position: "label-top" },
-		]},
-		{ type:"block", width: 743, list: [
-			{type: "calendar", name: "date_hired", label: "Date Hired", inputWidth: 302, position: "label-top" },
-			{ type: "newcolumn" },
-			{type: "calendar", name: "date_ended", offsetLeft: 80, label: "Date Ended", inputWidth: 302, position: "label-top" },
-		]},
-
-		]},// end Employment details
-		{ type: "button", value: "Submit", className: "btnSub" }
-	];
-
-	government_details = [
-		{ type: "fieldset", label: "Government Details", list: [
-		{ type:"block", width: 743, list: [
-			{type: "input", name: "sss_no", label: "SSS Number", inputWidth: 300, position: "label-top" },
-			{ type: "newcolumn" },
-			{type: "input", name: "bir_no", offsetLeft: 85, label: "BIR Number", inputWidth: 300, position: "label-top" },
-		]},
-		{ type:"block", width: 743, list: [
-			{type: "input", name: "taxID", label: "Tax Identification No.", inputWidth: 300, position: "label-top" },
-			{ type: "newcolumn" },
-			{type: "input", name: "philheath_no", offsetLeft: 85, label: "Philhealth Number", inputWidth: 300, position: "label-top" },
-		]},
-		{ type:"block", width: 743, list: [
-			{type: "input", name: "hdmf_no", label: "HDMF Number", inputWidth: 300, position: "label-top" },
-		]},
-		]}, // end government fieldset
-		{ type: "button", value: "Submit", className: "btnSub" }
-	];
-
-	school_work = [
-		{ type: "fieldset", label: "School & Work History", list: [
-		{ type:"block", width: 743, list: [
-			{type: "input", name: "ETD", label: "Education/Transcripts/Diplomas", inputWidth: 300, position: "label-top" },
-			{ type: "newcolumn" },
-			{type: "input", name: "PA", offsetLeft: 85, label: "Performance Assessments", inputWidth: 300, position: "label-top" },
-		]},
-		{ type:"block", width: 743, list: [
-			{type: "input", name: "clearance", label: "Clearances", inputWidth: 300, position: "label-top" },
-			{ type: "newcolumn" },
-			{type: "input", name: "correct_action", offsetLeft: 85, label: "Corrective actions", inputWidth: 300, position: "label-top" },
-		]},
-		{ type:"block", width: 743, list: [
-			{type: "input", name: "work_history", label: "Work History", inputWidth: 300, position: "label-top" },
-			{ type: "newcolumn" },
-			{type: "input", name: "PEI", offsetLeft: 85, label: "Post Employment Information", inputWidth: 300, position: "label-top" },
-		]},
-		]}, // end school & work fieldset
-		{ type: "button", value: "Submit", className: "btnSub" }
-	];
-
-	saveBasic = myTabbar.tabs("t1").attachForm(formData, true);
-	myTabbar.tabs("t2").attachForm(contact_details, true);
-	myTabbar.tabs("t3").attachForm(employment_details, true);
-	myTabbar.tabs("t4").attachForm(government_details, true);
-	myTabbar.tabs("t5").attachForm(school_work, true);
-
-	saveBasic.attachEvent('onButtonClick', function(id) {
-		if(id == 'basic_button') {
-			save_basic_information();
-		}
-	});
 }
 
 function do_login(w1)

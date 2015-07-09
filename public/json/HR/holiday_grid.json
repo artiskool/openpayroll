@@ -1,0 +1,27 @@
+{
+  head:[
+       { width:250,  type:"ro",   align:"center",  value:"Name"},
+       { width:250,  type:"ro",   align:"center",  value:"Holiday Type"},
+       { width:250,  type:"ro",   align:"center",  value:"Dates"},
+   ],
+    rows:[
+        {  id:1001,
+          data:[
+               "New Year's Day",
+               "Regular Holiday",
+               "01/01/2015",
+               ] },
+       {  id:1002, 
+          data:[
+               "Chinese New Year",
+               "Special Holiday",
+               "01/01/2015",
+               ] },
+
+      {  id:1003, 
+        data:[
+             "Day of Valor",
+             "Regular Holiday",
+             "04/09/2015",
+             ] },
+]}

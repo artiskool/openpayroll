@@ -1,12 +1,5 @@
 [
-	{id:"201File", text:"201 File",img: "folder_sync.gif", items:[
-		{id: "201_new", text: "Add New", img: "file_upload.gif"}
-	]},
+	{id: "201_new", text: "Add New", img: "file_upload.gif"},
 	{type: "separator"},
-	{id: "loans", text: "Loans"},
-	{type: "separator"},
-	{id: "deductions", text: "Deductions"},
-	{type: "separator"},
-	{id: "leaves", text: "Leaves"}
-
+	{id: "import_201", text: "Import", img: "file_upload.gif"},
 ]

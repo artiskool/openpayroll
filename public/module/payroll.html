@@ -139,17 +139,20 @@
 			});
 			w1.button("minmax").hide();
 
-			myDataView = w1.attachDataView({
-				css: "borderless",
-				type:{
-					template: "http->./json/Payroll/template.html",
-					padding: 15,
-					height: 30,
-					border: 0,
-					width: 130,
-				}
-			});
-			myDataView.load("./json/Payroll/payslip.json", "json");
+			// myDataView = w1.attachDataView({
+			// 	css: "borderless",
+			// 	type:{
+			// 		template: "http->./json/Payroll/template.html",
+			// 		padding: 15,
+			// 		height: 30,
+			// 		border: 0,
+			// 		width: 130,
+			// 	}
+			// });
+			// myDataView.load("./json/Payroll/payslip.json", "json");
+
+			myView = w1.attachGrid();
+			myView.loadXML("./json/gridHP.xml");
 		});
 	}
 </script>
