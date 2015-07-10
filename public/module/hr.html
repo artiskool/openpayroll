@@ -1,16 +1,12 @@
 <script>
+var myTabbar;
+
 	myTabbar = mySidebar.cells("dashboard").attachTabbar({
 		tabs: [
 			{id: "t1", text: "210 File", active: true},
 			{id: "t2", text: "Holidays"},
 			{id: "t3", text: "Working Schedules"},
 		]
-	});
-
-	myTabbar.attachEvent("onTabClick", function(id) {
-		if("t3" == id) {
-			view_working_sched();
-		}
 	});
 
 	// 201_file
@@ -29,6 +25,8 @@
 	add_201.attachEvent("onClick", function(id) {
 		if("201_new" == id) {
 			hr_201File();
+		} else if ("import_201" == id) {
+			import_records();
 		}
 	});
 
@@ -47,26 +45,21 @@
 		}
 	});
 
-	function view_working_sched()
-	{
-		scheduler.config.first_hour = 6;
-		scheduler.config.last_hour = 20;
-		scheduler.config.details_on_create = true;
-		scheduler.config.details_on_dblclick = true;
-		scheduler.config.repeat_date = "%m/%d/%Y";
-		scheduler.config.include_end_by = true;
-		working_sched = myTabbar.tabs("t3").attachScheduler(new Date(), "week");
+	//working_sched
+	scheduler.config.first_hour = 6;
+	scheduler.config.last_hour = 20;
+	scheduler.config.details_on_create = true;
+	scheduler.config.details_on_dblclick = true;
+	scheduler.config.repeat_date = "%m/%d/%Y";
 
-		scheduler.attachEvent("onBeforeViewChange", function(old_mode, old_date, new_mode, new_date) {
-			scheduler.resetLightbox();
-			scheduler.config.lightbox.sections = [
-			{name:"description", height:130, map_to:"text", type:"textarea" , focus:true},
-			{name:"recurring", height:115, type:"recurring", map_to:"rec_type", button:"recurring"},
-			{name:"time", height:72, type:"time", map_to:"auto"}
-			];
-			return true;
-		});
-	}
+	scheduler.config.xml_date="%Y-%m-%d %H:%i";
+	scheduler.config.prevent_cache = true;
+
+	scheduler.config.occurrence_timestamp_in_utc = true;
+	scheduler.config.include_end_by = true;
+	scheduler.config.repeat_precise = true;
+
+	myTabbar.tabs("t3").attachScheduler(new Date(), "week");
 
 	function hr_201File()
 	{
@@ -89,6 +82,7 @@
 				{id: "t3", text: "Employment Details"},
 				{id: "t4", text: "Goverment Details"},
 				{id: "t5", text: "School and Work History"},
+				{id: "t6", text: "Working Schedule"},
 			]
 		});
 
@@ -212,11 +206,26 @@
 			{ type: "button", value: "Submit", className: "btnSub" }
 		];
 
+		scheduler.config.first_hour = 6;
+		scheduler.config.last_hour = 20;
+		scheduler.config.details_on_create = true;
+		scheduler.config.details_on_dblclick = true;
+		scheduler.config.repeat_date = "%m/%d/%Y";
+
+		scheduler.config.xml_date="%Y-%m-%d %H:%i";
+		scheduler.config.prevent_cache = true;
+
+		scheduler.config.occurrence_timestamp_in_utc = true;
+		scheduler.config.include_end_by = true;
+		scheduler.config.repeat_precise = true;
+
+
 		saveBasic = myTabbar.tabs("t1").attachForm(formData, true);
 		myTabbar.tabs("t2").attachForm(contact_details, true);
 		myTabbar.tabs("t3").attachForm(employment_details, true);
 		myTabbar.tabs("t4").attachForm(government_details, true);
 		myTabbar.tabs("t5").attachForm(school_work, true);
+		myTabbar.tabs("t6").attachScheduler(new Date(), "week");
 
 		saveBasic.attachEvent('onButtonClick', function(id) {
 			if(id == 'basic_button') {
@@ -252,7 +261,31 @@
 				{type: "button", value: "Save", name: "save", offsetLeft: 283, offsetTop: 15}
 			]}
 		];
-
 		w1.attachForm(formData, true);
+	}
+
+	function import_records()
+	{
+		dhxWins = new dhtmlXWindows();
+			w1 = dhxWins.createWindow({
+			id: "w1",
+			width: 430,
+			height: 180,
+			move: false,
+			center: true,
+			resize: false,
+			caption: 'Import 201 File Record'
+		});
+		w1.button("minmax").hide();
+
+		formData = [
+			{type: "settings", position: "label-left", labelWidth: 100, inputWidth: 250},
+			{type: "block", inputWidth: "auto", offsetTop: 20, list: [
+				{type: "file", label: "Import File", name: "date_from", offsetTop: 10},
+				{type: "button", value: "Import", name: "import", offsetLeft: 262, offsetTop: 15}
+			]}
+		];
+
+		myForm = w1.attachForm(formData, true);
 	}
 </script>

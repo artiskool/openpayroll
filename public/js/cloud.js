@@ -3,6 +3,7 @@ var myToolbar;
 var loginPopup;
 var loginForm;
 var token;
+var base_url = 'http://localhost:8888';
 
 function doOnLoad() {
 	mySidebar = new dhtmlXSideBar({
@@ -62,8 +63,8 @@ function doOnLoad() {
 		}
 	});
 
-	// if (true)
-	// 	login();
+	if (true)
+		login();
 }
 
 function setStatusBar(msg) {
@@ -209,7 +210,7 @@ function do_login(w1)
 				"Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8",
 				"Authorization": "Basic " + "dGVzdGNsaWVudDp0ZXN0cGFzcw=="
 			},
-			url: "http://localhost:8888/oauth",
+			url: base_url + "/oauth",
 			data: {
 				grant_type: "password",
 				username: user,
@@ -250,7 +251,7 @@ function get_new_access_token(getRefreshToken, w1)
 			"Content-Type": "application/json",
 			"Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8",
 		},
-		url: "http://localhost:8888/oauth",
+		url: base_url + "/oauth",
 		data: {
 			grant_type: "refresh_token",
 			refresh_token: getRefreshToken,
@@ -281,14 +282,14 @@ function get_all_employees()
 			"Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8",
 			"Authorization": "Bearer " + window.token,
 		},
-		url: "http://localhost:8888/employees",
+		url: base_url + "/employees",
 		data: {
 			
 		},
 		dataType: "json",
 		success: function(response)
 		{
-			console.log(response);
+			console.log(response);	
 		},
 		error: function(jqXHR)
 		{
@@ -315,7 +316,7 @@ function save_basic_information()
 			"Content-Type": "application/json",
 			"Authorization": "Bearer " + window.token,
 		},
-		url: "http://localhost:8888/employees",
+		url: base_url + "/employees",
 		data: {
 		"employee_id": 5,
 		"first_name": "Raymart",
@@ -351,7 +352,7 @@ function save_contact_details()
 			"Content-Type": "application/json",
 			"Authorization": "Bearer " + window.token,
 		},
-		url: "http://localhost:8888/employees",
+		url: base_url + "/employees",
 		data: {
 		"employee_id": 5,
 		"first_name": "Raymart",
@@ -387,7 +388,7 @@ function save_employment_details()
 			"Content-Type": "application/json",
 			"Authorization": "Bearer " + window.token,
 		},
-		url: "http://localhost:8888/employees",
+		url: base_url + "/employees",
 		data: {
 		"employee_id": 5,
 		"first_name": "Raymart",
@@ -423,7 +424,7 @@ function save_government_details()
 			"Content-Type": "application/json",
 			"Authorization": "Bearer " + window.token,
 		},
-		url: "http://localhost:8888/employees",
+		url: base_url + "/employees",
 		data: {
 		"employee_id": 5,
 		"first_name": "Raymart",
@@ -459,7 +460,7 @@ function save_School_work()
 			"Content-Type": "application/json",
 			"Authorization": "Bearer " + window.token,
 		},
-		url: "http://localhost:8888/employees",
+		url: base_url + "/employees",
 		data: {
 		"employee_id": 5,
 		"first_name": "Raymart",
@@ -495,7 +496,7 @@ function update_employee()
 			"Content-Type": "application/json",
 			"Authorization": "Bearer " + window.token,
 		},
-		url: "http://localhost:8888/employees",
+		url: base_url + "/employees",
 		data: {
 		"employee_id": 5,
 		"first_name": "Raymart",
@@ -531,7 +532,7 @@ function delete_employee()
 			"Content-Type": "application/json",
 			"Authorization": "Bearer " + window.token,
 		},
-		url: "http://localhost:8888/employees",
+		url: base_url + "/employees",
 		data: {
 		"employee_id": 5,
 		"first_name": "Raymart",

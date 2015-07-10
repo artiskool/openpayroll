@@ -1,18 +1,22 @@
 <script>
-	myContext = new dhtmlXMenuObject();
-	myContext.renderAsContextMenu();
-	myContext.attachEvent("onClick",removeItem);
-	myContext.loadStruct("./json/HR/hr_context-menu.json", "json");
-	
-	myMenu = mySidebar.cells("dashboard").attachMenu({
+	myTabbar = mySidebar.cells("dashboard").attachTabbar({
+		tabs: [
+			{id: "t1", text: "Payroll", active: true},
+			{id: "t2", text: "Payslip"},
+		]
+	});
+
+	myTabbar.attachEvent("onTabClick", function(id) {
+		view_payslip();
+	});
+
+	myMenu = myTabbar.tabs("t1").attachMenu({
 		json: "./json/Payroll/payroll_menu.json",
 		icons_path: "./img/dhtmlxSidebar/toolbar_18/",
 	});
 
-	myGrid = mySidebar.cells("dashboard").attachGrid();
+	myGrid = myTabbar.tabs("t1").attachGrid();
 	myGrid.load("./json/Payroll/payroll_grid.json", "json");
-	myGrid.enableContextMenu(myContext);
-	myGrid.init();
 
 	myGrid.attachEvent("onRowDblClicked", function(rowId, cell_index) {
 		view_employee();
@@ -21,8 +25,6 @@
 	myMenu.attachEvent("onClick", function(id) {
 		if("gen_payroll" == id) {
 			generate_payroll();
-		} else if("payslip" == id) {
-			view_payslip();
 		} else if("view_payroll" == id) {
 			view_payroll();
 		}
@@ -30,20 +32,13 @@
 
 	function view_payroll()
 	{
-		myContext = new dhtmlXMenuObject();
-		myContext.renderAsContextMenu();
-		myContext.attachEvent("onClick",removeItem);
-		myContext.loadStruct("./json/HR/hr_context-menu.json", "json");
-
-		myMenu = mySidebar.cells("dashboard").attachMenu({
+		myMenu = myTabbar.tabs("t1").attachMenu({
 			json: "./json/Payroll/payroll_menu.json",
 			icons_path: "./img/dhtmlxSidebar/toolbar_18/",
 		});
 
-		myGrid = mySidebar.cells("dashboard").attachGrid();
+		myGrid = myTabbar.tabs("t1").attachGrid();
 		myGrid.load("./json/Payroll/payroll_grid.json", "json");
-		myGrid.enableContextMenu(myContext);
-		myGrid.init();
 
 		myGrid.attachEvent("onRowDblClicked", function(rowId, cell_index) {
 			view_employee();
@@ -121,38 +116,29 @@
 	
 	function view_payslip()
 	{
-		myGrid = mySidebar.cells("dashboard").attachGrid();
+		myGrid = myTabbar.tabs("t2").attachGrid();
 		myGrid.load("./json/Payroll/payslip_grid.json", "json");
-		myGrid.enableContextMenu(myContext);
-		myGrid.init();
 
 		myGrid.attachEvent("onRowDblClicked", function(rowId, cell_index) {
 			dhxWins = new dhtmlXWindows();
 				w1 = dhxWins.createWindow({
 				id: "w1",
 				width: 900,
-				height: 250,
+				height: 600,
 				move: false,
 				center: true,
 				resize: false,
+				enableCollSpan: true,
 				caption: 'View Payslip'
 			});
 			w1.button("minmax").hide();
 
-			// myDataView = w1.attachDataView({
-			// 	css: "borderless",
-			// 	type:{
-			// 		template: "http->./json/Payroll/template.html",
-			// 		padding: 15,
-			// 		height: 30,
-			// 		border: 0,
-			// 		width: 130,
-			// 	}
-			// });
-			// myDataView.load("./json/Payroll/payslip.json", "json");
-
 			myView = w1.attachGrid();
-			myView.loadXML("./json/gridHP.xml");
+			myView.enableCollSpan(true)
+			myView.setNoHeader(true);
+			myView.enableAlterCss("even","uneven");
+			myView.setCellTextStyle("head",4,"font-weight:bold;"); 
+			myView.loadXML("./json/Payroll/payslip_ui.xml");
 		});
 	}
 </script>

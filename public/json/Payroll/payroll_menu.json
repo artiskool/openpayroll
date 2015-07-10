@@ -1,9 +1,4 @@
 [
-	{id:"payroll", text:"Payroll", img: "folder_sync.gif", items:[
-		{id: "view_payroll", text: "View Payroll", img: "file_upload.gif"},
-		{id: "gen_payroll", text: "Generate Payroll", img: "file_upload.gif"}
-	]},
-	{type: "separator"},
-	{id: "payslip", text: "Payslip"},
+	{id: "gen_payroll", text: "Generate Payroll", img: "file_upload.gif"},
 	{type: "separator"},
 ]

@@ -1,24 +1,20 @@
 <script>
-	myContext = new dhtmlXMenuObject();
-	myContext.renderAsContextMenu();
-	myContext.attachEvent("onClick",removeItem);
-	myContext.loadStruct("./json/HR/hr_context-menu.json", "json");
+	myTabbar = mySidebar.cells("dashboard").attachTabbar({
+		tabs: [
+			{id: "t1", text: "Attendance", active: true},
+		]
+	});
 
-	myMenu = mySidebar.cells("dashboard").attachMenu({
+	dtr = myTabbar.tabs("t1").attachMenu({
 		json: "./json/DTR/dtr_menu.json",
 		icons_path: "./img/dhtmlxSidebar/toolbar_18/",
 	});
 
-	myGrid = mySidebar.cells("dashboard").attachGrid();
+	myGrid = myTabbar.tabs("t1").attachGrid();
 	myGrid.load("./json/DTR/dtr_grid.json", "json");
-	myGrid.enableContextMenu(myContext);
-	myGrid.init();
 
-	// myGrid.attachEvent("onRowDblClicked", function(rowId, cell_index) {
-	// 	alert(rowId);
-	// });
 
-	myMenu.attachEvent("onClick", function(id) {
+	dtr.attachEvent("onClick", function(id) {
 		if("add_time" == id) {
 			add_time_record();
 		} else if("imp_timesheet" == id) {
@@ -75,7 +71,7 @@
 			{type: "settings", position: "label-left", labelWidth: 100, inputWidth: 250},
 			{type: "block", inputWidth: "auto", offsetTop: 20, list: [
 				{type: "file", label: "Import File", name: "date_from", offsetTop: 10},
-				{type: "button", value: "Import", name: "import", offsetLeft: 270, offsetTop: 15}
+				{type: "button", value: "Import", name: "import", offsetLeft: 262, offsetTop: 15}
 			]}
 		];
 

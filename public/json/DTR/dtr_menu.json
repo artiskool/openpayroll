@@ -1,7 +1,5 @@
 [
-	{id:"attendance", text:"Attendance",img: "folder_sync.gif", items:[
-		{id: "add_time", text: "Add Time Record", img: "file_upload.gif"},
-		{id: "imp_timesheet", text: "Import Timesheet", img: "file_upload.gif"}
-	]},
+	{id: "add_time", text: "Add Time Record", img: "file_upload.gif"},
 	{type: "separator"},
+	{id: "imp_timesheet", text: "Import Timesheet", img: "file_upload.gif"}
 ]

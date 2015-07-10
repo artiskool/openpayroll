@@ -33,3 +33,14 @@ div.dhxsidebar_cont {
 	border-right: none;
 	font-size: 14px !important;
 }
+
+.even{
+    /*background-color:#22FF44;*/
+    border: solid 0px;
+    font-size: 14px;
+}
+.uneven{
+    /*background-color:#41964e;*/
+    border: solid 0px;
+    font-size: 14px;
+}
