@@ -1,0 +1,83 @@
+<script>
+	myTabbar = mySidebar.items("admin").attachTabbar({
+		tabs: [
+			{id: "t1", text: "User Management", active: true},
+		]
+	});
+
+	manage_user = myTabbar.tabs("t1").attachMenu({
+		json: "./json/Admin/user_management.json",
+		icons_path: "./img/dhtmlxSidebar/toolbar_18/",
+	});
+
+	myGrid = myTabbar.tabs("t1").attachGrid();
+	myGrid.load("./json/Admin/users_grid.json", "json");
+
+	myGrid.attachEvent("onRowDblClicked", function(rId,cInd) {
+		users();
+	});
+
+	manage_user.attachEvent("onClick", function(id) {
+		switch(id) {
+			case "users":
+				view_user();
+				break;
+			case "user_group":
+				user_group();
+				break;
+		}
+	});
+
+	function view_user()
+	{
+		myGrid = myTabbar.tabs("t1").attachGrid();
+		myGrid.load("./json/Admin/users_grid.json", "json");
+
+		myGrid.attachEvent("onRowDblClicked", function(rId,cInd) {
+			users();
+		});
+	}
+
+	function users()
+	{
+		dhxWins = new dhtmlXWindows();
+			w1 = dhxWins.createWindow({
+			id: "w1",
+			width: 420,
+			height: 220,
+			move: false,
+			center: true,
+			resize: false,
+			caption: 'Manage Users'
+		});
+		w1.button("minmax").hide();
+		w1.setModal(true);
+
+		formData = [
+			{type: "settings", position: "label-left", labelWidth: 100, inputWidth: 250},
+			{type: "block", inputWidth: "auto", offsetTop: 20, list: [
+				{type: "combo", label: "Employee", name: "random", serverFiltering: "", filterCache: true, filterSubLoad: true},
+				{type: "select", label: "Group", name: "group", offsetTop: 10, inputWidth: 245},
+				{type: "select", label: "Status", name: "status", value: "", offsetTop: 10,options:[
+						{text: "Active", value: "active", name: "active", selected: true},
+						{text: "Pending", value: "pending", name: "pending"},
+						{text: "Suspended", value: "suspended", name: "suspended"},
+				]},
+				{type: "button", value: "Save", name: "save", offsetLeft: 285, offsetTop: 15}
+			]}
+		];
+
+		myForm = w1.attachForm(formData, true);
+	}
+
+	function user_group()
+	{
+		myGrid = myTabbar.tabs("t1").attachGrid();
+		myGrid.load("./json/Admin/group_grid.json", "json");
+
+		myGrid.attachEvent("onRowDblClicked", function(rId,cInd) {
+			alert(rId);
+		});
+	}
+
+</script>

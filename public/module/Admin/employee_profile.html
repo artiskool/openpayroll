@@ -1,0 +1,57 @@
+<script>
+	myTabbar = mySidebar.cells("dashboard").attachTabbar({
+		tabs: [
+			{id: "t1", text: "Employee Profile", active: true},
+		]
+	});
+
+	profileLayout = myTabbar.tabs("t1").attachLayout({
+		pattern: "5S",
+		cells: [
+			{id: "a", text: "Basic Information" },
+			{id: "b", text: "Work Schedule"},
+			{id: "c", text: "Contact Information"},
+			{id: "d", text: "Employment Details"},
+			{id: "e", text: "Government Details"},
+		],
+	});
+
+	// employee details
+	formData = [
+			{ type:"block", width: 550, list: [
+				{type: "input", name: "employee_id", label: "Employee No.", inputWidth: 180, position: "label-top",},
+				{ type: "newcolumn" },
+				{type: "input", name: "Fname", offsetLeft: 100, label: "First Name", inputWidth: 180, position: "label-top",},
+			]},
+			{ type:"block", width: 550, list: [
+				{type: "input", name: "Lname", label: "Last Name", inputWidth: 180, position: "label-top"},
+				{ type: "newcolumn" },
+				{type: "input", name: "Mname", offsetLeft: 100, label: "Middle Name", inputWidth: 180, position: "label-top"},
+			]},
+			{ type:"block", width: 550, list: [
+				{type: "calendar", name: "birthdate", label: "Birthdate", inputWidth: 180, position: "label-top" },
+				{ type: "newcolumn" },
+				{type: "input", name: "gender", offsetLeft: 100, label: "Gender", inputWidth: 180, position: "label-top" },
+			]},
+			{ type: "button", value: "Update", name: "basic_button", className: "btnUpdate"}
+		];
+
+		profileLayout.cells("a").attachForm(formData, true);
+	//end employee
+
+	// working schedules
+	scheduler.config.first_hour = 6;
+	scheduler.config.last_hour = 20;
+	scheduler.config.details_on_create = true;
+	scheduler.config.details_on_dblclick = true;
+	scheduler.config.repeat_date = "%m/%d/%Y";
+
+	scheduler.config.xml_date="%Y-%m-%d %H:%i";
+	scheduler.config.prevent_cache = true;
+
+	scheduler.config.occurrence_timestamp_in_utc = true;
+	scheduler.config.include_end_by = true;
+	scheduler.config.repeat_precise = true;
+
+	profileLayout.cells("b").attachScheduler();
+</script>

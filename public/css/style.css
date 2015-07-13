@@ -28,6 +28,19 @@ div.dhxsidebar_cont {
 	float: right !important;
 }
 
+.dhxform_item_label_left.btnUpdate div.dhxform_btn_txt {
+	background-image: url('../img/save.gif');
+	background-repeat: no-repeat;
+	background-position: 0px 3px;
+	padding: 0 10px 0 22px;
+}
+
+.dhxform_obj_dhx_skyblue .btnUpdate div.dhxform_btn {
+	float: right !important;
+	margin-right: 50px !important;
+}
+
+
 .borderless .dhx_dataview_default_item, .borderless .dhx_dataview_default_item_selected{
 	border-bottom: none;
 	border-right: none;

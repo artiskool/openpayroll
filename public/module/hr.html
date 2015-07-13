@@ -42,6 +42,8 @@ var myTabbar;
 	holiday.attachEvent("onClick", function(id) {
 		if("add_holiday" == id) {
 			add_holiday();
+		} else if("import_holiday" == id) {
+			import_holidays();
 		}
 	});
 
@@ -74,6 +76,7 @@ var myTabbar;
 			caption: 'Add New 201 File'
 		});
 		w1.button("minmax").hide();
+		w1.setModal(true);
 
 		myTabbar = w1.attachTabbar({
 			tabs: [
@@ -111,7 +114,7 @@ var myTabbar;
 			{ type:"block", width: 743, list: [
 				{type: "select", name: "marital_status", label: "Marital Status", inputWidth: 300, position: "label-top" },
 				{ type: "newcolumn" },
-				{type: "select", name: "active", offsetLeft: 85, label: "Active", inputWidth: 300, position: "label-top" },
+				{type: "select", name: "active", offsetLeft: 90, label: "Active", inputWidth: 300, position: "label-top" },
 			]},
 
 			]}, //end basic information
@@ -247,6 +250,7 @@ var myTabbar;
 			caption: 'Add New Holiday'
 		});
 		w1.button("minmax").hide();
+		w1.setModal(true);
 
 		formData = [
 			{type: "settings", position: "label-left", labelWidth: 100, inputWidth: 250},
@@ -277,6 +281,33 @@ var myTabbar;
 			caption: 'Import 201 File Record'
 		});
 		w1.button("minmax").hide();
+		w1.setModal(true);
+
+		formData = [
+			{type: "settings", position: "label-left", labelWidth: 100, inputWidth: 250},
+			{type: "block", inputWidth: "auto", offsetTop: 20, list: [
+				{type: "file", label: "Import File", name: "date_from", offsetTop: 10},
+				{type: "button", value: "Import", name: "import", offsetLeft: 262, offsetTop: 15}
+			]}
+		];
+
+		myForm = w1.attachForm(formData, true);
+	}
+
+	function import_holidays()
+	{
+		dhxWins = new dhtmlXWindows();
+			w1 = dhxWins.createWindow({
+			id: "w1",
+			width: 430,
+			height: 180,
+			move: false,
+			center: true,
+			resize: false,
+			caption: 'Import Holidays'
+		});
+		w1.button("minmax").hide();
+		w1.setModal(true);
 
 		formData = [
 			{type: "settings", position: "label-left", labelWidth: 100, inputWidth: 250},

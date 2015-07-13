@@ -58,6 +58,7 @@
 			caption: 'Employee list'
 		});
 		w1.button("minmax").hide();
+		w1.setModal(true);
 
 		myGrid = w1.attachGrid();
 		myGrid.load("./json/Payroll/employee_grid.json", "json");
@@ -76,6 +77,7 @@
 			caption: 'Generate Payroll'
 		});
 		w1.button("minmax").hide();
+		w1.setModal(true);
 
 		formData = [
 			{type: "settings", position: "label-left", labelWidth: 100, inputWidth: 250},
@@ -107,9 +109,6 @@
 			if("payroll_date" == name && "custom" == value) {
 				myForm.enableItem("date_to");
 				myForm.enableItem("date_from");
-			} else {
-				myForm.disableItem("date_to");
-				myForm.disableItem("date_from");
 			}
 		});
 	}
@@ -132,6 +131,7 @@
 				caption: 'View Payslip'
 			});
 			w1.button("minmax").hide();
+			w1.setModal(true);
 
 			myView = w1.attachGrid();
 			myView.enableCollSpan(true)

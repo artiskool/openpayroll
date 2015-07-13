@@ -1,0 +1,43 @@
+{
+  head:[
+       { width:100,  type:"ro",   align:"center",  value:"Image"},
+       { width:100,  type:"ro",   align:"center",  value:"Employee ID"},
+       { width:120,  type:"ro",   align:"center",  value:"First Name"},
+       { width:120, type:"ro",    align:"center", value:"Last Name"},
+       { width:200, type:"ro",    align:"center",   value:"Email"},
+       { width:120, type:"ro",    align:"center",   value:"Group"},
+       { width:120,  type:"ro", align:"center",  value:"Status"},
+   ],
+    rows:[
+        {  id:1001,
+          data:[
+               "<img src='./img/dokmate.png'/>",
+               "1001",
+               "Ray",
+               "Abanid",
+               "rayabanid@gmail.com",
+               "Admin",
+               "Pending",
+               ] },
+       {  id:1002, 
+          data:[
+                "<img src='./img/48x48-logo.png'/>",
+               "1002",
+               "Raymart",
+               "Obeso",
+               "ai_dmdo@gmail.com",
+               "Admin",
+               "Suspended",
+               ] },
+
+      {  id:1003, 
+        data:[
+              "<img src='./img/dokmate.png'/>",
+             "1003",
+             "Jhanin",
+             "Briones",
+             "jhaninbriones@gmail.com",
+             "Admin",
+             "Active",
+             ] },
+]}

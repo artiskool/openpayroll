@@ -15,10 +15,13 @@
 
 
 	dtr.attachEvent("onClick", function(id) {
-		if("add_time" == id) {
-			add_time_record();
-		} else if("imp_timesheet" == id) {
-			import_records();
+		switch(id) {
+			case "add_time":
+				add_time_record();
+				break;
+			case "imp_timesheet":
+				import_records();
+				break;
 		}
 	});
 
@@ -35,6 +38,7 @@
 			caption: 'Add Time Record'
 		});
 		w1.button("minmax").hide();
+		w1.setModal(true);
 
 		formData = [
 			{type: "settings", position: "label-left", labelWidth: 100, inputWidth: 250},
@@ -66,6 +70,7 @@
 			caption: 'Import Time Record'
 		});
 		w1.button("minmax").hide();
+		w1.setModal(true);
 
 		formData = [
 			{type: "settings", position: "label-left", labelWidth: 100, inputWidth: 250},

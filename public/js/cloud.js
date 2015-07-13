@@ -50,21 +50,33 @@ function doOnLoad() {
 		}
 	});
 
-	myToolbar.attachEvent("onClick", function(id) {
-		if("hr" == id) {
-			hr_menu();
-			//get_all_employees();
-		} else if("payroll" == id) {
-			myMenu = mySidebar.cells("dashboard").detachMenu();
-			payroll_menu();
-		} else if("dtr" == id) {
-			myMenu = mySidebar.cells("dashboard").detachMenu();
-			dtr_menu();
+	mySidebar.attachEvent("onSelect", function(id) {
+		switch(id) {
+			case "admin":
+				admin_users();
+				break;
 		}
 	});
 
-	if (true)
-		login();
+	myToolbar.attachEvent("onClick", function(id) {
+		switch(id) {
+			case "hr":
+				hr_menu();
+				break;
+			case "payroll":
+				payroll_menu();
+				break;
+			case "dtr":
+				dtr_menu();
+				break;
+			case "emp_profile":
+				view_employee_profile();
+				break;
+		}
+	});
+
+	// if (true)
+	// 	login();
 }
 
 function setStatusBar(msg) {
@@ -98,7 +110,8 @@ function login() {
 	myForm.setFocusOnFirstActive();
 	myForm.attachEvent("onButtonClick", function(id){
 		if (myForm.validate()) { // success
-			do_login(w1);
+			//do_login(w1);
+			w1.close();
 		}
 		else {
 		}
@@ -173,6 +186,16 @@ function dtr_menu()
 function hr_menu()
 {
 	myMenu = mySidebar.cells("dashboard").attachURL("./module/hr.html", true);
+}
+
+function admin_users()
+{
+	myMenu = mySidebar.cells("admin").attachURL("./module/Admin/user_management.html", true);
+}
+
+function view_employee_profile()
+{
+	myMenu = mySidebar.cells("dashboard").attachURL("./module/Admin/employee_profile.html", true);
 }
 
 function removeItem(menuItemId)
