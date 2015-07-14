@@ -1,41 +1,91 @@
 <script>
 	myTabbar = mySidebar.items("admin").attachTabbar({
+		mode: "bottom",
 		tabs: [
-			{id: "t1", text: "User Management", active: true},
+			{id: "t1", text: "User Management", active: true}
 		]
 	});
 
-	manage_user = myTabbar.tabs("t1").attachMenu({
-		json: "./json/Admin/user_management.json",
-		icons_path: "./img/dhtmlxSidebar/toolbar_18/",
+	myUserTab = myTabbar.tabs("t1").attachTabbar({
+		mode: "bottom",
+		tabs: [
+			{id: "tt1", text: "Users", active: true},
+			{id: "tt2", text: "User Groups"}
+		]
 	});
 
-	myGrid = myTabbar.tabs("t1").attachGrid();
+	// Users
+	myGrid = myUserTab.tabs("tt1").attachGrid();
 	myGrid.load("./json/Admin/users_grid.json", "json");
 
 	myGrid.attachEvent("onRowDblClicked", function(rId,cInd) {
 		users();
 	});
 
-	manage_user.attachEvent("onClick", function(id) {
+	// Users Group
+	myGroupsMenu = myUserTab.tabs("tt2").attachMenu({
+		json: "./json/Admin/user_management.json",
+		icons_path: "./img/dhtmlxSidebar/toolbar_18/"
+	});
+
+	myGroupsGrid = myUserTab.tabs("tt2").attachGrid();
+	myGroupsGrid.load("./json/Admin/group_grid.json", "json");
+
+	myGroupsMenu.attachEvent("onClick", function(id) {
 		switch(id) {
-			case "users":
-				view_user();
-				break;
-			case "user_group":
-				user_group();
+			case "addGroup":
+				addUserGroup();
 				break;
 		}
 	});
 
-	function view_user()
+	function addUserGroup()
 	{
-		myGrid = myTabbar.tabs("t1").attachGrid();
-		myGrid.load("./json/Admin/users_grid.json", "json");
-
-		myGrid.attachEvent("onRowDblClicked", function(rId,cInd) {
-			users();
+		dhxWins = new dhtmlXWindows();
+			w1 = dhxWins.createWindow({
+			id: "w1",
+			width: 450,
+			height: 250,
+			move: false,
+			center: true,
+			resize: false,
+			caption: "Add Group"
 		});
+		w1.button("minmax").hide();
+		w1.setModal(true);
+
+		groupTab = w1.attachTabbar({
+			mode: "bottom",
+			tabs: [
+				{id: "group1", text: "General", active: true},
+				{id: "group2", text: "Permissions"}
+			]
+		});
+
+		// General Tab
+		formData = [
+		
+			{type: "settings", position: "label-left", labelWidth: 100, inputWidth: 248},
+			{ type: "fieldset", offsetLeft: 5, label: "Manage Users", list: [
+			{type: "block", inputWidth: "auto", offsetTop: 20, list: [
+				{type: "combo", label: "Employee", name: "random", serverFiltering: "", filterCache: true, filterSubLoad: true},
+				{type: "select", label: "Status", name: "status", value: "", offsetTop: 10,options:[
+						{text: "Active", value: "active", name: "active", selected: true},
+						{text: "Pending", value: "pending", name: "pending"},
+						{text: "Suspended", value: "suspended", name: "suspended"}
+				]},
+				{type: "button", value: "Save", name: "save", offsetLeft: 283, offsetTop: 15}
+			]}, 
+			]}, 
+		];
+
+		myForm = groupTab.tabs("group1").attachForm(formData, true);
+
+		// Permission Tab
+		myGrid = groupTab.tabs("group2").attachGrid();
+		myGrid.load("./json/Admin/permission_grid.json", "json");
+		mygrid.setImagePath("./dhtmlx/imgs/");
+		myGrid.attachHeader("#master_checkbox,#text_filter");
 	}
 
 	function users()
@@ -61,23 +111,13 @@
 				{type: "select", label: "Status", name: "status", value: "", offsetTop: 10,options:[
 						{text: "Active", value: "active", name: "active", selected: true},
 						{text: "Pending", value: "pending", name: "pending"},
-						{text: "Suspended", value: "suspended", name: "suspended"},
+						{text: "Suspended", value: "suspended", name: "suspended"}
 				]},
 				{type: "button", value: "Save", name: "save", offsetLeft: 285, offsetTop: 15}
 			]}
 		];
 
 		myForm = w1.attachForm(formData, true);
-	}
-
-	function user_group()
-	{
-		myGrid = myTabbar.tabs("t1").attachGrid();
-		myGrid.load("./json/Admin/group_grid.json", "json");
-
-		myGrid.attachEvent("onRowDblClicked", function(rId,cInd) {
-			alert(rId);
-		});
 	}
 
 </script>

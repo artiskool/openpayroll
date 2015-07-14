@@ -1,49 +1,54 @@
 <script>
-var myTabbar;
-
 	myTabbar = mySidebar.cells("dashboard").attachTabbar({
+		mode: "bottom",
 		tabs: [
 			{id: "t1", text: "210 File", active: true},
 			{id: "t2", text: "Holidays"},
-			{id: "t3", text: "Working Schedules"},
+			{id: "t3", text: "Working Schedules"}
 		]
 	});
 
 	// 201_file
 	add_201 = myTabbar.tabs("t1").attachMenu({
 		json: "./json/HR/hr_menu.json",
-		icons_path: "./img/dhtmlxSidebar/toolbar_18/",
+		icons_path: "./img/dhtmlxSidebar/toolbar_18/"
 	});
 
 	Grid_201 = myTabbar.tabs("t1").attachGrid();
 	Grid_201.load("./json/HR/hr_grid.json", "json");
 
 	Grid_201.attachEvent("onRowDblClicked", function(rowId, cell_index) {
-		hr_201File();
+		hr201File();
 	});
 
 	add_201.attachEvent("onClick", function(id) {
-		if("201_new" == id) {
-			hr_201File();
-		} else if ("import_201" == id) {
-			import_records();
+		switch(id) {
+			case "201_new":
+				hr201File();
+				break;
+			case "import_201":
+				importRecords();
+				break;
 		}
 	});
 
 	//holiday
 	holiday = myTabbar.tabs("t2").attachMenu({
 		json: "./json/HR/holidays.json",
-		icons_path: "./img/dhtmlxSidebar/toolbar_18/",
+		icons_path: "./img/dhtmlxSidebar/toolbar_18/"
 	});
 
 	Grid_holiday = myTabbar.tabs("t2").attachGrid();
 	Grid_holiday.load("./json/HR/holiday_grid.json", "json");
 
 	holiday.attachEvent("onClick", function(id) {
-		if("add_holiday" == id) {
-			add_holiday();
-		} else if("import_holiday" == id) {
-			import_holidays();
+		switch(id) {
+			case "add_holiday":
+				addHoliday();
+				break;
+			case "import_holiday":
+				importHolidays();
+				break;
 		}
 	});
 
@@ -61,9 +66,21 @@ var myTabbar;
 	scheduler.config.include_end_by = true;
 	scheduler.config.repeat_precise = true;
 
-	myTabbar.tabs("t3").attachScheduler(new Date(), "week");
+	sched = myTabbar.tabs("t3").attachScheduler(new Date(), "week");
 
-	function hr_201File()
+	sched.addEvent({
+		start_date: "14-07-2015 08:00",
+		end_date: "14-07-2015 12:00",
+		text: "Work"
+	});
+
+	sched.addEvent({
+		start_date: "14-07-2015 13:00",
+		end_date: "14-07-2015 18:00",
+		text: "Work"
+	});
+
+	function hr201File()
 	{
 		dhxWins = new dhtmlXWindows();
 		w1 = dhxWins.createWindow({
@@ -92,9 +109,9 @@ var myTabbar;
 		formData = [
 			{ type: "fieldset", label: "Basic Information", list: [
 			{ type:"block", width: 743, list: [
-				{type: "label", label: "<img src='./img/64x64-logo.png' />"},
+				{type: "label", offsetLeft: 180, label: "<img src='./img/64x64-logo.png' />"},
 				{ type: "newcolumn" },
-				{type: "upload", name: "myFiles", offsetLeft: 320, inputWidth: 330, url: "php/dhtmlxform_item_upload.php", _swfLogs: "enabled", swfPath: "uploader.swf", swfUrl: "php/dhtmlxform_item_upload.php"},
+				{type: "upload", name: "myFiles", inputWidth: 330, url: "php/dhtmlxform_item_upload.php", _swfLogs: "enabled", swfPath: "uploader.swf", swfUrl: "php/dhtmlxform_item_upload.php"},
 			]},
 			{ type:"block", width: 743, list: [
 				{type: "input", name: "employee_id", label: "Employee No.", inputWidth: 300, position: "label-top", required:true, validate:"NotEmpty"},
@@ -114,7 +131,7 @@ var myTabbar;
 			{ type:"block", width: 743, list: [
 				{type: "select", name: "marital_status", label: "Marital Status", inputWidth: 300, position: "label-top" },
 				{ type: "newcolumn" },
-				{type: "select", name: "active", offsetLeft: 90, label: "Active", inputWidth: 300, position: "label-top" },
+				{type: "select", name: "active", offsetLeft: 90, label: "Active", inputWidth: 300, position: "label-top" }
 			]},
 
 			]}, //end basic information
@@ -141,7 +158,7 @@ var myTabbar;
 			{ type:"block", width: 743, list: [
 				{type: "select", name: "province", label: "Province", inputWidth: 302, position: "label-top" },
 				{ type: "newcolumn" },
-				{type: "select", name: "country", offsetLeft: 88, label: "Country", inputWidth: 302, position: "label-top" },
+				{type: "select", name: "country", offsetLeft: 88, label: "Country", inputWidth: 302, position: "label-top" }
 			]},
 			]},// end Contact details
 			{ type: "button", value: "Submit", className: "btnSub" }
@@ -162,7 +179,7 @@ var myTabbar;
 			{ type:"block", width: 743, list: [
 				{type: "calendar", name: "date_hired", label: "Date Hired", inputWidth: 302, position: "label-top" },
 				{ type: "newcolumn" },
-				{type: "calendar", name: "date_ended", offsetLeft: 80, label: "Date Ended", inputWidth: 302, position: "label-top" },
+				{type: "calendar", name: "date_ended", offsetLeft: 80, label: "Date Ended", inputWidth: 302, position: "label-top" }
 			]},
 
 			]},// end Employment details
@@ -182,7 +199,7 @@ var myTabbar;
 				{type: "input", name: "philheath_no", offsetLeft: 85, label: "Philhealth Number", inputWidth: 300, position: "label-top" },
 			]},
 			{ type:"block", width: 743, list: [
-				{type: "input", name: "hdmf_no", label: "HDMF Number", inputWidth: 300, position: "label-top" },
+				{type: "input", name: "hdmf_no", label: "HDMF Number", inputWidth: 300, position: "label-top" }
 			]},
 			]}, // end government fieldset
 			{ type: "button", value: "Submit", className: "btnSub" }
@@ -222,7 +239,6 @@ var myTabbar;
 		scheduler.config.include_end_by = true;
 		scheduler.config.repeat_precise = true;
 
-
 		saveBasic = myTabbar.tabs("t1").attachForm(formData, true);
 		myTabbar.tabs("t2").attachForm(contact_details, true);
 		myTabbar.tabs("t3").attachForm(employment_details, true);
@@ -231,13 +247,15 @@ var myTabbar;
 		myTabbar.tabs("t6").attachScheduler(new Date(), "week");
 
 		saveBasic.attachEvent('onButtonClick', function(id) {
-			if(id == 'basic_button') {
-				save_basic_information();
+			switch(id) {
+				case "basic_button":
+					saveBasicInformation();
+					break;
 			}
 		});
 	}
 
-	function add_holiday()
+	function addHoliday()
 	{
 		dhxWins = new dhtmlXWindows();
 		w1 = dhxWins.createWindow({
@@ -263,12 +281,12 @@ var myTabbar;
 				{type: "input", label: "Name", name: "holiday_name", offsetTop: 10, inputWidth: 245},
 				{type: "calendar", label: "Date", name: "holiday_date", offsetTop: 10, inputWidth: 245},
 				{type: "button", value: "Save", name: "save", offsetLeft: 283, offsetTop: 15}
-			]}
+			]},
 		];
 		w1.attachForm(formData, true);
 	}
 
-	function import_records()
+	function importRecords()
 	{
 		dhxWins = new dhtmlXWindows();
 			w1 = dhxWins.createWindow({
@@ -294,7 +312,7 @@ var myTabbar;
 		myForm = w1.attachForm(formData, true);
 	}
 
-	function import_holidays()
+	function importHolidays()
 	{
 		dhxWins = new dhtmlXWindows();
 			w1 = dhxWins.createWindow({

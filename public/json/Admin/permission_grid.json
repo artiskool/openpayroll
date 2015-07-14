@@ -1,0 +1,28 @@
+{
+  head:[
+       { width:100,  type:"ch",   align:"center",  value:"Action"},
+       { width:330,  type:"ro", align:"center",  value:"Resources"}
+   ],
+    rows:[
+        {  id:1001,
+          data:[
+               "1",
+               "GET"
+               ] },
+       {  id:1002, 
+          data:[
+                "1",
+               "POST"
+               ] },
+
+      {  id:1003, 
+        data:[
+              "1",
+              "PUT"
+             ] },
+      {  id:1004, 
+        data:[
+              "1",
+              "DELETE"
+             ] },
+]}

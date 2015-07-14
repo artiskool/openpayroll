@@ -3,7 +3,7 @@ var myToolbar;
 var loginPopup;
 var loginForm;
 var token;
-var base_url = 'http://localhost:8888';
+var baseUrl = 'http://localhost:8888';
 
 function doOnLoad() {
 	mySidebar = new dhtmlXSideBar({
@@ -53,7 +53,7 @@ function doOnLoad() {
 	mySidebar.attachEvent("onSelect", function(id) {
 		switch(id) {
 			case "admin":
-				admin_users();
+				adminUsers();
 				break;
 		}
 	});
@@ -61,16 +61,16 @@ function doOnLoad() {
 	myToolbar.attachEvent("onClick", function(id) {
 		switch(id) {
 			case "hr":
-				hr_menu();
+				hrMenu();
 				break;
 			case "payroll":
-				payroll_menu();
+				payrollMenu();
 				break;
 			case "dtr":
-				dtr_menu();
+				dtrMenu();
 				break;
 			case "emp_profile":
-				view_employee_profile();
+				viewEmployeeProfile();
 				break;
 		}
 	});
@@ -173,27 +173,27 @@ function misc() {
 	myGrid.loadXML("./samples/dhtmlxGrid/common/grid_layout.xml?etc="+new Date().getTime());
 }
 
-function payroll_menu()
+function payrollMenu()
 {
 	myMenu = mySidebar.cells("dashboard").attachURL("./module/payroll.html", true);
 }
 
-function dtr_menu()
+function dtrMenu()
 {
 	myMenu = mySidebar.cells("dashboard").attachURL("./module/dtr.html", true);
 }
 
-function hr_menu()
+function hrMenu()
 {
 	myMenu = mySidebar.cells("dashboard").attachURL("./module/hr.html", true);
 }
 
-function admin_users()
+function adminUsers()
 {
 	myMenu = mySidebar.cells("admin").attachURL("./module/Admin/user_management.html", true);
 }
 
-function view_employee_profile()
+function viewEmployeeProfile()
 {
 	myMenu = mySidebar.cells("dashboard").attachURL("./module/Admin/employee_profile.html", true);
 }
@@ -219,7 +219,7 @@ function removeItem(menuItemId)
 	}
 }
 
-function do_login(w1)
+function doLogin(w1)
 {
 	var user = $("input[name='username']").val();
 	var pass = $("input[name='password']").val();
@@ -233,7 +233,7 @@ function do_login(w1)
 				"Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8",
 				"Authorization": "Basic " + "dGVzdGNsaWVudDp0ZXN0cGFzcw=="
 			},
-			url: base_url + "/oauth",
+			url: baseUrl + "/oauth",
 			data: {
 				grant_type: "password",
 				username: user,
@@ -265,7 +265,7 @@ function do_login(w1)
 	});
 }
 
-function get_new_access_token(getRefreshToken, w1)
+function getNewAccessToken(getRefreshToken, w1)
 {
 	$.ajax({
 		type: "POST",
@@ -274,7 +274,7 @@ function get_new_access_token(getRefreshToken, w1)
 			"Content-Type": "application/json",
 			"Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8",
 		},
-		url: base_url + "/oauth",
+		url: baseUrl + "/oauth",
 		data: {
 			grant_type: "refresh_token",
 			refresh_token: getRefreshToken,
@@ -295,7 +295,7 @@ function get_new_access_token(getRefreshToken, w1)
 	});
 }
 
-function get_all_employees()
+function getAllEmployees()
 {
 	$.ajax({
 		type: "GET",
@@ -305,7 +305,7 @@ function get_all_employees()
 			"Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8",
 			"Authorization": "Bearer " + window.token,
 		},
-		url: base_url + "/employees",
+		url: baseUrl + "/employees",
 		data: {
 			
 		},
@@ -321,7 +321,7 @@ function get_all_employees()
 	});
 }
 
-function save_basic_information()
+function saveBasicInformation()
 {
 	var empid = $("input[name='employee_id']").val();
 	var first_name = $("input[name='Fname']").val();
@@ -339,7 +339,7 @@ function save_basic_information()
 			"Content-Type": "application/json",
 			"Authorization": "Bearer " + window.token,
 		},
-		url: base_url + "/employees",
+		url: baseUrl + "/employees",
 		data: {
 		"employee_id": 5,
 		"first_name": "Raymart",
@@ -357,7 +357,7 @@ function save_basic_information()
 	});
 }
 
-function save_contact_details()
+function saveContactDetails()
 {
 	var empid = $("input[name='employee_id']").val();
 	var first_name = $("input[name='Fname']").val();
@@ -375,7 +375,7 @@ function save_contact_details()
 			"Content-Type": "application/json",
 			"Authorization": "Bearer " + window.token,
 		},
-		url: base_url + "/employees",
+		url: baseUrl + "/employees",
 		data: {
 		"employee_id": 5,
 		"first_name": "Raymart",
@@ -393,7 +393,7 @@ function save_contact_details()
 	});
 }
 
-function save_employment_details()
+function saveEmploymentDetails()
 {
 	var empid = $("input[name='employee_id']").val();
 	var first_name = $("input[name='Fname']").val();
@@ -411,7 +411,7 @@ function save_employment_details()
 			"Content-Type": "application/json",
 			"Authorization": "Bearer " + window.token,
 		},
-		url: base_url + "/employees",
+		url: baseUrl + "/employees",
 		data: {
 		"employee_id": 5,
 		"first_name": "Raymart",
@@ -429,7 +429,7 @@ function save_employment_details()
 	});
 }
 
-function save_government_details()
+function saveGovernmentDetails()
 {
 	var empid = $("input[name='employee_id']").val();
 	var first_name = $("input[name='Fname']").val();
@@ -447,7 +447,7 @@ function save_government_details()
 			"Content-Type": "application/json",
 			"Authorization": "Bearer " + window.token,
 		},
-		url: base_url + "/employees",
+		url: baseUrl + "/employees",
 		data: {
 		"employee_id": 5,
 		"first_name": "Raymart",
@@ -465,7 +465,7 @@ function save_government_details()
 	});
 }
 
-function save_School_work()
+function saveSchoolWork()
 {
 	var empid = $("input[name='employee_id']").val();
 	var first_name = $("input[name='Fname']").val();
@@ -483,7 +483,7 @@ function save_School_work()
 			"Content-Type": "application/json",
 			"Authorization": "Bearer " + window.token,
 		},
-		url: base_url + "/employees",
+		url: baseUrl + "/employees",
 		data: {
 		"employee_id": 5,
 		"first_name": "Raymart",
@@ -501,7 +501,7 @@ function save_School_work()
 	});
 }
 
-function update_employee()
+function updateEmployee()
 {
 	var empid = $("input[name='employee_id']").val();
 	var first_name = $("input[name='Fname']").val();
@@ -519,7 +519,7 @@ function update_employee()
 			"Content-Type": "application/json",
 			"Authorization": "Bearer " + window.token,
 		},
-		url: base_url + "/employees",
+		url: baseUrl + "/employees",
 		data: {
 		"employee_id": 5,
 		"first_name": "Raymart",
@@ -537,7 +537,7 @@ function update_employee()
 	});
 }
 
-function delete_employee()
+function deleteEmployee()
 {
 	var empid = $("input[name='employee_id']").val();
 	var first_name = $("input[name='Fname']").val();
@@ -555,7 +555,7 @@ function delete_employee()
 			"Content-Type": "application/json",
 			"Authorization": "Bearer " + window.token,
 		},
-		url: base_url + "/employees",
+		url: baseUrl + "/employees",
 		data: {
 		"employee_id": 5,
 		"first_name": "Raymart",

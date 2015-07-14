@@ -1,51 +1,56 @@
 <script>
 	myTabbar = mySidebar.cells("dashboard").attachTabbar({
+		mode: "bottom",
 		tabs: [
 			{id: "t1", text: "Payroll", active: true},
-			{id: "t2", text: "Payslip"},
+			{id: "t2", text: "Payslip"}
 		]
 	});
 
 	myTabbar.attachEvent("onTabClick", function(id) {
-		view_payslip();
+		switch(id) {
+			case "t2":
+				viewPayslip();
+				break;
+		}
 	});
 
 	myMenu = myTabbar.tabs("t1").attachMenu({
 		json: "./json/Payroll/payroll_menu.json",
-		icons_path: "./img/dhtmlxSidebar/toolbar_18/",
+		icons_path: "./img/dhtmlxSidebar/toolbar_18/"
 	});
 
 	myGrid = myTabbar.tabs("t1").attachGrid();
 	myGrid.load("./json/Payroll/payroll_grid.json", "json");
 
 	myGrid.attachEvent("onRowDblClicked", function(rowId, cell_index) {
-		view_employee();
+		viewEmployee();
 	});
 
 	myMenu.attachEvent("onClick", function(id) {
 		if("gen_payroll" == id) {
-			generate_payroll();
+			generatePayroll();
 		} else if("view_payroll" == id) {
-			view_payroll();
+			viewPayroll();
 		}
 	});
 
-	function view_payroll()
+	function viewPayroll()
 	{
 		myMenu = myTabbar.tabs("t1").attachMenu({
 			json: "./json/Payroll/payroll_menu.json",
-			icons_path: "./img/dhtmlxSidebar/toolbar_18/",
+			icons_path: "./img/dhtmlxSidebar/toolbar_18/"
 		});
 
 		myGrid = myTabbar.tabs("t1").attachGrid();
 		myGrid.load("./json/Payroll/payroll_grid.json", "json");
 
 		myGrid.attachEvent("onRowDblClicked", function(rowId, cell_index) {
-			view_employee();
+			viewEmployee();
 		});
 	}
 
-	function view_employee()
+	function viewEmployee()
 	{
 		dhxWins = new dhtmlXWindows();
 			w1 = dhxWins.createWindow({
@@ -64,7 +69,7 @@
 		myGrid.load("./json/Payroll/employee_grid.json", "json");
 	}
 
-	function generate_payroll()
+	function generatePayroll()
 	{
 		dhxWins = new dhtmlXWindows();
 			w1 = dhxWins.createWindow({
@@ -84,7 +89,7 @@
 			{type: "block", inputWidth: "auto", offsetTop: 20, list: [
 				{type: "select", label: "Payroll Group", name: "payroll_group", value: "", required:true, validate:"NotEmpty" , offsetTop: 10,options:[
 						{text: "Regular", value: "regular", name: "reg", selected: true},
-						{text: "Group1", value: "group1", name: "group1"},
+						{text: "Group1", value: "group1", name: "group1"}
 				]},
 				{type: "select", label: "Payroll Date", name: "payroll_date", value: "", offsetTop: 10, options:[
 						{text: "July 5, 2015", value: "regular", selected: true},
@@ -92,7 +97,7 @@
 						{text: "July 15, 2015", value: "group1"},
 						{text: "July 20, 2015", value: "group1"},
 						{text: "July 30, 2015", value: "group1"},
-						{text: "Custom", value: "custom"},
+						{text: "Custom", value: "custom"}
 				]},
 				{type: "calendar", label: "Date From", name: "date_from", offsetTop: 10, inputWidth: 245},
 				{type: "calendar", label: "Date To", name: "date_to", offsetTop: 10, inputWidth: 245},
@@ -113,7 +118,7 @@
 		});
 	}
 	
-	function view_payslip()
+	function viewPayslip()
 	{
 		myGrid = myTabbar.tabs("t2").attachGrid();
 		myGrid.load("./json/Payroll/payslip_grid.json", "json");

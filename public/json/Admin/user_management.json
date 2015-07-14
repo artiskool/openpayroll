@@ -1,5 +1,4 @@
 [
-	{id: "users", text: "Users", img: "file_upload.gif"},
+	{id: "addGroup", text: "Add Group", img: "file_upload.gif"},
 	{type: "separator"},
-	{id: "user_group", text: "User Groups", img: "file_upload.gif"}
 ]

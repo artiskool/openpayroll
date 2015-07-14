@@ -1,13 +1,14 @@
 <script>
 	myTabbar = mySidebar.cells("dashboard").attachTabbar({
+		mode: "bottom",
 		tabs: [
-			{id: "t1", text: "Attendance", active: true},
+			{id: "t1", text: "Attendance", active: true}
 		]
 	});
 
 	dtr = myTabbar.tabs("t1").attachMenu({
 		json: "./json/DTR/dtr_menu.json",
-		icons_path: "./img/dhtmlxSidebar/toolbar_18/",
+		icons_path: "./img/dhtmlxSidebar/toolbar_18/"
 	});
 
 	myGrid = myTabbar.tabs("t1").attachGrid();
@@ -17,15 +18,15 @@
 	dtr.attachEvent("onClick", function(id) {
 		switch(id) {
 			case "add_time":
-				add_time_record();
+				addTimeRecord();
 				break;
 			case "imp_timesheet":
-				import_records();
+				importRecords();
 				break;
 		}
 	});
 
-	function add_time_record()
+	function addTimeRecord()
 	{
 		dhxWins = new dhtmlXWindows();
 			w1 = dhxWins.createWindow({
@@ -57,7 +58,7 @@
 		myForm = w1.attachForm(formData, true);
 	}
 
-	function import_records()
+	function importRecords()
 	{
 		dhxWins = new dhtmlXWindows();
 			w1 = dhxWins.createWindow({

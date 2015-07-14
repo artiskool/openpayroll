@@ -1,57 +1,93 @@
 <script>
 	myTabbar = mySidebar.cells("dashboard").attachTabbar({
+		mode: "bottom",
 		tabs: [
 			{id: "t1", text: "Employee Profile", active: true},
 		]
 	});
 
 	profileLayout = myTabbar.tabs("t1").attachLayout({
-		pattern: "5S",
+		pattern: "3L",
 		cells: [
 			{id: "a", text: "Basic Information" },
-			{id: "b", text: "Work Schedule"},
-			{id: "c", text: "Contact Information"},
-			{id: "d", text: "Employment Details"},
-			{id: "e", text: "Government Details"},
+			{id: "b", text: "Contact Details"},
+			{id: "c", text: "Government Details"}
 		],
 	});
 
 	// employee details
 	formData = [
 			{ type:"block", width: 550, list: [
-				{type: "input", name: "employee_id", label: "Employee No.", inputWidth: 180, position: "label-top",},
+				{type: "label", offsetLeft: 80, label: "<img src='./img/64x64-logo.png' />"},
 				{ type: "newcolumn" },
-				{type: "input", name: "Fname", offsetLeft: 100, label: "First Name", inputWidth: 180, position: "label-top",},
+				{type: "upload", name: "myFiles", offsetTop: 15, inputWidth: 330, url: "php/dhtmlxform_item_upload.php", _swfLogs: "enabled", swfPath: "uploader.swf", swfUrl: "php/dhtmlxform_item_upload.php"}
 			]},
 			{ type:"block", width: 550, list: [
-				{type: "input", name: "Lname", label: "Last Name", inputWidth: 180, position: "label-top"},
+				{type: "input", name: "employee_id", value: 1, offsetLeft: 20, label: "Employee No.", inputWidth: 200, position: "label-top"},
 				{ type: "newcolumn" },
-				{type: "input", name: "Mname", offsetLeft: 100, label: "Middle Name", inputWidth: 180, position: "label-top"},
+				{type: "input", name: "Fname", value: "Ray", offsetLeft: 80, label: "First Name", inputWidth: 200, position: "label-top"}
 			]},
 			{ type:"block", width: 550, list: [
-				{type: "calendar", name: "birthdate", label: "Birthdate", inputWidth: 180, position: "label-top" },
+				{type: "input", name: "Lname", value: "Abanid", offsetLeft: 20, label: "Last Name", inputWidth: 200, position: "label-top"},
 				{ type: "newcolumn" },
-				{type: "input", name: "gender", offsetLeft: 100, label: "Gender", inputWidth: 180, position: "label-top" },
+				{type: "input", name: "Mname", value: "Unabia", offsetLeft: 80, label: "Middle Name", inputWidth: 200, position: "label-top"}
+			]},
+			{ type:"block", width: 550, list: [
+				{type: "password", name: "password", offsetLeft: 20, label: "Password", inputWidth: 200, position: "label-top" },
+				{ type: "newcolumn" },
+				{type: "password", name: "re_password", offsetLeft: 80, label: "Retype Password", inputWidth: 200, position: "label-top" }
 			]},
 			{ type: "button", value: "Update", name: "basic_button", className: "btnUpdate"}
 		];
 
-		profileLayout.cells("a").attachForm(formData, true);
+	contact_details = [
+			{ type:"block", width: 550, list: [
+				{type: "input", name: "email", offsetLeft: 20, label: "Email", inputWidth: 200, position: "label-top" },
+				{ type: "newcolumn" },
+				{type: "input", name: "phone_no", offsetLeft: 80, label: "Phone No.", inputWidth: 200, position: "label-top" }
+			]},
+			{ type:"block", width: 550, list: [
+				{type: "input", name: "mobile_no", offsetLeft: 20, label: "Mobile No.", inputWidth: 200, position: "label-top" },
+				{ type: "newcolumn" },
+				{type: "input", name: "address1", offsetLeft: 80, label: "Address Line 1", inputWidth: 200, position: "label-top" }
+			]},
+			{ type:"block", width: 550, list: [
+				{type: "input", name: "address2", offsetLeft: 20, label: "Address Line 2", inputWidth: 200, position: "label-top" },
+				{ type: "newcolumn" },
+				{type: "select", name: "city", offsetLeft: 80, label: "City", inputWidth: 200, position: "label-top" }
+			]},
+			{ type:"block", width: 550, list: [
+				{type: "select", name: "province", offsetLeft: 20, label: "Province", inputWidth: 200, position: "label-top" },
+				{ type: "newcolumn" },
+				{type: "select", name: "country", offsetLeft: 85, label: "Country", inputWidth: 200, position: "label-top" }
+			]},
+
+			{ type: "button", value: "Update", className: "btnUpdate" }
+		];
+
+	government_details = [
+			{ type:"block", width: 550, list: [
+				{type: "input", name: "sss_no", offsetLeft: 20, label: "SSS Number", inputWidth: 200, position: "label-top" },
+				{ type: "newcolumn" },
+				{type: "input", name: "bir_no", offsetLeft: 80, label: "BIR Number", inputWidth: 200, position: "label-top" },
+			]},
+			{ type:"block", width: 550, list: [
+				{type: "input", name: "taxID", offsetLeft: 20, label: "Tax Identification No.", inputWidth: 200, position: "label-top" },
+				{ type: "newcolumn" },
+				{type: "input", name: "philheath_no", offsetLeft: 80, label: "Philhealth Number", inputWidth: 200, position: "label-top" },
+			]},
+			{ type:"block", width: 550, list: [
+				{type: "input", name: "hdmf_no", offsetLeft: 20, label: "HDMF Number", inputWidth: 200, position: "label-top" },
+			]},
+			{ type: "button", value: "Submit", className: "btnUpdate" }
+		];
+
+		profileLayout.cells("a").setWidth(563);
+		profileLayout.cells("b").setHeight(303);
+		basic = profileLayout.cells("a").attachForm(formData, true);
+		profileLayout.cells("b").attachForm(contact_details, true);
+		profileLayout.cells("c").attachForm(government_details, true);
+
+		basic.disableItem("employee_id");
 	//end employee
-
-	// working schedules
-	scheduler.config.first_hour = 6;
-	scheduler.config.last_hour = 20;
-	scheduler.config.details_on_create = true;
-	scheduler.config.details_on_dblclick = true;
-	scheduler.config.repeat_date = "%m/%d/%Y";
-
-	scheduler.config.xml_date="%Y-%m-%d %H:%i";
-	scheduler.config.prevent_cache = true;
-
-	scheduler.config.occurrence_timestamp_in_utc = true;
-	scheduler.config.include_end_by = true;
-	scheduler.config.repeat_precise = true;
-
-	profileLayout.cells("b").attachScheduler();
 </script>
