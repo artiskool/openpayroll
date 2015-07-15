@@ -1,4 +1,4 @@
 [
 	{id: "addGroup", text: "Add Group", img: "file_upload.gif"},
-	{type: "separator"},
+	{type: "separator"}
 ]

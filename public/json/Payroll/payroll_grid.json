@@ -1,15 +1,15 @@
 {
   head:[
-       { width:100,  type:"ro",   align:"center",  value:"Payroll Group"},
-       { width:100,  type:"ro",   align:"center",  value:"Period"},
-       { width:105,  type:"ro",   align:"center",  value:"From"},
-       { width:105, type:"ro",    align:"center", value:"To"},
-       { width:105, type:"ro",    align:"center",   value:"Employee"},
-       { width:105, type:"ro",    align:"center",   value:"Gross Income"},
-       { width:105,  type:"ro", align:"center",  value:"Taxable Income"},
-       { width:105,  type:"ro",    align:"center", value:"Withholding Tax"},
-       { width:105,  type:"ro",    align:"center",  value:"Deductions"},
-       { width:100,  type:"ro",    align:"center",  value:"Net Pay"},
+       { width:110,  type:"ro",   align:"center",  value:"Payroll Group"},
+       { width:110,  type:"ro",   align:"center",  value:"Period"},
+       { width:110,  type:"ro",   align:"center",  value:"From"},
+       { width:115, type:"ro",    align:"center", value:"To"},
+       { width:115, type:"ro",    align:"center",   value:"Employee"},
+       { width:115, type:"ro",    align:"center",   value:"Gross Income"},
+       { width:115,  type:"ro", align:"center",  value:"Taxable Income"},
+       { width:115,  type:"ro",    align:"center", value:"Withholding Tax"},
+       { width:115,  type:"ro",    align:"center",  value:"Deductions"},
+       { width:115,  type:"ro",    align:"center",  value:"Net Pay"}
    ],
     rows:[
         {  id:1001,
@@ -23,7 +23,7 @@
                "4,411.70",
                "122.35",
                "2356",
-               "4,298.75",
+               "4,298.75"
                ] },
        {  id:1002, 
           data:[
@@ -36,7 +36,7 @@
                "4,411.70",
                "122.35",
                "2356",
-               "4,298.75",
+               "4,298.75"
                ] },
 
       {  id:1003, 
@@ -50,6 +50,6 @@
              "4,411.70",
              "122.35",
              "2356",
-             "4,298.75",
+             "4,298.75"
              ] },
 ]}

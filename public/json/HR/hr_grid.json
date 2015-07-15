@@ -9,7 +9,7 @@
        { width:235,  type:"ro", align:"center",  value:"Address"},
        { width:100,  type:"ro",    align:"center", value:"City"},
        { width:100,  type:"ro",    align:"center",  value:"Province"},
-       { width:100,  type:"ro",    align:"center",  value:"Created By"},
+       { width:100,  type:"ro",    align:"center",  value:"Created By"}
    ],
     rows:[
         {  id:1001,

@@ -1,0 +1,65 @@
+<body>
+	<div id="chartDiv"></div>
+</body>
+<script>
+	
+	formData = [
+		{type: "settings", position: "label-left", labelWidth: 100, inputWidth: 248},
+		{type: "block", inputWidth: "auto", list: [
+			{type: "select", offsetLeft: 15,name: "status", value: "", options:[
+					{text: "Active", value: "active", name: "active", selected: true},
+					{text: "Pending", value: "pending", name: "pending"},
+					{text: "Suspended", value: "suspended", name: "suspended"}
+			]},
+		]}, 
+	];
+
+	myForm = myLayout.cells("a").attachForm(formData, true);
+
+
+	myChart = myLayout.cells("a").attachChart({
+		view:"bar",
+		container:"chartDiv",
+		value:"#sales#",
+		color: "#58dccd",
+		gradient:"rising",
+		tooltip:{
+			template:"#sales#"
+		},
+		width:60,
+		xAxis:{
+			template:"#month#"
+		},
+		yAxis:{
+			start:0,
+			step:10,
+			end:100
+		},
+		legend:{
+			values:[
+				{text:"Employee",color:"#58dccd"},{text:"Absent",color:"#a7ee70"},
+				{text:"Tardy",color:"#36abee"}
+			],
+			valign:"middle",
+			align:"right",
+			width:90,
+			layout:"y"
+		}
+	});
+	myChart.addSeries({
+		value:"#sales2#",
+		color:"#a7ee70",
+		tooltip:{
+			template:"#sales2#"
+		}
+	});
+	myChart.addSeries({
+		value:"#sales3#",
+		color:"#36abee",
+		tooltip:{
+			template:"#sales3#"
+		}
+	});
+	myChart.load("./json/Admin/employeeChart.json", "json");
+
+</script>

@@ -2,8 +2,17 @@
 	myTabbar = mySidebar.items("admin").attachTabbar({
 		mode: "bottom",
 		tabs: [
-			{id: "t1", text: "User Management", active: true}
+			{id: "t1", text: "User Management", active: true},
+			{id: "t2", text: "Reports",}
 		]
+	});
+
+	myTabbar.attachEvent("onTabClick", function(id) {
+		switch(id) {
+			case "t2":
+				viewReports();
+				break;
+		}
 	});
 
 	myUserTab = myTabbar.tabs("t1").attachTabbar({
@@ -64,18 +73,15 @@
 
 		// General Tab
 		formData = [
-		
 			{type: "settings", position: "label-left", labelWidth: 100, inputWidth: 248},
-			{ type: "fieldset", offsetLeft: 5, label: "Manage Users", list: [
-			{type: "block", inputWidth: "auto", offsetTop: 20, list: [
-				{type: "combo", label: "Employee", name: "random", serverFiltering: "", filterCache: true, filterSubLoad: true},
-				{type: "select", label: "Status", name: "status", value: "", offsetTop: 10,options:[
+			{type: "block", inputWidth: "auto", offsetTop: 30, list: [
+				{type: "combo", offsetLeft: 15, label: "Employee", name: "random", serverFiltering: "", filterCache: true, filterSubLoad: true},
+				{type: "select", offsetLeft: 15, label: "Status", name: "status", value: "", offsetTop: 10,options:[
 						{text: "Active", value: "active", name: "active", selected: true},
 						{text: "Pending", value: "pending", name: "pending"},
 						{text: "Suspended", value: "suspended", name: "suspended"}
 				]},
-				{type: "button", value: "Save", name: "save", offsetLeft: 283, offsetTop: 15}
-			]}, 
+				{type: "button", value: "Save", name: "save", offsetLeft: 295, offsetTop: 15}
 			]}, 
 		];
 
@@ -84,7 +90,7 @@
 		// Permission Tab
 		myGrid = groupTab.tabs("group2").attachGrid();
 		myGrid.load("./json/Admin/permission_grid.json", "json");
-		mygrid.setImagePath("./dhtmlx/imgs/");
+		myGrid.setImagePath("./dhtmlx/imgs/");
 		myGrid.attachHeader("#master_checkbox,#text_filter");
 	}
 
@@ -118,6 +124,19 @@
 		];
 
 		myForm = w1.attachForm(formData, true);
+	}
+
+	function viewReports()
+	{
+		myLayout = myTabbar.tabs("t2").attachLayout({
+			pattern: "2E",
+			cells: [
+				{id: "a", text: "Employee Reports" },
+				{id: "b", text: "Payroll Reports"}
+			],
+		});
+
+		myLayout.cells("a").attachURL("./module/Admin/reports.html", true);
 	}
 
 </script>

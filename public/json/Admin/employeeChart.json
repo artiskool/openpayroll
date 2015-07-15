@@ -1,0 +1,14 @@
+[
+	{ sales:"20", sales2:"35", sales3:"55", month:"JAN" },
+	{ sales:"40", sales2:"24", sales3:"40", month:"FEB" },
+	{ sales:"44", sales2:"20", sales3:"27", month:"MAR" },
+	{ sales:"23", sales2:"50", sales3:"43", month:"APR" },
+	{ sales:"21", sales2:"36", sales3:"31", month:"MAY" },
+	{ sales:"50", sales2:"40", sales3:"56", month:"JUN" },
+	{ sales:"30", sales2:"65", sales3:"75", month:"JUL" },
+	{ sales:"90", sales2:"62", sales3:"55", month:"AUG" },
+	{ sales:"55", sales2:"40", sales3:"60", month:"SEP" },
+	{ sales:"72", sales2:"45", sales3:"54", month:"OCT" },
+	{ sales:"72", sales2:"45", sales3:"54", month:"NOV" },
+	{ sales:"72", sales2:"45", sales3:"54", month:"DEC" }
+];

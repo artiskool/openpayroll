@@ -1,4 +1,4 @@
 [
 	{id: "gen_payroll", text: "Generate Payroll", img: "file_upload.gif"},
-	{type: "separator"},
+	{type: "separator"}
 ]

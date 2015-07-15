@@ -17,7 +17,7 @@
                "Abanid",
                "rayabanid@gmail.com",
                "Admin",
-               "Suspended",
+               "Suspended"
                ] },
        {  id:1002, 
           data:[
@@ -27,7 +27,7 @@
                "Obeso",
                "ai_dmdo@gmail.com",
                "Admin",
-               "Active",
+               "Active"
                ] },
 
       {  id:1003, 
@@ -38,6 +38,6 @@
              "Briones",
              "jhaninbriones@gmail.com",
              "Admin",
-             "Pending",
+             "Pending"
              ] },
 ]}

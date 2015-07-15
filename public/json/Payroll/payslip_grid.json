@@ -3,7 +3,7 @@
        { width:100,  type:"ro",   align:"center",  value:"Payroll Group"},
        { width:100,  type:"ro",   align:"center",  value:"Period"},
        { width:105, type:"ro",    align:"center",   value:"Last Name"},
-       { width:105, type:"ro",    align:"center",   value:"First Name"},
+       { width:105, type:"ro",    align:"center",   value:"First Name"}
    ],
     rows:[
         {  id:1001,
@@ -12,7 +12,7 @@
                "July 31, 2015",
                "Abanid",
                "Ray",
-               "11",
+               "11"
                ] },
        {  id:1002, 
           data:[
@@ -20,7 +20,7 @@
                "July 31, 2015",
                "Abanid",
                "Ray",
-               "11",
+               "11"
                ] },
 
       {  id:1003, 
@@ -29,6 +29,6 @@
                "July 31, 2015",
                "Abanid",
                "Ray",
-               "11",
+               "11"
              ] },
 ]}

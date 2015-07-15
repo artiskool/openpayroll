@@ -10,7 +10,7 @@
        { width:105,  type:"ro",    align:"center", value:"Time In"},
        { width:105,  type:"ro",    align:"center",  value:"Time Out"},
        { width:100,  type:"ro",    align:"center",  value:"Hours Work"},
-       { width:100,  type:"ro",    align:"center",  value:"Overtime"},
+       { width:100,  type:"ro",    align:"center",  value:"Overtime"}
    ],
     rows:[
         {  id:1001,

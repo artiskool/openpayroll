@@ -82,12 +82,26 @@
 			{ type: "button", value: "Submit", className: "btnUpdate" }
 		];
 
+		basic = profileLayout.cells("a").attachLayout({
+			pattern: "2E",
+			cells: [
+				{id: "a", text: "Basic Information" },
+				{id: "b", text: "Work Schedule"},
+			],
+		});
 		profileLayout.cells("a").setWidth(563);
 		profileLayout.cells("b").setHeight(303);
-		basic = profileLayout.cells("a").attachForm(formData, true);
+		basic.cells("a").setHeight(325);
+
+		basicInfo = basic.cells("a").attachForm(formData, true);
 		profileLayout.cells("b").attachForm(contact_details, true);
 		profileLayout.cells("c").attachForm(government_details, true);
 
-		basic.disableItem("employee_id");
+		scheduler.config.first_hour = 7;
+		scheduler.config.last_hour = 20;
+
+		basic.cells("b").attachScheduler(new Date(), "day");
+
+		basicInfo.disableItem("employee_id");
 	//end employee
 </script>

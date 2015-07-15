@@ -26,6 +26,7 @@ div.dhxsidebar_cont {
 
 .dhxform_obj_dhx_skyblue .btnSub div.dhxform_btn {
 	float: right !important;
+	margin-right: 30px !important;
 }
 
 .dhxform_item_label_left.btnUpdate div.dhxform_btn_txt {

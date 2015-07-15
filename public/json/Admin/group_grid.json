@@ -3,7 +3,7 @@
        { width:100,  type:"ro",   align:"center",  value:"Image"},
        { width:120,  type:"ro",   align:"center",  value:"First Name"},
        { width:120, type:"ro",    align:"center", value:"Last Name"},
-       { width:120,  type:"ro", align:"center",  value:"Status"},
+       { width:120,  type:"ro", align:"center",  value:"Status"}
    ],
     rows:[
         {  id:1001,
@@ -11,7 +11,7 @@
                "<img src='./img/dokmate.png'/>",
                "Ray",
                "Abanid",
-               "Pending",
+               "Pending"
                ] },
        {  id:1002, 
           data:[
@@ -21,7 +21,7 @@
                "Obeso",
                "ai_dmdo@gmail.com",
                "Admin",
-               "Suspended",
+               "Suspended"
                ] },
 
       {  id:1003, 
@@ -32,6 +32,6 @@
              "Briones",
              "jhaninbriones@gmail.com",
              "Admin",
-             "Active",
+             "Active"
              ] },
 ]}
