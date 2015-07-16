@@ -1,0 +1,17 @@
+[
+    { philhealth:"20", SSS:"35", BIR:"55", HDMF:"10", payroll:"91", day:"1" },
+	{ philhealth:"40", SSS:"24", BIR:"40", HDMF:"20", payroll:"92", day:"2" },
+	{ philhealth:"44", SSS:"20", BIR:"27", HDMF:"30", payroll:"93", day:"3" },
+	{ philhealth:"23", SSS:"50", BIR:"43", HDMF:"40", payroll:"94", day:"4" },
+	{ philhealth:"21", SSS:"36", BIR:"31", HDMF:"50", payroll:"95", day:"5" },
+	{ philhealth:"50", SSS:"40", BIR:"56", HDMF:"60", payroll:"96", day:"6" },
+	{ philhealth:"30", SSS:"65", BIR:"75", HDMF:"70", payroll:"97", day:"7" },
+	{ philhealth:"90", SSS:"62", BIR:"55", HDMF:"80", payroll:"98", day:"8" },
+	{ philhealth:"55", SSS:"40", BIR:"60", HDMF:"90", payroll:"99", day:"9" },
+	{ philhealth:"72", SSS:"45", BIR:"54", HDMF:"50", payroll:"100", day:"10" },
+	{ philhealth:"72", SSS:"45", BIR:"54", HDMF:"10", payroll:"91", day:"11" },
+	{ philhealth:"72", SSS:"45", BIR:"54", HDMF:"20", payroll:"92", day:"12" },
+	{ philhealth:"72", SSS:"45", BIR:"54", HDMF:"20", payroll:"92", day:"13" },
+	{ philhealth:"72", SSS:"45", BIR:"54", HDMF:"20", payroll:"92", day:"14" },
+	{ philhealth:"72", SSS:"45", BIR:"54", HDMF:"20", payroll:"92", day:"15" }
+];

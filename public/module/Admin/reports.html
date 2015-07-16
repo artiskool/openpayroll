@@ -1,30 +1,50 @@
-<body>
-	<div id="chartDiv"></div>
-</body>
 <script>
-	
+	//Employee Chart
+	newLayout = myLayout.cells("a").attachLayout({
+		pattern: "2E",
+		cells: [
+			{id: "a", header: false},
+			{id: "b", header: false}
+		]
+	});
+	newLayout.cells("a").setHeight(40);
+
 	formData = [
-		{type: "settings", position: "label-left", labelWidth: 100, inputWidth: 248},
+		{type: "settings", position: "label-left", labelWidth: 100, inputWidth: 200},
 		{type: "block", inputWidth: "auto", list: [
-			{type: "select", offsetLeft: 15,name: "status", value: "", options:[
-					{text: "Active", value: "active", name: "active", selected: true},
-					{text: "Pending", value: "pending", name: "pending"},
-					{text: "Suspended", value: "suspended", name: "suspended"}
+			{type: "select", name: "selectOptions", options:[
+					{text: "Annual", value: "annual", name: "annual", selected: true},
+					{text: "Monthly", value: "monthly", name: "monthly"}
 			]},
-		]}, 
+			{ type: "newcolumn" },
+			{type: "select", name: "month", options:[
+					{text: "January", value: "jan", name: "annual", selected: true},
+					{text: "February", value: "feb", name: "pending"}
+			]}
+		]}
 	];
+	myForm = newLayout.cells("a").attachForm(formData, true);
+	myForm.hideItem("month");
 
-	myForm = myLayout.cells("a").attachForm(formData, true);
+	myForm.attachEvent("onChange", function (name, value) {
+		if(name == "selectOptions" && value == "monthly") {
+			myForm.showItem("month");
+		} else if(name == "month" && value == "feb") {
+			viewEmployeeMonthly();
+		} else if(name == "selectOptions" && value == "annual") {
+			myForm.hideItem("month");
+			myLayout.tabs("a").attachURL("./module/Admin/reports.html", true);
+		}
+	});
 
-
-	myChart = myLayout.cells("a").attachChart({
+	myChart = newLayout.cells("b").attachChart({
 		view:"bar",
 		container:"chartDiv",
-		value:"#sales#",
+		value:"#employee#",
 		color: "#58dccd",
 		gradient:"rising",
 		tooltip:{
-			template:"#sales#"
+			template:"#employee#"
 		},
 		width:60,
 		xAxis:{
@@ -37,7 +57,8 @@
 		},
 		legend:{
 			values:[
-				{text:"Employee",color:"#58dccd"},{text:"Absent",color:"#a7ee70"},
+				{text:"Employee",color:"#58dccd"},
+				{text:"Absent",color:"#a7ee70"},
 				{text:"Tardy",color:"#36abee"}
 			],
 			valign:"middle",
@@ -47,19 +68,232 @@
 		}
 	});
 	myChart.addSeries({
-		value:"#sales2#",
+		value:"#absent#",
 		color:"#a7ee70",
 		tooltip:{
-			template:"#sales2#"
+			template:"#absent#"
 		}
 	});
 	myChart.addSeries({
-		value:"#sales3#",
+		value:"#tardy#",
 		color:"#36abee",
 		tooltip:{
-			template:"#sales3#"
+			template:"#tardy#"
 		}
 	});
 	myChart.load("./json/Admin/employeeChart.json", "json");
 
+
+
+	//Payroll Chart
+	newLayoutB = myLayout.cells("b").attachLayout({
+		pattern: "2E",
+		cells: [
+			{id: "a", header: false},
+			{id: "b", header: false}
+		]
+	});
+	newLayoutB.cells("a").setHeight(40);
+	formDataB = [
+		{type: "settings", position: "label-left", labelWidth: 100, inputWidth: 200},
+		{type: "block", inputWidth: "auto", list: [
+			{type: "select", name: "selectPayroll", value: "", options:[
+					{text: "Annual", value: "annual", name: "annual", selected: true},
+					{text: "Monthly", value: "monthly", name: "pending"}
+			]},
+			{ type: "newcolumn" },
+			{type: "select", name: "month", options:[
+					{text: "January", value: "jan", name: "annual", selected: true},
+					{text: "February", value: "feb", name: "pending"}
+			]}
+		]}
+	];
+	myFormB = newLayoutB.cells("a").attachForm(formDataB, true);
+	myFormB.hideItem("month");
+
+	myFormB.attachEvent("onChange", function (name, value) {
+		if(name == "selectPayroll" && value == "monthly") {
+			myFormB.showItem("month");
+		} else if(name == "month" && value == "feb") {
+			viewPayrollMonthly();
+		}
+	});
+	myPayrollChart = newLayoutB.cells("b").attachChart({
+		view:"bar",
+		container:"chartDiv",
+		value:"#philhealth#",
+		color: "#58dccd",
+		gradient:"rising",
+		tooltip:{
+			template:"#philhealth#"
+		},
+		width:60,
+		xAxis:{
+			template:"#month#"
+		},
+		yAxis:{
+			start:0,
+			step:10,
+			end:100
+		},
+		legend:{
+			values:[
+				{text:"Philhealth",color:"#58dccd"},
+				{text:"SSS",color:"#a7ee70"},
+				{text:"BIR",color:"#36abee"},
+				{text:"HDMF",color:"#ffea76"},
+				{text:"Payroll",color:"#ff6246"}
+			],
+			valign:"middle",
+			align:"right",
+			width:90,
+			layout:"y"
+		}
+	});
+	myPayrollChart.addSeries({
+		value:"#SSS#",
+		color:"#a7ee70",
+		tooltip:{
+			template:"#SSS#"
+		}
+	});
+	myPayrollChart.addSeries({
+		value:"#BIR#",
+		color:"#36abee",
+		tooltip:{
+			template:"#BIR#"
+		}
+	});
+	myPayrollChart.addSeries({
+		value:"#HDMF#",
+		color:"#ffea76",
+		tooltip:{
+			template:"#HDMF#"
+		}
+	});
+	myPayrollChart.addSeries({
+		value:"#payroll#",
+		color:"#ff6246",
+		tooltip:{
+			template:"#payroll#"
+		}
+	});
+	myPayrollChart.load("./json/Admin/payrollChart.json", "json");
+
+	function viewEmployeeMonthly()
+	{
+		myLineChart = newLayout.cells("b").attachChart({
+			view:"bar",
+			container:"chartDiv",
+			value:"#employee#",
+			color: "#58dccd",
+			gradient:"rising",
+			tooltip:{
+				template:"#employee#"
+			},
+			width:60,
+			xAxis:{
+				template:"#day#"
+			},
+			yAxis:{
+				start:0,
+				step:1,
+				end:8
+			},
+			legend:{
+				values:[
+					{text:"Employee",color:"#58dccd"},
+					{text:"Absent",color:"#a7ee70"},
+					{text:"Tardy",color:"#36abee"}
+				],
+				valign:"middle",
+				align:"right",
+				width:90,
+				layout:"y"
+			}
+		});
+		myLineChart.addSeries({
+			value:"#absent#",
+			color:"#a7ee70",
+			tooltip:{
+				template:"#absent#"
+			}
+		});
+		myLineChart.addSeries({
+			value:"#tardy#",
+			color:"#36abee",
+			tooltip:{
+				template:"#tardy#"
+			}
+		});
+	
+	myLineChart.load("./json/Admin/employeeMonthly.json", "json");
+	}
+
+	function viewPayrollMonthly()
+	{
+		myChartMonthly = newLayoutB.cells("b").attachChart({
+		view:"bar",
+		container:"chartDiv",
+		value:"#philhealth#",
+		color: "#58dccd",
+		gradient:"rising",
+		tooltip:{
+			template:"#philhealth#"
+		},
+		width:60,
+		xAxis:{
+			template:"#day#"
+		},
+		yAxis:{
+			start:0,
+			step:10,
+			end:100
+		},
+		legend:{
+			values:[
+				{text:"Philhealth",color:"#58dccd"},
+				{text:"SSS",color:"#a7ee70"},
+				{text:"BIR",color:"#36abee"},
+				{text:"HDMF",color:"#ffea76"},
+				{text:"Payroll",color:"#ff6246"}
+			],
+			valign:"middle",
+			align:"right",
+			width:90,
+			layout:"y"
+		}
+	});
+	myChartMonthly.addSeries({
+		value:"#SSS#",
+		color:"#a7ee70",
+		tooltip:{
+			template:"#SSS#"
+		}
+	});
+	myChartMonthly.addSeries({
+		value:"#BIR#",
+		color:"#36abee",
+		tooltip:{
+			template:"#BIR#"
+		}
+	});
+	myChartMonthly.addSeries({
+		value:"#HDMF#",
+		color:"#ffea76",
+		tooltip:{
+			template:"#HDMF#"
+		}
+	});
+	myChartMonthly.addSeries({
+		value:"#payroll#",
+		color:"#ff6246",
+		tooltip:{
+			template:"#payroll#"
+		}
+	});
+	
+	myChartMonthly.load("./json/Admin/payrollMonthly.json", "json");
+	
+	}
 </script>

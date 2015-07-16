@@ -1,0 +1,17 @@
+[
+    { "absent":"4.8", "tardy":"2.3", "employee":"2.4", "day":"1" },
+    { "absent":"5.0", "tardy":"2.1", "employee":"4.4", "day":"2" },
+    { "absent":"3.2", "tardy":"0.1", "employee":"1.4", "day":"3" },
+    { "absent":"3.1", "tardy":"5.7", "employee":"2.4", "day":"4" },
+    { "absent":"1.0", "tardy":"3.0", "employee":"3.4", "day":"5" },
+    { "absent":"1.3", "tardy":"2.6", "employee":"4.4", "day":"6" },
+    { "absent":"3.2", "tardy":"3.0", "employee":"1.4", "day":"7" },
+    { "absent":"2.3", "tardy":"5.0", "employee":"2.4", "day":"8" },
+    { "absent":"1.9", "tardy":"1.4", "employee":"3.4", "day":"9" },
+    { "absent":"2.2", "tardy":"1.0", "employee":"4.4", "day":"10" },
+    { "absent":"4.0", "tardy":"1.5", "employee":"1.4", "day":"11" },
+    { "absent":"6.0", "tardy":"4.0", "employee":"2.4", "day":"12" },
+    { "absent":"6.0", "tardy":"4.0", "employee":"3.4", "day":"13" },
+    { "absent":"6.0", "tardy":"4.0", "employee":"4.4", "day":"14" },
+    { "absent":"6.0", "tardy":"4.0", "employee":"1.4", "day":"15" },
+];

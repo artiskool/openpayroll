@@ -190,7 +190,7 @@ function hrMenu()
 
 function adminUsers()
 {
-	myMenu = mySidebar.cells("admin").attachURL("./module/Admin/user_management.html", true);
+	myMenu = mySidebar.cells("admin").attachURL("./module/Admin/adminArea.html", true);
 }
 
 function viewEmployeeProfile()

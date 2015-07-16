@@ -1,0 +1,14 @@
+[
+	{ philhealth:"20", SSS:"35", BIR:"55", HDMF:"10", payroll:"91", month:"JAN" },
+	{ philhealth:"40", SSS:"24", BIR:"40", HDMF:"20", payroll:"92", month:"FEB" },
+	{ philhealth:"44", SSS:"20", BIR:"27", HDMF:"30", payroll:"93", month:"MAR" },
+	{ philhealth:"23", SSS:"50", BIR:"43", HDMF:"40", payroll:"94", month:"APR" },
+	{ philhealth:"21", SSS:"36", BIR:"31", HDMF:"50", payroll:"95", month:"MAY" },
+	{ philhealth:"50", SSS:"40", BIR:"56", HDMF:"60", payroll:"96", month:"JUN" },
+	{ philhealth:"30", SSS:"65", BIR:"75", HDMF:"70", payroll:"97", month:"JUL" },
+	{ philhealth:"90", SSS:"62", BIR:"55", HDMF:"80", payroll:"98", month:"AUG" },
+	{ philhealth:"55", SSS:"40", BIR:"60", HDMF:"90", payroll:"99", month:"SEP" },
+	{ philhealth:"72", SSS:"45", BIR:"54", HDMF:"50", payroll:"100", month:"OCT" },
+	{ philhealth:"72", SSS:"45", BIR:"54", HDMF:"10", payroll:"91", month:"NOV" },
+	{ philhealth:"72", SSS:"45", BIR:"54", HDMF:"20", payroll:"92", month:"DEC" }
+];

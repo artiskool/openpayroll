@@ -1,14 +1,14 @@
 [
-	{ sales:"20", sales2:"35", sales3:"55", month:"JAN" },
-	{ sales:"40", sales2:"24", sales3:"40", month:"FEB" },
-	{ sales:"44", sales2:"20", sales3:"27", month:"MAR" },
-	{ sales:"23", sales2:"50", sales3:"43", month:"APR" },
-	{ sales:"21", sales2:"36", sales3:"31", month:"MAY" },
-	{ sales:"50", sales2:"40", sales3:"56", month:"JUN" },
-	{ sales:"30", sales2:"65", sales3:"75", month:"JUL" },
-	{ sales:"90", sales2:"62", sales3:"55", month:"AUG" },
-	{ sales:"55", sales2:"40", sales3:"60", month:"SEP" },
-	{ sales:"72", sales2:"45", sales3:"54", month:"OCT" },
-	{ sales:"72", sales2:"45", sales3:"54", month:"NOV" },
-	{ sales:"72", sales2:"45", sales3:"54", month:"DEC" }
+	{ absent:"20", tardy:"35", employee:"55", month:"JAN" },
+	{ absent:"40", tardy:"24", employee:"40", month:"FEB" },
+	{ absent:"44", tardy:"20", employee:"27", month:"MAR" },
+	{ absent:"23", tardy:"50", employee:"43", month:"APR" },
+	{ absent:"21", tardy:"36", employee:"31", month:"MAY" },
+	{ absent:"50", tardy:"40", employee:"56", month:"JUN" },
+	{ absent:"30", tardy:"65", employee:"75", month:"JUL" },
+	{ absent:"90", tardy:"62", employee:"55", month:"AUG" },
+	{ absent:"55", tardy:"40", employee:"60", month:"SEP" },
+	{ absent:"72", tardy:"45", employee:"54", month:"OCT" },
+	{ absent:"72", tardy:"45", employee:"54", month:"NOV" },
+	{ absent:"72", tardy:"45", employee:"54", month:"DEC" }
 ];
