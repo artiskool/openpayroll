@@ -116,6 +116,8 @@
 			myFormB.showItem("month");
 		} else if(name == "month" && value == "feb") {
 			viewPayrollMonthly();
+		} else if(name == "selectPayroll" && value == "annual") {
+			myLayout.tabs("a").attachURL("./module/Admin/reports.html", true);
 		}
 	});
 	myPayrollChart = newLayoutB.cells("b").attachChart({

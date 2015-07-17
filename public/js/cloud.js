@@ -3,7 +3,7 @@ var myToolbar;
 var loginPopup;
 var loginForm;
 var token;
-var baseUrl = 'http://localhost:8888';
+var baseUrl = 'https://cloud.net.ph/staging/public';
 
 function doOnLoad() {
 	mySidebar = new dhtmlXSideBar({
@@ -75,8 +75,8 @@ function doOnLoad() {
 		}
 	});
 
-	// if (true)
-	// 	login();
+	if (true)
+		login();
 }
 
 function setStatusBar(msg) {
@@ -110,8 +110,7 @@ function login() {
 	myForm.setFocusOnFirstActive();
 	myForm.attachEvent("onButtonClick", function(id){
 		if (myForm.validate()) { // success
-			//do_login(w1);
-			w1.close();
+			doLogin();
 		}
 		else {
 		}
@@ -198,6 +197,11 @@ function viewEmployeeProfile()
 	myMenu = mySidebar.cells("dashboard").attachURL("./module/Admin/employee_profile.html", true);
 }
 
+function doLogin(w1)
+{
+	myMenu = mySidebar.cells("dashboard").attachURL("./module/login.html", true);
+}
+
 function removeItem(menuItemId)
 {
 	var data = myGrid.contextID.split("_");
@@ -219,81 +223,7 @@ function removeItem(menuItemId)
 	}
 }
 
-function doLogin(w1)
-{
-	var user = $("input[name='username']").val();
-	var pass = $("input[name='password']").val();
 
-	jQuery(document).ready(function() {
-		$.ajax({
-			type: "POST",
-			headers: {
-				"Accept": "application/json",
-				"Content-Type": "application/json",
-				"Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8",
-				"Authorization": "Basic " + "dGVzdGNsaWVudDp0ZXN0cGFzcw=="
-			},
-			url: baseUrl + "/oauth",
-			data: {
-				grant_type: "password",
-				username: user,
-				password: pass,
-				client_id: "testclient"
-			},
-			dataType: "json",
-			success: function(response)
-			 {
-			 	if(response) {
-			 		var getRefreshToken = get_new_access_token(response.refresh_token, w1);
-			 	}
-			 },
-			 error: function(jqXHR)
-			 {
-			 	if(jqXHR.statusText == "invalid_client") {
-			 		dhtmlx.alert({
-				 		title: "Invalid Credentials",
-						text: "Username or Password is Incorrect",
-					});
-			 	} else if(jqXHR.statusText == "invalid_grant") {
-			 		dhtmlx.alert({
-				 		title: "Invalid Grant",
-						text: "The Authorization is Invalid",
-					});
-			 	}
-			 }
-		});
-	});
-}
-
-function getNewAccessToken(getRefreshToken, w1)
-{
-	$.ajax({
-		type: "POST",
-		headers: {
-			"Accept": "application/json",
-			"Content-Type": "application/json",
-			"Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8",
-		},
-		url: baseUrl + "/oauth",
-		data: {
-			grant_type: "refresh_token",
-			refresh_token: getRefreshToken,
-			client_id: "testclient",
-			client_secret: "testpass"
-		},
-		dataType: "json",
-		success: function(response)
-		{
-			token = response.access_token;
-			w1.close();
-		},
-		error: function(jqXHR)
-		{
-			console.log(jqXHR);
-		}
-
-	});
-}
 
 function getAllEmployees()
 {
