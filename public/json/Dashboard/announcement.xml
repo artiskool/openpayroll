@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rows>
+    <head>
+        <column id="z5" width="30" type="ro" align="left"></column>
+        <column width="125" type="ro" align="left"></column>
+        <column width="190" type="ro" align="left"></column>
+        <column width="190" type="ro" align="left"></column>
+        <column width="30" type="ro" align="left"></column>
+        <settings>
+            <colwidth>px</colwidth>
+        </settings>
+    </head>
+    <row id="sep_head1">
+    </row>
+    <row id="head">
+        <cell></cell>
+        <cell colspan="3" class="fntBold">LOG-IN AND LOG-OUT REMINDER</cell>
+        <cell></cell>
+        <cell></cell>
+    </row>
+    <row id="sep_head">
+    </row>
+    <row id="name">
+        <cell></cell>
+        <cell colspan="2" class="fntItalic">Admin  - June 23, 2015 01:06:17pm </cell>
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+        <cell colspan="2">05/05/05 - 05/05/05</cell>
+        <cell></cell>
+        <cell></cell>
+    </row>
+    <row id="id">
+        <cell></cell>
+        <cell colspan="3" >
+            It has been observed that some Daily Time Records (DTR) have incomplete Log-In and Log-Out.  To esnure that work hours are maximized and to continuosly maintain the discipline in the workplace, this is a gentle reminder to EVERYONE of our policy on PUNCTUALITY (Article VIII Section 2.1) : All employees shall LOG-IN upon reporting to his / her work area and LOG-OUT upon the end of his / her work hours. Any error resulting from your usual log-in . . . </cell>
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+    </row>
+    <row id="sep">
+    </row>
+</rows>

@@ -1,17 +1,9 @@
-<script>
+<script>	
 	myTabbar = mySidebar.cells("dashboard").attachTabbar({
 		mode: "bottom",
 		tabs: [
-			{id: "t1", text: "Employee Profile", active: true},
-		]
-	});
-
-	profileLayout = myTabbar.tabs("t1").attachLayout({
-		pattern: "3L",
-		cells: [
-			{id: "a", text: "Basic Information" },
-			{id: "b", text: "Contact Details"},
-			{id: "c", text: "Government Details"}
+			{id: "t1", text: "Basic Information", active: true},
+			{id: "t2", text: "Work Schedules"}
 		],
 	});
 
@@ -66,7 +58,7 @@
 		];
 
 	government_details = [
-			{ type:"block", width: 550, list: [
+			{ type:"block", offsetTop: -10, width: 550, list: [
 				{type: "input", name: "sss_no", offsetLeft: 20, label: "SSS Number", inputWidth: 200, position: "label-top" },
 				{ type: "newcolumn" },
 				{type: "input", name: "bir_no", offsetLeft: 80, label: "BIR Number", inputWidth: 200, position: "label-top" },
@@ -82,26 +74,32 @@
 			{ type: "button", value: "Submit", className: "btnUpdate" }
 		];
 
-		basic = profileLayout.cells("a").attachLayout({
-			pattern: "2E",
+		basic = myTabbar.tabs("t1").attachLayout({
+			pattern: "2U",
 			cells: [
 				{id: "a", text: "Basic Information" },
 				{id: "b", text: "Work Schedule"},
 			],
 		});
-		profileLayout.cells("a").setWidth(563);
-		profileLayout.cells("b").setHeight(303);
-		basic.cells("a").setHeight(325);
 
+		myBasicLayout = basic.cells("b").attachLayout({
+			pattern: "2E",
+			cells: [
+				{id: "a", text: "Contact Details"},
+				{id: "b", text: "Government Details"},
+			],
+		});
+
+		basic.cells("a").setWidth(560);
+		myBasicLayout.cells("a").setHeight(304);
 		basicInfo = basic.cells("a").attachForm(formData, true);
-		profileLayout.cells("b").attachForm(contact_details, true);
-		profileLayout.cells("c").attachForm(government_details, true);
+		myBasicLayout.cells("a").attachForm(contact_details, true);
+		myBasicLayout.cells("b").attachForm(government_details, true);
 
 		scheduler.config.first_hour = 7;
 		scheduler.config.last_hour = 20;
 
-		basic.cells("b").attachScheduler(new Date(), "day");
-
+		myTabbar.tabs("t2").attachScheduler(new Date(), "week");
 		basicInfo.disableItem("employee_id");
 	//end employee
 </script>

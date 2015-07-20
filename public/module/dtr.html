@@ -13,7 +13,7 @@
 
 	myGrid = myTabbar.tabs("t1").attachGrid();
 	myGrid.load("./json/DTR/dtr_grid.json", "json");
-
+	myGrid.setStyle("font-weight: bold;");
 
 	dtr.attachEvent("onClick", function(id) {
 		switch(id) {
@@ -63,7 +63,7 @@
 		dhxWins = new dhtmlXWindows();
 			w1 = dhxWins.createWindow({
 			id: "w1",
-			width: 430,
+			width: 410,
 			height: 180,
 			move: false,
 			center: true,

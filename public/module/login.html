@@ -21,9 +21,7 @@
 			dataType: "json",
 			success: function(response)
 			 {
-			 	//getRefreshToken = getNewAccessToken(response.refresh_token);
-			 	///getRefreshToken = getNewAccessToken();
-			 	console.log(response);
+			 	getRefreshToken = getNewAccessToken(response.refresh_token);
 			 },
 			 error: function(jqXHR)
 			 {
@@ -49,7 +47,6 @@
 			headers: {
 				"Accept": "application/json",
 				"Content-Type": "application/json",
-				"Access-Control-Allow-Origin": "*",
 				"Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8",
 			},
 			url: baseUrl + "/oauth",

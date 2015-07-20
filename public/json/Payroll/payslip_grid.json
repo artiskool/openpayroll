@@ -3,7 +3,13 @@
        { width:100,  type:"ro",   align:"center",  value:"Payroll Group"},
        { width:100,  type:"ro",   align:"center",  value:"Period"},
        { width:105, type:"ro",    align:"center",   value:"Last Name"},
-       { width:105, type:"ro",    align:"center",   value:"First Name"}
+       { width:105, type:"ro",    align:"center",   value:"First Name"},
+       { width:105, type:"ro",    align:"center",   value:"Tax Code"},
+       { width:105, type:"ro",    align:"center",   value:"Basic Pay"},
+       { width:105, type:"ro",    align:"center",   value:"Allowances"},
+       { width:105, type:"ro",    align:"center",   value:"SSS"},
+       { width:105, type:"ro",    align:"center",   value:"Philhealth"},
+       { width:105, type:"ro",    align:"center",   value:"Pag-ibig"},
    ],
     rows:[
         {  id:1001,
@@ -12,7 +18,12 @@
                "July 31, 2015",
                "Abanid",
                "Ray",
-               "11"
+               "S",
+               "1,675",
+               "200",
+               "150",
+               "250",
+               "250"
                ] },
        {  id:1002, 
           data:[

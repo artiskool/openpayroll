@@ -1,0 +1,87 @@
+<script>
+	myLayout = mySidebar.cells("dashboard").attachLayout({
+		pattern: "3T",
+		cells: [
+			{id: "a", text: "Payroll Generation"},
+			{id: "b", text: "Announcement"},
+			{id: "c", text: "Events"},
+		]
+	});
+
+	//payroll generation
+	myPayrollChart = myLayout.cells("a").attachChart({
+		view:"bar",
+		container:"chartDiv",
+		value:"#philhealth#",
+		color: "#58dccd",
+		gradient:"rising",
+		tooltip:{
+			template:"#philhealth#"
+		},
+		width:60,
+		xAxis:{
+			template:"#month#"
+		},
+		yAxis:{
+			start:0,
+			step:10,
+			end:100
+		},
+		legend:{
+			values:[
+				{text:"Philhealth",color:"#58dccd"},
+				{text:"SSS",color:"#a7ee70"},
+				{text:"BIR",color:"#36abee"},
+				{text:"HDMF",color:"#ffea76"},
+				{text:"Payroll",color:"#ff6246"}
+			],
+			valign:"middle",
+			align:"right",
+			width:90,
+			layout:"y"
+		}
+	});
+	myPayrollChart.addSeries({
+		value:"#SSS#",
+		color:"#a7ee70",
+		tooltip:{
+			template:"#SSS#"
+		}
+	});
+	myPayrollChart.addSeries({
+		value:"#BIR#",
+		color:"#36abee",
+		tooltip:{
+			template:"#BIR#"
+		}
+	});
+	myPayrollChart.addSeries({
+		value:"#HDMF#",
+		color:"#ffea76",
+		tooltip:{
+			template:"#HDMF#"
+		}
+	});
+	myPayrollChart.addSeries({
+		value:"#payroll#",
+		color:"#ff6246",
+		tooltip:{
+			template:"#payroll#"
+		}
+	});
+	myPayrollChart.load("./json/Admin/payrollChart.json", "json");
+
+
+	//announcement
+	myAnnoucement = myLayout.cells("b").attachGrid();
+	myAnnoucement.loadXML("./json/Dashboard/announcement.xml");
+	myAnnoucement.enableCollSpan(true)
+	myAnnoucement.setNoHeader(true);
+	myAnnoucement.enableAlterCss("even","uneven");
+	myAnnoucement.enableMultiline(true);
+
+	//holidays
+	myGrid = myLayout.cells("c").attachGrid();
+	myGrid.load("./json/Dashboard/holidays_grid.json", "json");
+	myGrid.setStyle("font-weight: bold;");
+</script>

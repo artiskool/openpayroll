@@ -6,8 +6,8 @@
        { width:105, type:"ro",    align:"center",   value:"Monthly Income"},
        { width:105, type:"ro",    align:"center",   value:"Gross Income"},
        { width:105,  type:"ro", align:"center",  value:"Taxable Income"},
-       { width:105,  type:"ro",    align:"center", value:"Withholding Tax"},
-       { width:105,  type:"ro",    align:"center",  value:"Total  Deductions"},
+       { width:115,  type:"ro",    align:"center", value:"Withholding Tax"},
+       { width:115,  type:"ro",    align:"center",  value:"Total  Deductions"},
        { width:100,  type:"ro",    align:"center",  value:"Net Pay"},
    ],
     rows:[

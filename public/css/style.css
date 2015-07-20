@@ -58,3 +58,13 @@ div.dhxsidebar_cont {
     border: solid 0px;
     font-size: 14px;
 }
+.fntBold {
+	font-weight: bold;
+}
+.fntBoldColor {
+	font-weight: bold;
+	color: #BA0000;
+}
+.fntItalic {
+	font-style: italic;
+}

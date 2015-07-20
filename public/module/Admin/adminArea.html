@@ -27,6 +27,7 @@
 
 	myGrid = myUserTab.tabs("tt1").attachGrid();
 	myGrid.load("./json/Admin/users_grid.json", "json");
+	myGrid.setStyle("font-weight: bold;");
 
 	myGrid.attachEvent("onRowDblClicked", function(rId,cInd) {
 		users();
@@ -40,6 +41,7 @@
 
 	myGroupsGrid = myUserTab.tabs("tt2").attachGrid();
 	myGroupsGrid.load("./json/Admin/group_grid.json", "json");
+	myGroupsGrid.setStyle("font-weight: bold;");
 
 	myGroupsMenu.attachEvent("onClick", function(id) {
 		switch(id) {

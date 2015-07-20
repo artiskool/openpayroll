@@ -52,6 +52,9 @@ function doOnLoad() {
 
 	mySidebar.attachEvent("onSelect", function(id) {
 		switch(id) {
+			case "dashboard":
+				dashboard();
+				break;
 			case "admin":
 				adminUsers();
 				break;
@@ -74,9 +77,8 @@ function doOnLoad() {
 				break;
 		}
 	});
-
-	if (true)
-		login();
+	// if (true)
+	// 	login();
 }
 
 function setStatusBar(msg) {
@@ -111,6 +113,7 @@ function login() {
 	myForm.attachEvent("onButtonClick", function(id){
 		if (myForm.validate()) { // success
 			doLogin();
+			//dashboard();
 		}
 		else {
 		}
@@ -179,27 +182,32 @@ function payrollMenu()
 
 function dtrMenu()
 {
-	myMenu = mySidebar.cells("dashboard").attachURL("./module/dtr.html", true);
+	mySidebar.cells("dashboard").attachURL("./module/dtr.html", true);
 }
 
 function hrMenu()
 {
-	myMenu = mySidebar.cells("dashboard").attachURL("./module/hr.html", true);
+	mySidebar.cells("dashboard").attachURL("./module/hr.html", true);
 }
 
 function adminUsers()
 {
-	myMenu = mySidebar.cells("admin").attachURL("./module/Admin/adminArea.html", true);
+	mySidebar.cells("admin").attachURL("./module/Admin/adminArea.html", true);
 }
 
 function viewEmployeeProfile()
 {
-	myMenu = mySidebar.cells("dashboard").attachURL("./module/Admin/employee_profile.html", true);
+	mySidebar.cells("dashboard").attachURL("./module/Admin/employee_profile.html", true);
 }
 
-function doLogin(w1)
+function doLogin()
 {
-	myMenu = mySidebar.cells("dashboard").attachURL("./module/login.html", true);
+	mySidebar.cells("dashboard").attachURL("./module/login.html", true);
+}
+
+function dashboard()
+{
+	mySidebar.cells("dashboard").attachURL("./module/dashboard.html", true);
 }
 
 function removeItem(menuItemId)
@@ -222,8 +230,6 @@ function removeItem(menuItemId)
 			break;
 	}
 }
-
-
 
 function getAllEmployees()
 {

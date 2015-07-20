@@ -16,6 +16,7 @@
 
 	Grid_201 = myTabbar.tabs("t1").attachGrid();
 	Grid_201.load("./json/HR/hr_grid.json", "json");
+	Grid_201.setStyle("font-weight: bold;");
 
 	Grid_201.attachEvent("onRowDblClicked", function(rowId, cell_index) {
 		hr201File(rowId);
@@ -40,6 +41,7 @@
 
 	Grid_holiday = myTabbar.tabs("t2").attachGrid();
 	Grid_holiday.load("./json/HR/holiday_grid.json", "json");
+	Grid_holiday.setStyle("font-weight: bold;");
 
 	holiday.attachEvent("onClick", function(id) {
 		switch(id) {
@@ -86,7 +88,7 @@
 		w1 = dhxWins.createWindow({
 			id: "w1",
 			width: 810,
-			height: 480,
+			height: 479,
 			move: false,
 			center: true,
 			resize: false,
@@ -309,7 +311,7 @@
 		dhxWins = new dhtmlXWindows();
 			w1 = dhxWins.createWindow({
 			id: "w1",
-			width: 430,
+			width: 410,
 			height: 180,
 			move: false,
 			center: true,
@@ -335,7 +337,7 @@
 		dhxWins = new dhtmlXWindows();
 			w1 = dhxWins.createWindow({
 			id: "w1",
-			width: 430,
+			width: 410,
 			height: 180,
 			move: false,
 			center: true,

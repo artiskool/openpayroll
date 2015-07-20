@@ -1,5 +1,5 @@
 [
 	{id: "201_new", text: "Add New", img: "file_upload.gif"},
 	{type: "separator"},
-	{id: "import_201", text: "Import", img: "file_upload.gif"}
+	{id: "import_201", text: "Import 201 File", img: "file_upload.gif"}
 ]
