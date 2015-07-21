@@ -3,6 +3,7 @@ var myToolbar;
 var loginPopup;
 var loginForm;
 var token;
+var ids;
 var baseUrl = 'https://cloud.net.ph/staging/public';
 
 function doOnLoad() {
@@ -49,6 +50,10 @@ function doOnLoad() {
 			});
 		}
 	});
+	
+	mySidebar.attachEvent("onContentLoaded", function(id){
+    	ids = id;
+	});
 
 	mySidebar.attachEvent("onSelect", function(id) {
 		switch(id) {
@@ -59,26 +64,28 @@ function doOnLoad() {
 				adminUsers();
 				break;
 		}
+		ids = id;
 	});
 
 	myToolbar.attachEvent("onClick", function(id) {
 		switch(id) {
 			case "hr":
-				hrMenu();
+				hrMenu(ids);
 				break;
 			case "payroll":
-				payrollMenu();
+				payrollMenu(ids);
 				break;
 			case "dtr":
-				dtrMenu();
+				dtrMenu(ids);
 				break;
 			case "emp_profile":
-				viewEmployeeProfile();
+				viewEmployeeProfile(ids);
 				break;
 		}
 	});
-	// if (true)
-	// 	login();
+
+	if (true)
+		login();
 }
 
 function setStatusBar(msg) {
@@ -113,7 +120,6 @@ function login() {
 	myForm.attachEvent("onButtonClick", function(id){
 		if (myForm.validate()) { // success
 			doLogin();
-			//dashboard();
 		}
 		else {
 		}
@@ -175,19 +181,20 @@ function misc() {
 	myGrid.loadXML("./samples/dhtmlxGrid/common/grid_layout.xml?etc="+new Date().getTime());
 }
 
-function payrollMenu()
+function payrollMenu(ids)
 {
-	myMenu = mySidebar.cells("dashboard").attachURL("./module/payroll.html", true);
+	mySidebar.progressOn();
+	mySidebar.cells(ids).attachURL("./module/payroll.html", true);
 }
 
-function dtrMenu()
+function dtrMenu(ids)
 {
-	mySidebar.cells("dashboard").attachURL("./module/dtr.html", true);
+	mySidebar.cells(ids).attachURL("./module/dtr.html", true);
 }
 
-function hrMenu()
+function hrMenu(ids)
 {
-	mySidebar.cells("dashboard").attachURL("./module/hr.html", true);
+	mySidebar.cells(ids).attachURL("./module/hr.html", true);
 }
 
 function adminUsers()
@@ -195,9 +202,9 @@ function adminUsers()
 	mySidebar.cells("admin").attachURL("./module/Admin/adminArea.html", true);
 }
 
-function viewEmployeeProfile()
+function viewEmployeeProfile(ids)
 {
-	mySidebar.cells("dashboard").attachURL("./module/Admin/employee_profile.html", true);
+	mySidebar.cells(ids).attachURL("./module/Admin/employee_profile.html", true);
 }
 
 function doLogin()
@@ -229,68 +236,6 @@ function removeItem(menuItemId)
 			});
 			break;
 	}
-}
-
-function getAllEmployees()
-{
-	$.ajax({
-		type: "GET",
-		headers: {
-			"Accept": "application/json",
-			"Content-Type": "application/json",
-			"Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8",
-			"Authorization": "Bearer " + window.token,
-		},
-		url: baseUrl + "/employees",
-		data: {
-			
-		},
-		dataType: "json",
-		success: function(response)
-		{
-			console.log(response);	
-		},
-		error: function(jqXHR)
-		{
-			console.log(jqXHR);
-		}
-	});
-}
-
-function saveBasicInformation()
-{
-	var empid = $("input[name='employee_id']").val();
-	var first_name = $("input[name='Fname']").val();
-	var last_name = $("input[name='Lname']").val();
-	var middle_name = $("input[name='Mname']").val();
-	var birthdate = $("input[name='birthdate']").val();
-	var gender = $("input[name=gender]").val();
-	var marital_status = $("input[name=marital_status]").val();
-	var active = $("input[name=active]").val();
-
-	$.ajax({
-		type: "POST",
-		headers: {
-			"Accept": "application/json",
-			"Content-Type": "application/json",
-			"Authorization": "Bearer " + window.token,
-		},
-		url: baseUrl + "/employees",
-		data: {
-		"employee_id": 5,
-		"first_name": "Raymart",
-		"last_name": "Obeso"
-		},
-		dataType: "json",
-		success: function(response)
-		{
-			console.log(response);
-		},
-		error: function(jqXHR)
-		{
-			console.log(jqXHR);
-		}
-	});
 }
 
 function saveContactDetails()

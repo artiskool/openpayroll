@@ -7,6 +7,12 @@
 	{type: "button", text: "Project Management", img: "file_download.gif"},
 	{type: "separator"},
 	{type: "spacer"},
-	{type: "button", id: "login", text: "Login", img: "login.gif"},
-	{type: "button", id: "emp_profile", text: "My Profile", img: "login.gif"}
+	//{type: "button", id: "login", text: "Login", img: "login.gif"},
+	{type: "button", type: "buttonSelect", id: "", text: "Jong", img: "login.gif",
+		options: [
+			{ type: "button", id: "emp_profile", text: "My Profile", img: "login.gif" },
+			{ type: "separator" },
+			{ type: "button", id: "logout", text: "Logout", img: "file_download.gif" }
+		]
+	}
 ]

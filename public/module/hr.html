@@ -1,5 +1,7 @@
 <script>
-	myTabbar = mySidebar.cells("dashboard").attachTabbar({
+	getAllEmployees();
+	
+	myTabbar = mySidebar.cells(ids).attachTabbar({
 		mode: "bottom",
 		tabs: [
 			{id: "t1", text: "210 File", active: true},
@@ -356,5 +358,72 @@
 		];
 
 		myForm = w1.attachForm(formData, true);
+	}
+
+	function getAllEmployees()
+	{
+		$.ajax({
+			type: "GET",
+			headers: {
+				"Accept": "application/json",
+				"Content-Type": "application/json",
+				"Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8",
+				"Authorization": "Bearer " + window.token,
+			},
+			url: baseUrl + "/employees",
+			data: {
+				
+			},
+			dataType: "json",
+			success: function(response)
+			{
+				console.log(response);	
+			},
+			error: function(jqXHR)
+			{
+				console.log(jqXHR);
+			}
+		});
+	}
+
+	function saveBasicInformation()
+	{
+		var empid = $("input[name='employee_id']").val();
+		var first_name = $("input[name='Fname']").val();
+		var last_name = $("input[name='Lname']").val();
+		// var middle_name = $("input[name='Mname']").val();
+		// var birthdate = $("input[name='birthdate']").val();
+		// var gender = $("input[name=gender]").val();
+		// var marital_status = $("input[name=marital_status]").val();
+		// var active = $("input[name=active]").val();
+
+		$.ajax({
+			type: "POST",
+			headers: {
+				"Accept": "application/json",
+				"Content-Type": "application/problem+json",
+				"Content-Type" : "application/x-www-form-urlencoded",
+				"Authorization": "Bearer " + window.token,
+			},
+			url: baseUrl + "/employees",
+			data: {
+			"employee_id": 2,
+			"first_name": "Raymart",
+			"last_name": "Obeso"
+			},
+			dataType: "json",
+			beforeSend: function(data)
+			{
+				console.log(data);
+			},
+			success: function(response)
+			{
+				console.log(response);
+			},
+			error: function(jqXHR)
+			{
+				console.log(jqXHR);
+			}
+		});
 	}
 </script>

@@ -20,6 +20,8 @@
             <colwidth>px</colwidth>
         </settings>
     </head>
+    <row id="sep_head1">
+    </row>
     <row id="head">
         <cell></cell>
         <cell></cell>

@@ -19,12 +19,17 @@
 				client_id: "testclient"
 			},
 			dataType: "json",
+			beforeSend: function(response)
+			{
+				w1.progressOn();
+			},
 			success: function(response)
 			 {
 			 	getRefreshToken = getNewAccessToken(response.refresh_token);
 			 },
 			 error: function(jqXHR)
 			 {
+			 	w1.progressOff();
 			 	if(jqXHR.statusText == "invalid_client") {
 			 		dhtmlx.alert({
 				 		title: "Invalid Credentials",
@@ -61,6 +66,7 @@
 			{
 				token = response.access_token;
 				w1.close();
+				dashboard();
 			},
 			error: function(jqXHR)
 			{

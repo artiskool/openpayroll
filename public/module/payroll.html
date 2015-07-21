@@ -1,5 +1,5 @@
 <script>
-	myTabbar = mySidebar.cells("dashboard").attachTabbar({
+	myTabbar = mySidebar.cells(ids).attachTabbar({
 		mode: "bottom",
 		tabs: [
 			{id: "t1", text: "Payroll", active: true},
@@ -131,7 +131,7 @@
 				w1 = dhxWins.createWindow({
 				id: "w1",
 				width: 900,
-				height: 600,
+				height: 615,
 				move: false,
 				center: true,
 				resize: false,
@@ -146,6 +146,11 @@
 			myView.setNoHeader(true);
 			myView.enableAlterCss("even","uneven");
 			myView.loadXML("./json/Payroll/payslip_ui.xml");
+			myView.attachEvent("onBeforeSelect", function(row,old_row){
+				return false;
+			});
 		});
 	}
+
+	mySidebar.progressOff();
 </script>

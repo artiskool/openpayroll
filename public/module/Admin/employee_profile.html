@@ -1,11 +1,12 @@
 <script>	
-	myTabbar = mySidebar.cells("dashboard").attachTabbar({
+	myTabbar = mySidebar.cells(ids).attachTabbar({
 		mode: "bottom",
 		tabs: [
 			{id: "t1", text: "Basic Information", active: true},
 			{id: "t2", text: "Work Schedules"}
 		],
 	});
+
 
 	// employee details
 	formData = [
@@ -81,7 +82,9 @@
 				{id: "b", text: "Work Schedule"},
 			],
 		});
-
+		basic.cells("a").hideArrow();
+		basic.cells("b").hideArrow();
+		
 		myBasicLayout = basic.cells("b").attachLayout({
 			pattern: "2E",
 			cells: [
@@ -89,6 +92,8 @@
 				{id: "b", text: "Government Details"},
 			],
 		});
+		myBasicLayout.cells("a").hideArrow();
+		myBasicLayout.cells("b").hideArrow();
 
 		basic.cells("a").setWidth(560);
 		myBasicLayout.cells("a").setHeight(304);
