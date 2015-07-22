@@ -1,0 +1,217 @@
+<script>
+
+	switch(tabsId) {
+		case "basicUpdate":
+			updateBasicInformation(empID);
+			break;
+		case "contactUpdate":
+			updateContactInfo(empID);
+			break;
+		case "employmentUpdate":
+			updateEmploymentInfo(empID);
+			break;
+		case "governmentUpdate":
+			updateGovernmentInfo(empID);
+			break;
+		case "schoolWorkUpdate":
+			updateSchoolWorkInfo(empID);
+			break;
+	}
+
+	function updateBasicInformation(empID)
+	{
+		var empid = $("input[name='employeeId']").val();
+		var firstName = $("input[name='Fname']").val();
+		var lastName = $("input[name='Lname']").val();
+		var middleName = $("input[name='Mname']").val();
+		var birthdate = $("input[name='birthdate']").val();
+		var gender = $("input[name=gender]").val();
+		var maritalStatus = $("input[name=maritalStatus]").val();
+		var active = $("input[name=active]").val();
+
+		$.ajax({
+			type: "PUT",
+			headers: {
+				"Accept": "application/json",
+				"Content-Type": "application/json",
+				"Authorization": "Bearer " + window.token,
+			},
+			url: baseUrl + "/employees/" + empID,
+			data: JSON.stringify({
+			"employee_id": empid,
+			"first_name": firstName,
+			"last_name": lastName,
+			"middle_name": middleName,
+			"birthdate": birthdate,
+			"gender": gender,
+			"marital_status": maritalStatus,
+			"active": active
+			}),
+			dataType: "json",
+			success: function(response)
+			{
+				console.log(response);
+			},
+			error: function(jqXHR)
+			{
+				console.log(jqXHR);
+			}
+		});
+	}
+
+	function updateContactInfo(empID)
+	{
+		var empid = $("input[name='employeeId']").val();
+		var firstName = $("input[name='Fname']").val();
+		var lastName = $("input[name='Lname']").val();
+		var email = $("input[name=email]").val();
+		var phoneNo = $("input[name=phoneNo]").val();
+		var mobileNo = $("input[name=mobileNo]").val();
+		var address1 = $("input[name=address1]").val();
+		var address2 = $("input[name=address2]").val();
+		var city = $("input[name=city]").val();
+		var province = $("input[name=province]").val();
+		var country = $("input[name=country]").val();
+
+		$.ajax({
+			type: "PUT",
+			headers: {
+				"Accept": "application/json",
+				"Content-Type": "application/json",
+				"Authorization": "Bearer " + window.token,
+			},
+			url: baseUrl + "/employees/" + empID,
+			data: JSON.stringify({
+			"employee_id": empid,
+			"first_name": firstName,
+			"last_name": lastName,
+			"email": email,
+			"phone_no": phoneNo,
+			"mobile_no": mobileNo,
+			"address_line1": address1,
+			"address_line2": address2,
+			"city": city,
+			"province": province,
+			"country": country
+			}),
+			dataType: "json",
+			success: function(response)
+			{
+				console.log(response);
+			},
+			error: function(jqXHR)
+			{
+				console.log(jqXHR);
+			}
+		});
+	}
+
+	function updateEmploymentInfo(empID)
+	{
+		var employmentType = $("input[name=employmentType]").val();
+		var department = $("input[name=department]").val();
+		var position = $("input[name=position]").val();
+		var rank = $("input[name=rank]").val();
+		var dateHired = $("input[name=dateHired]").val();
+		var dateEnded = $("input[name=dateEnded]").val();
+
+		$.ajax({
+			type: "PUT",
+			headers: {
+				"Accept": "application/json",
+				"Content-Type": "application/json",
+				"Authorization": "Bearer " + window.token,
+			},
+			url: baseUrl + "/employees/" + empID,
+			data: JSON.stringify({
+			"employment_type": employmentType,
+			"department": department,
+			"position": position,
+			"rank": rank,
+			"date_hired": dateHired,
+			"date_ended": dateEnded
+			}),
+			dataType: "json",
+			success: function(response)
+			{
+				console.log(response);
+			},
+			error: function(jqXHR)
+			{
+				console.log(jqXHR);
+			}
+		});
+	}
+
+	function updateGovernmentInfo(empID)
+	{
+		var sssNo = $("input[name=sssNo]").val();
+		var birNo = $("input[name=birNo]").val();
+		var taxID = $("input[name=taxID]").val();
+		var philheathNo = $("input[name=philheathNo]").val();
+		var hdmfNo = $("input[name=hdmfNo]").val();
+
+		$.ajax({
+			type: "PUT",
+			headers: {
+				"Accept": "application/json",
+				"Content-Type": "application/json",
+				"Authorization": "Bearer " + window.token,
+			},
+			url: baseUrl + "/employees/" + empID,
+			data: JSON.stringify({
+			"sss_no": sssNo,
+			"bir_no": birNo,
+			"tax_id_no": taxID,
+			"philhealth_no": philheathNo,
+			"hdmf_no": hdmfNo
+			}),
+			dataType: "json",
+			success: function(response)
+			{
+				console.log(response);
+			},
+			error: function(jqXHR)
+			{
+				console.log(jqXHR);
+			}
+		});
+	}
+
+	function updateSchoolWorkInfo(empID)
+	{
+		var etd = $("input[name=etd]").val();
+		var pa = $("input[name=pa]").val();
+		var clearance = $("input[name=clearance]").val();
+		var correctAction = $("input[name=correctAction]").val();
+		var workHistory = $("input[name=workHistory]").val();
+		var pei = $("input[name=pei]").val();
+
+		$.ajax({
+			type: "PUT",
+			headers: {
+				"Accept": "application/json",
+				"Content-Type": "application/json",
+				"Authorization": "Bearer " + window.token,
+			},
+			url: baseUrl + "/employees/" + empID,
+			data: JSON.stringify({
+			"etd_doc": etd,
+			"performance_assesment": pa,
+			"clearances": clearance,
+			"corrective_actions": correctAction,
+			"work_history": workHistory,
+			"post_employment_info": pei
+			}),
+			dataType: "json",
+			success: function(response)
+			{
+				console.log(response);
+			},
+			error: function(jqXHR)
+			{
+				console.log(jqXHR);
+			}
+		});
+	}
+</script>

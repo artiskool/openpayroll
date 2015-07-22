@@ -1,0 +1,511 @@
+<script>
+
+	myTabbar = mySidebar.cells(cellIds).attachTabbar({
+		mode: "bottom",
+		tabs: [
+			{id: "t1", text: "210 File", active: true},
+			{id: "t2", text: "Holidays"},
+			{id: "t3", text: "Working Schedules"}
+		]
+	});
+
+	// 201_file
+	add201 = myTabbar.tabs("t1").attachMenu({
+		json: "./json/HR/hr_menu.json",
+		icons_path: "./img/dhtmlxSidebar/toolbar_18/"
+	});
+
+	Grid201 = myTabbar.tabs("t1").attachGrid();
+	Grid201.load("./json/HR/hr_grid.json", "json");
+	Grid201.setStyle("font-weight: bold;");
+
+	Grid201.attachEvent("onRowDblClicked", function(rowId, cellIndex) {
+		hr201File(rowId);
+	});
+
+	Grid201.attachEvent("onRowSelect", function(id) {
+		getEmpId = id;
+	})
+
+	add201.attachEvent("onClick", function(id) {
+		switch(id) {
+			case "201New":
+				hr201File(id);
+				break;
+			case "import201":
+				importRecords();
+				break;
+			case "removeItem":
+				confirmRemove(getEmpId);
+				break;
+		}
+	});
+
+	//holiday
+	holiday = myTabbar.tabs("t2").attachMenu({
+		json: "./json/HR/holidays.json",
+		icons_path: "./img/dhtmlxSidebar/toolbar_18/"
+	});
+
+	GridHoliday = myTabbar.tabs("t2").attachGrid();
+	GridHoliday.load("./json/HR/holiday_grid.json", "json");
+	GridHoliday.setStyle("font-weight: bold;");
+
+	holiday.attachEvent("onClick", function(id) {
+		switch(id) {
+			case "addHoliday":
+				addHoliday();
+				break;
+			case "importHoliday":
+				importHolidays();
+				break;
+		}
+	});
+
+	//working_sched
+	scheduler.config.first_hour = 6;
+	scheduler.config.last_hour = 20;
+	scheduler.config.details_on_create = true;
+	scheduler.config.details_on_dblclick = true;
+	scheduler.config.repeat_date = "%m/%d/%Y";
+
+	scheduler.config.xml_date="%Y-%m-%d %H:%i";
+	scheduler.config.prevent_cache = true;
+
+	scheduler.config.occurrence_timestamp_in_utc = true;
+	scheduler.config.include_end_by = true;
+	scheduler.config.repeat_precise = true;
+
+	sched = myTabbar.tabs("t3").attachScheduler(new Date(), "week");
+
+	sched.addEvent({
+		start_date: "14-07-2015 08:00",
+		end_date: "14-07-2015 12:00",
+		text: "Work"
+	});
+
+	sched.addEvent({
+		start_date: "14-07-2015 13:00",
+		end_date: "14-07-2015 18:00",
+		text: "Work"
+	});
+
+	function hr201File(rowId)
+	{
+		dhxWins = new dhtmlXWindows();
+		w1 = dhxWins.createWindow({
+			id: "w1",
+			width: 810,
+			height: 479,
+			move: false,
+			center: true,
+			resize: false,
+			caption: 'Add New 201 File'
+		});
+		w1.button("minmax").hide();
+		w1.setModal(true);
+
+		myTabbar = w1.attachTabbar({
+			mode: "bottom",
+			tabs: [
+				{id: "t1", text: "Basic Information", active: true},
+				{id: "t2", text: "Contact Details"},
+				{id: "t3", text: "Employment Details"},
+				{id: "t4", text: "Goverment Details"},
+				{id: "t5", text: "School and Work History"},
+				{id: "t6", text: "Working Schedule"},
+				{id: "t7"}
+			]
+		});
+		myTabbar.tabs("t7").hide();
+
+		formData = [
+			{ type: "fieldset", label: "Basic Information", list: [
+			{ type:"block", width: 743, list: [
+				{type: "label", offsetLeft: 180, label: "<img src='./img/64x64-logo.png' />"},
+				{ type: "newcolumn" },
+				{type: "upload", name: "myFiles", inputWidth: 330, url: "php/dhtmlxform_item_upload.php", _swfLogs: "enabled", swfPath: "uploader.swf", swfUrl: "php/dhtmlxform_item_upload.php"},
+			]},
+			{ type:"block", width: 743, list: [
+				{type: "input", name: "employeeId", label: "Employee No.", inputWidth: 300, position: "label-top", required:true, validate:"NotEmpty"},
+				{ type: "newcolumn" },
+				{type: "input", name: "Fname", offsetLeft: 85, label: "First Name", inputWidth: 300, position: "label-top", required:true, validate:"NotEmpty"},
+			]},
+			{ type:"block", width: 743, list: [
+				{type: "input", name: "Lname", label: "Last Name", inputWidth: 300, position: "label-top", required:true, validate:"NotEmpty"},
+				{ type: "newcolumn" },
+				{type: "input", name: "Mname", offsetLeft: 85, label: "Middle Name", inputWidth: 300, position: "label-top"},
+			]},
+			{ type:"block", width: 743, list: [
+				{type: "calendar", name: "birthdate", label: "Birthdate", inputWidth: 300, position: "label-top" },
+				{ type: "newcolumn" },
+				{type: "select", name: "gender", offsetLeft: 85, label: "Gender", inputWidth: 300, position: "label-top",options:[
+						{text: "Male", value: "male", name: "female", selected: true},
+						{text: "Female", value: "female", name: "female"}
+				]},
+			]},
+			{ type:"block", width: 743, list: [
+				{type: "select", name: "maritalStatus", label: "Marital Status", inputWidth: 300, position: "label-top", options:[
+						{text: "Single", value: "single", name: "single", selected: true},
+						{text: "Married", value: "married", name: "married"},
+				]},
+				{ type: "newcolumn" },
+				{type: "select", name: "active", offsetLeft: 90, label: "Active", inputWidth: 300, position: "label-top", options:[
+						{text: "Yes", value: "yes", name: "yes", selected: true},
+						{text: "No", value: "no", name: "no"},
+				]},
+			]},
+				{ type: "button", value: "Submit", name: "basicButton", className: "btnSub"},
+				{ type: "button", value: "Update", name: "basicUpdate", className: "btnSub"}
+			]}, //end basic information
+			
+		];
+
+		contactDetails = [
+			{ type: "fieldset", label: "Contact Details", list: [
+			{ type:"block", width: 743, list: [
+				{type: "input", name: "email", label: "Email", inputWidth: 300, position: "label-top" },
+				{ type: "newcolumn" },
+				{type: "input", name: "phoneNo", offsetLeft: 85, label: "Phone No.", inputWidth: 300, position: "label-top" },
+			]},
+			{ type:"block", width: 743, list: [
+				{type: "input", name: "mobileNo", label: "Mobile No.", inputWidth: 300, position: "label-top" },
+				{ type: "newcolumn" },
+				{type: "input", name: "address1", offsetLeft: 85, label: "Address Line 1", inputWidth: 300, position: "label-top" },
+			]},
+			{ type:"block", width: 743, list: [
+				{type: "input", name: "address2", label: "Address Line 2", inputWidth: 302, position: "label-top" },
+				{ type: "newcolumn" },
+				{type: "select", name: "city", offsetLeft: 85, label: "City", inputWidth: 302, position: "label-top" },
+			]},
+			{ type:"block", width: 743, list: [
+				{type: "select", name: "province", label: "Province", inputWidth: 302, position: "label-top" },
+				{ type: "newcolumn" },
+				{type: "select", name: "country", offsetLeft: 88, label: "Country", inputWidth: 302, position: "label-top" }
+			]},
+				{ type: "button", value: "Submit", name: "contactButton", className: "btnSub"},
+				{ type: "button", value: "Update", name: "contactUpdate", className: "btnSub"}
+			]},// end Contact details
+		];
+
+		employmentDetails = [
+			{ type: "fieldset", label: "Employment Details", list: [
+			{ type:"block", width: 743, list: [
+				{type: "select", name: "employmentType", label: "Employment Type", inputWidth: 300, position: "label-top" },
+				{ type: "newcolumn" },
+				{type: "select", name: "department", offsetLeft: 85, label: "Department", inputWidth: 300, position: "label-top" },
+			]},
+			{ type:"block", width: 743, list: [
+				{type: "select", name: "position", label: "Position", inputWidth: 300, position: "label-top" },
+				{ type: "newcolumn" },
+				{type: "select", name: "rank", offsetLeft: 85, label: "Rank", inputWidth: 300, position: "label-top" },
+			]},
+			{ type:"block", width: 743, list: [
+				{type: "calendar", name: "dateHired", label: "Date Hired", inputWidth: 302, position: "label-top" },
+				{ type: "newcolumn" },
+				{type: "calendar", name: "dateEnded", offsetLeft: 80, label: "Date Ended", inputWidth: 302, position: "label-top" }
+			]},
+				{ type: "button", value: "Submit", name: "employmentButton", className: "btnSub"},
+				{ type: "button", value: "Update", name: "employmentUpdate", className: "btnSub"}
+			]},// end Employment details
+			
+		];
+
+		governmentDetails = [
+			{ type: "fieldset", label: "Government Details", list: [
+			{ type:"block", width: 743, list: [
+				{type: "input", name: "sssNo", label: "SSS Number", inputWidth: 300, position: "label-top" },
+				{ type: "newcolumn" },
+				{type: "input", name: "birNo", offsetLeft: 85, label: "BIR Number", inputWidth: 300, position: "label-top" },
+			]},
+			{ type:"block", width: 743, list: [
+				{type: "input", name: "taxID", label: "Tax Identification No.", inputWidth: 300, position: "label-top" },
+				{ type: "newcolumn" },
+				{type: "input", name: "philheathNo", offsetLeft: 85, label: "Philhealth Number", inputWidth: 300, position: "label-top" },
+			]},
+			{ type:"block", width: 743, list: [
+				{type: "input", name: "hdmfNo", label: "HDMF Number", inputWidth: 300, position: "label-top" }
+			]},
+				{ type: "button", value: "Submit", name: "governmentButton", className: "btnSub"},
+				{ type: "button", value: "Update", name: "governmentUpdate", className: "btnSub"}
+			]}, // end government fieldset
+		];
+
+		schoolWork = [
+			{ type: "fieldset", label: "School & Work History", list: [
+			{ type:"block", width: 743, list: [
+				{type: "input", name: "etd", label: "Education/Transcripts/Diplomas", inputWidth: 300, position: "label-top" },
+				{ type: "newcolumn" },
+				{type: "input", name: "pa", offsetLeft: 85, label: "Performance Assessments", inputWidth: 300, position: "label-top" },
+			]},
+			{ type:"block", width: 743, list: [
+				{type: "input", name: "clearance", label: "Clearances", inputWidth: 300, position: "label-top" },
+				{ type: "newcolumn" },
+				{type: "input", name: "correctAction", offsetLeft: 85, label: "Corrective actions", inputWidth: 300, position: "label-top" },
+			]},
+			{ type:"block", width: 743, list: [
+				{type: "input", name: "workHistory", label: "Work History", inputWidth: 300, position: "label-top" },
+				{ type: "newcolumn" },
+				{type: "input", name: "pei", offsetLeft: 85, label: "Post Employment Information", inputWidth: 300, position: "label-top" },
+			]},
+				{ type: "button", value: "Submit", name: "schoolWorkButton", className: "btnSub"},
+				{ type: "button", value: "Update", name: "schoolWorkUpdate", className: "btnSub"}
+			]}, // end school & work fieldset
+		];
+
+		scheduler.config.first_hour = 6;
+		scheduler.config.last_hour = 20;
+		scheduler.config.details_on_create = true;
+		scheduler.config.details_on_dblclick = true;
+		scheduler.config.repeat_date = "%m/%d/%Y";
+
+		scheduler.config.xml_date="%Y-%m-%d %H:%i";
+		scheduler.config.prevent_cache = true;
+
+		scheduler.config.occurrence_timestamp_in_utc = true;
+		scheduler.config.include_end_by = true;
+		scheduler.config.repeat_precise = true;
+
+		saveBasic = myTabbar.tabs("t1").attachForm(formData, true);
+		saveContacts = myTabbar.tabs("t2").attachForm(contactDetails, true);
+		saveEmployment = myTabbar.tabs("t3").attachForm(employmentDetails, true);
+		saveGovernment = myTabbar.tabs("t4").attachForm(governmentDetails, true);
+		saveSchoolWork = myTabbar.tabs("t5").attachForm(schoolWork, true);
+		myTabbar.tabs("t6").attachScheduler(new Date(), "week");
+
+		switch(rowId) {
+			case "201New":
+				saveBasic.hideItem("basicUpdate");
+				saveContacts.hideItem("contactUpdate");
+				saveEmployment.hideItem("employmentUpdate");
+				saveGovernment.hideItem("governmentUpdate");
+				saveSchoolWork.hideItem("schoolWorkUpdate");
+				break;
+			default:
+				saveBasic.hideItem("basicButton");
+				saveContacts.hideItem("contactButton");
+				saveEmployment.hideItem("employmentButton");
+				saveGovernment.hideItem("governmentButton");
+				saveSchoolWork.hideItem("schoolWorkButton");
+				w1.setText("Edit 201 File");
+				break;		
+		}
+		empID = rowId;
+		saveBasic.attachEvent('onButtonClick', function(id) {
+			tabsId = id;
+			switch(id) {
+				case "basicButton":
+					save201File(tabsId);
+					break;
+				case "basicUpdate":
+					update201File(tabsId, empID);
+					break;
+			}
+		});
+
+		saveContacts.attachEvent("onButtonClick", function(id) {
+			tabsId = id;
+			switch(id) {
+				case "contactButton":
+					save201File(tabsId);
+					break;
+				case "contactUpdate":
+					update201File(tabsId);
+					break;
+			}
+		});
+
+		saveEmployment.attachEvent("onButtonClick", function(id) {
+			tabsId = id;
+			switch(id) {
+				case "employmentButton":
+					save201File(tabsId);
+					break;
+				case "employmentUpdate":
+					update201File(tabsId);
+					break;
+			}
+		});
+
+		saveGovernment.attachEvent("onButtonClick", function(id) {
+			tabsId = id;
+			switch(id) {
+				case "governmentButton":
+					save201File(tabsId);
+					break;
+				case "governmentUpdate":
+					update201File(tabsId);
+					break;
+			}
+		});
+
+		saveSchoolWork.attachEvent("onButtonClick", function(id) {
+			tabsId = id;
+			switch(id) {
+				case "schoolWorkButton":
+					save201File(tabsId);
+					break;
+				case "schoolWorkUpdate":
+					update201File(tabsId);
+					break;
+			}
+		});
+	}
+
+	function addHoliday()
+	{
+		dhxWins = new dhtmlXWindows();
+		w1 = dhxWins.createWindow({
+			id: "w1",
+			width: 415,
+			height: 230,
+			move: false,
+			center: true,
+			resize: false,
+			caption: 'Add New Holiday'
+		});
+		w1.button("minmax").hide();
+		w1.setModal(true);
+
+		formData = [
+			{type: "settings", position: "label-left", labelWidth: 100, inputWidth: 250},
+			{type: "block", inputWidth: "auto", offsetTop: 20, list: [
+				{type: "select", label: "Holiday Type", name: "payrollGroup", value: "", offsetTop: 10, options:[
+						{text: "Non-Holiday", value: "non-holiday", name: "reg", selected: true},
+						{text: "Regular Holiday", value: "regHoliday", name: "group1"},
+						{text: "Special Holiday", value: "specHoliday", name: "group1"},
+				]},
+				{type: "input", label: "Name", name: "holidayName", offsetTop: 10, inputWidth: 245},
+				{type: "calendar", label: "Date", name: "holidayDate", offsetTop: 10, inputWidth: 245},
+				{type: "button", value: "Save", name: "save", offsetLeft: 283, offsetTop: 15}
+			]},
+		];
+		w1.attachForm(formData, true);
+	}
+
+	function importRecords()
+	{
+		dhxWins = new dhtmlXWindows();
+			w1 = dhxWins.createWindow({
+			id: "w1",
+			width: 410,
+			height: 180,
+			move: false,
+			center: true,
+			resize: false,
+			caption: 'Import 201 File Record'
+		});
+		w1.button("minmax").hide();
+		w1.setModal(true);
+
+		formData = [
+			{type: "settings", position: "label-left", labelWidth: 100, inputWidth: 250},
+			{type: "block", inputWidth: "auto", offsetTop: 20, list: [
+				{type: "file", label: "Import File", name: "dateFrom", offsetTop: 10},
+				{type: "button", value: "Import", name: "import", offsetLeft: 262, offsetTop: 15}
+			]}
+		];
+
+		myForm = w1.attachForm(formData, true);
+	}
+
+	function importHolidays()
+	{
+		dhxWins = new dhtmlXWindows();
+			w1 = dhxWins.createWindow({
+			id: "w1",
+			width: 410,
+			height: 180,
+			move: false,
+			center: true,
+			resize: false,
+			caption: 'Import Holidays'
+		});
+		w1.button("minmax").hide();
+		w1.setModal(true);
+
+		formData = [
+			{type: "settings", position: "label-left", labelWidth: 100, inputWidth: 250},
+			{type: "block", inputWidth: "auto", offsetTop: 20, list: [
+				{type: "file", label: "Import File", name: "dateFrom", offsetTop: 10},
+				{type: "button", value: "Import", name: "import", offsetLeft: 262, offsetTop: 15}
+			]}
+		];
+
+		myForm = w1.attachForm(formData, true);
+	}
+
+	function getAllEmployees()
+	{
+		$.ajax({
+			type: "GET",
+			headers: {
+				"Accept": "application/json",
+				"Content-Type": "application/json",
+				"Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8",
+				"Authorization": "Bearer " + window.token,
+			},
+			url: baseUrl + "/employees",
+			data: {
+				
+			},
+			dataType: "json",
+			success: function(response)
+			{
+				console.log(response);
+			},
+			error: function(jqXHR)
+			{
+				console.log(jqXHR);
+			}
+		});
+	}
+
+	function confirmRemove(getEmpId)
+	{
+		dhtmlx.message({
+			type: "confirm",
+			text: "Are you sure you want to remove this?",
+			callback: function(response) {
+				if(response == true) {
+					removeItem(getEmpId);
+					window.setTimeout("Grid201.deleteRow("+getEmpId+");",200);
+				}
+			}
+		});
+	}
+
+	function removeItem(getEmpId)
+	{
+		$.ajax({
+			type: "GET",
+			headers: {
+				"Accept": "application/json",
+				"Content-Type": "application/json",
+				"Authorization": "Bearer " + window.token,
+			},
+			url: baseUrl + "/employees/" + getEmpId,
+			dataType: "json",
+			success: function(response)
+			{
+				console.log(response);
+			},
+			error: function(jqXHR)
+			{
+				console.log(jqXHR);
+			}
+		});
+	}
+
+	function save201File(tabsId)
+	{
+		myTabbar.tabs("t7").attachURL("./module/HR/save_201.html", true);
+	}
+
+	function update201File(tabsId, empID)
+	{
+		myTabbar.tabs("t7").attachURL("./module/HR/update_201.html", true);
+	}
+	
+	mySidebar.progressOff();
+</script>

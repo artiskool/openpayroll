@@ -1,5 +1,5 @@
 <script>	
-	myTabbar = mySidebar.cells(ids).attachTabbar({
+	myTabbar = mySidebar.cells(cellIds).attachTabbar({
 		mode: "bottom",
 		tabs: [
 			{id: "t1", text: "Basic Information", active: true},
@@ -107,4 +107,6 @@
 		myTabbar.tabs("t2").attachScheduler(new Date(), "week");
 		basicInfo.disableItem("employee_id");
 	//end employee
+
+	mySidebar.progressOff();
 </script>

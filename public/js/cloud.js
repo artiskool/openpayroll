@@ -3,7 +3,7 @@ var myToolbar;
 var loginPopup;
 var loginForm;
 var token;
-var ids;
+var cellIds;
 var baseUrl = 'https://cloud.net.ph/staging/public';
 
 function doOnLoad() {
@@ -51,9 +51,9 @@ function doOnLoad() {
 		}
 	});
 	
-	mySidebar.attachEvent("onContentLoaded", function(id){
-    	ids = id;
-	});
+	// mySidebar.attachEvent("onContentLoaded", function(id){
+ //    	cellIds = id;
+	// });
 
 	mySidebar.attachEvent("onSelect", function(id) {
 		switch(id) {
@@ -64,28 +64,28 @@ function doOnLoad() {
 				adminUsers();
 				break;
 		}
-		ids = id;
+		cellIds = id;
 	});
 
 	myToolbar.attachEvent("onClick", function(id) {
 		switch(id) {
 			case "hr":
-				hrMenu(ids);
+				hrMenu(cellIds);
 				break;
 			case "payroll":
-				payrollMenu(ids);
+				payrollMenu(cellIds);
 				break;
 			case "dtr":
-				dtrMenu(ids);
+				dtrMenu(cellIds);
 				break;
 			case "emp_profile":
-				viewEmployeeProfile(ids);
+				viewEmployeeProfile(cellIds);
 				break;
 		}
 	});
 
-	if (true)
-		login();
+	// if (true)
+	// 	login();
 }
 
 function setStatusBar(msg) {
@@ -181,30 +181,34 @@ function misc() {
 	myGrid.loadXML("./samples/dhtmlxGrid/common/grid_layout.xml?etc="+new Date().getTime());
 }
 
-function payrollMenu(ids)
+function payrollMenu(cellIds)
 {
 	mySidebar.progressOn();
-	mySidebar.cells(ids).attachURL("./module/payroll.html", true);
+	mySidebar.cells(cellIds).attachURL("./module/payroll.html", true);
 }
 
-function dtrMenu(ids)
+function dtrMenu(cellIds)
 {
-	mySidebar.cells(ids).attachURL("./module/dtr.html", true);
+	mySidebar.progressOn();
+	mySidebar.cells(cellIds).attachURL("./module/dtr.html", true);
 }
 
-function hrMenu(ids)
+function hrMenu(cellIds)
 {
-	mySidebar.cells(ids).attachURL("./module/hr.html", true);
+	mySidebar.progressOn();
+	mySidebar.cells(cellIds).attachURL("./module/HR/hr.html", true);
 }
 
 function adminUsers()
 {
+	mySidebar.progressOn();
 	mySidebar.cells("admin").attachURL("./module/Admin/adminArea.html", true);
 }
 
-function viewEmployeeProfile(ids)
+function viewEmployeeProfile(cellIds)
 {
-	mySidebar.cells(ids).attachURL("./module/Admin/employee_profile.html", true);
+	mySidebar.progressOn();
+	mySidebar.cells(cellIds).attachURL("./module/Admin/employee_profile.html", true);
 }
 
 function doLogin()
@@ -236,220 +240,4 @@ function removeItem(menuItemId)
 			});
 			break;
 	}
-}
-
-function saveContactDetails()
-{
-	var empid = $("input[name='employee_id']").val();
-	var first_name = $("input[name='Fname']").val();
-	var last_name = $("input[name='Lname']").val();
-	var middle_name = $("input[name='Mname']").val();
-	var birthdate = $("input[name='birthdate']").val();
-	var gender = $("input[name=gender]").val();
-	var marital_status = $("input[name=marital_status]").val();
-	var active = $("input[name=active]").val();
-
-	$.ajax({
-		type: "POST",
-		headers: {
-			"Accept": "application/json",
-			"Content-Type": "application/json",
-			"Authorization": "Bearer " + window.token,
-		},
-		url: baseUrl + "/employees",
-		data: {
-		"employee_id": 5,
-		"first_name": "Raymart",
-		"last_name": "Obeso"
-		},
-		dataType: "json",
-		success: function(response)
-		{
-			console.log(response);
-		},
-		error: function(jqXHR)
-		{
-			console.log(jqXHR);
-		}
-	});
-}
-
-function saveEmploymentDetails()
-{
-	var empid = $("input[name='employee_id']").val();
-	var first_name = $("input[name='Fname']").val();
-	var last_name = $("input[name='Lname']").val();
-	var middle_name = $("input[name='Mname']").val();
-	var birthdate = $("input[name='birthdate']").val();
-	var gender = $("input[name=gender]").val();
-	var marital_status = $("input[name=marital_status]").val();
-	var active = $("input[name=active]").val();
-
-	$.ajax({
-		type: "POST",
-		headers: {
-			"Accept": "application/json",
-			"Content-Type": "application/json",
-			"Authorization": "Bearer " + window.token,
-		},
-		url: baseUrl + "/employees",
-		data: {
-		"employee_id": 5,
-		"first_name": "Raymart",
-		"last_name": "Obeso"
-		},
-		dataType: "json",
-		success: function(response)
-		{
-			console.log(response);
-		},
-		error: function(jqXHR)
-		{
-			console.log(jqXHR);
-		}
-	});
-}
-
-function saveGovernmentDetails()
-{
-	var empid = $("input[name='employee_id']").val();
-	var first_name = $("input[name='Fname']").val();
-	var last_name = $("input[name='Lname']").val();
-	var middle_name = $("input[name='Mname']").val();
-	var birthdate = $("input[name='birthdate']").val();
-	var gender = $("input[name=gender]").val();
-	var marital_status = $("input[name=marital_status]").val();
-	var active = $("input[name=active]").val();
-
-	$.ajax({
-		type: "POST",
-		headers: {
-			"Accept": "application/json",
-			"Content-Type": "application/json",
-			"Authorization": "Bearer " + window.token,
-		},
-		url: baseUrl + "/employees",
-		data: {
-		"employee_id": 5,
-		"first_name": "Raymart",
-		"last_name": "Obeso"
-		},
-		dataType: "json",
-		success: function(response)
-		{
-			console.log(response);
-		},
-		error: function(jqXHR)
-		{
-			console.log(jqXHR);
-		}
-	});
-}
-
-function saveSchoolWork()
-{
-	var empid = $("input[name='employee_id']").val();
-	var first_name = $("input[name='Fname']").val();
-	var last_name = $("input[name='Lname']").val();
-	var middle_name = $("input[name='Mname']").val();
-	var birthdate = $("input[name='birthdate']").val();
-	var gender = $("input[name=gender]").val();
-	var marital_status = $("input[name=marital_status]").val();
-	var active = $("input[name=active]").val();
-
-	$.ajax({
-		type: "POST",
-		headers: {
-			"Accept": "application/json",
-			"Content-Type": "application/json",
-			"Authorization": "Bearer " + window.token,
-		},
-		url: baseUrl + "/employees",
-		data: {
-		"employee_id": 5,
-		"first_name": "Raymart",
-		"last_name": "Obeso"
-		},
-		dataType: "json",
-		success: function(response)
-		{
-			console.log(response);
-		},
-		error: function(jqXHR)
-		{
-			console.log(jqXHR);
-		}
-	});
-}
-
-function updateEmployee()
-{
-	var empid = $("input[name='employee_id']").val();
-	var first_name = $("input[name='Fname']").val();
-	var last_name = $("input[name='Lname']").val();
-	var middle_name = $("input[name='Mname']").val();
-	var birthdate = $("input[name='birthdate']").val();
-	var gender = $("input[name=gender]").val();
-	var marital_status = $("input[name=marital_status]").val();
-	var active = $("input[name=active]").val();
-
-	$.ajax({
-		type: "POST",
-		headers: {
-			"Accept": "application/json",
-			"Content-Type": "application/json",
-			"Authorization": "Bearer " + window.token,
-		},
-		url: baseUrl + "/employees",
-		data: {
-		"employee_id": 5,
-		"first_name": "Raymart",
-		"last_name": "Obeso"
-		},
-		dataType: "json",
-		success: function(response)
-		{
-			console.log(response);
-		},
-		error: function(jqXHR)
-		{
-			console.log(jqXHR);
-		}
-	});
-}
-
-function deleteEmployee()
-{
-	var empid = $("input[name='employee_id']").val();
-	var first_name = $("input[name='Fname']").val();
-	var last_name = $("input[name='Lname']").val();
-	var middle_name = $("input[name='Mname']").val();
-	var birthdate = $("input[name='birthdate']").val();
-	var gender = $("input[name=gender]").val();
-	var marital_status = $("input[name=marital_status]").val();
-	var active = $("input[name=active]").val();
-
-	$.ajax({
-		type: "POST",
-		headers: {
-			"Accept": "application/json",
-			"Content-Type": "application/json",
-			"Authorization": "Bearer " + window.token,
-		},
-		url: baseUrl + "/employees",
-		data: {
-		"employee_id": 5,
-		"first_name": "Raymart",
-		"last_name": "Obeso"
-		},
-		dataType: "json",
-		success: function(response)
-		{
-			console.log(response);
-		},
-		error: function(jqXHR)
-		{
-			console.log(jqXHR);
-		}
-	});
 }

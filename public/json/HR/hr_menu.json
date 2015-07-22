@@ -1,5 +1,7 @@
 [
-	{id: "201_new", text: "Add New", img: "file_upload.gif"},
+	{id: "201New", text: "Add New", img: "file_upload.gif"},
 	{type: "separator"},
-	{id: "import_201", text: "Import 201 File", img: "file_upload.gif"}
+	{id: "import201", text: "Import 201 File", img: "file_upload.gif"},
+	{type: "separator"},
+	{id: "removeItem", text: "Delete", img: "file_upload.gif"}
 ]

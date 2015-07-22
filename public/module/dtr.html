@@ -1,5 +1,5 @@
 <script>
-	myTabbar = mySidebar.cells(ids).attachTabbar({
+	myTabbar = mySidebar.cells(cellIds).attachTabbar({
 		mode: "bottom",
 		tabs: [
 			{id: "t1", text: "Attendance", active: true}
@@ -83,4 +83,6 @@
 
 		myForm = w1.attachForm(formData, true);
 	}
+	
+	mySidebar.progressOff();
 </script>
