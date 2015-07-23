@@ -51,9 +51,9 @@ function doOnLoad() {
 		}
 	});
 	
-	// mySidebar.attachEvent("onContentLoaded", function(id){
- //    	cellIds = id;
-	// });
+	mySidebar.attachEvent("onContentLoaded", function(id){
+    	cellIds = id;
+	});
 
 	mySidebar.attachEvent("onSelect", function(id) {
 		switch(id) {
@@ -84,8 +84,8 @@ function doOnLoad() {
 		}
 	});
 
-	// if (true)
-	// 	login();
+	if (true)
+		login();
 }
 
 function setStatusBar(msg) {
@@ -190,7 +190,7 @@ function payrollMenu(cellIds)
 function dtrMenu(cellIds)
 {
 	mySidebar.progressOn();
-	mySidebar.cells(cellIds).attachURL("./module/dtr.html", true);
+	mySidebar.cells(cellIds).attachURL("./module/DTR/dtr.html", true);
 }
 
 function hrMenu(cellIds)
@@ -208,7 +208,7 @@ function adminUsers()
 function viewEmployeeProfile(cellIds)
 {
 	mySidebar.progressOn();
-	mySidebar.cells(cellIds).attachURL("./module/Admin/employee_profile.html", true);
+	mySidebar.cells(cellIds).attachURL("./module/Admin/Profile/employee_profile.html", true);
 }
 
 function doLogin()

@@ -1,0 +1,48 @@
+<script>
+	switch(btnIds) {
+		case "saveTimeRecord":
+			saveTimeRecords();
+			break;
+		case "importRecord":
+			importRecords();
+			break;
+	}
+
+	function saveTimeRecords()
+	{
+		var employeeName = $("input[name='employeeName']").val();
+		var addDate = $("input[name='addDate']").val();
+		var addTime = $("input[name='addTime']").val();
+		var status = $("input[name='status']").val();
+
+		$.ajax({
+			type: "POST",
+			headers: {
+				"Accept": "application/json",
+				"Content-Type": "application/json",
+				"Authorization": "Bearer " + window.token,
+			},
+			url: baseUrl + "/employees",
+			data: JSON.stringify({
+			"holidayType": employeeName,
+			"holidayName": addDate,
+			"holidayDate": addTime,
+			"holidayDate": status
+			}),
+			dataType: "json",
+			success: function(response)
+			{
+				console.log(response);
+			},
+			error: function(jqXHR)
+			{
+				console.log(jqXHR);
+			}
+		});
+	}
+
+	function importRecords()
+	{
+		alert(1);
+	}
+</script>

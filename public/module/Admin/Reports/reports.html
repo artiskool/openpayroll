@@ -33,7 +33,7 @@
 			viewEmployeeMonthly();
 		} else if(name == "selectOptions" && value == "annual") {
 			myForm.hideItem("month");
-			myLayout.tabs("a").attachURL("./module/Admin/reports.html", true);
+			myLayout.tabs("a").attachURL("./module/Admin/Reports/reports.html", true);
 		}
 	});
 
@@ -117,7 +117,7 @@
 		} else if(name == "month" && value == "feb") {
 			viewPayrollMonthly();
 		} else if(name == "selectPayroll" && value == "annual") {
-			myLayout.tabs("a").attachURL("./module/Admin/reports.html", true);
+			myLayout.tabs("a").attachURL("./module/Admin/Reports/reports.html", true);
 		}
 	});
 	myPayrollChart = newLayoutB.cells("b").attachChart({

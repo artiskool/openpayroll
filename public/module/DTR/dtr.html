@@ -2,9 +2,11 @@
 	myTabbar = mySidebar.cells(cellIds).attachTabbar({
 		mode: "bottom",
 		tabs: [
-			{id: "t1", text: "Attendance", active: true}
+			{id: "t1", text: "Attendance", active: true},
+			{id: "t2"},
 		]
 	});
+	myTabbar.tabs("t2").hide();
 
 	dtr = myTabbar.tabs("t1").attachMenu({
 		json: "./json/DTR/dtr_menu.json",
@@ -16,9 +18,10 @@
 	myGrid.setStyle("font-weight: bold;");
 
 	dtr.attachEvent("onClick", function(id) {
+		btnIds = id;
 		switch(id) {
 			case "add_time":
-				addTimeRecord();
+				addTimeRecord(btnIds);
 				break;
 			case "imp_timesheet":
 				importRecords();
@@ -44,18 +47,27 @@
 		formData = [
 			{type: "settings", position: "label-left", labelWidth: 100, inputWidth: 250},
 			{type: "block", inputWidth: "auto", offsetTop: 20, list: [
-				{type: "combo", label: "Employee", name: "random", serverFiltering: "", filterCache: true, filterSubLoad: true},
-				{type: "calendar", label: "Date", name: "date_from", offsetTop: 10, inputWidth: 245},
-				{type: "input", label: "Time", name: "time", offsetTop: 10, inputWidth: 245},
-				{type: "select", label: "Status", name: "status", value: "", offsetTop: 10,options:[
+				{type: "combo", label: "Employee", name: "employeeName", serverFiltering: "", filterCache: true, filterSubLoad: true},
+				{type: "calendar", label: "Date", name: "addDate", offsetTop: 10, inputWidth: 245},
+				{type: "input", label: "Time", name: "addTime", offsetTop: 10, inputWidth: 245},
+				{type: "select", label: "Status", name: "status", offsetTop: 10,options:[
 						{text: "Clock In", value: "clock_in", name: "employee", selected: true},
 						{text: "Clock Out", value: "clock_in", name: "group1"},
 				]},
-				{type: "button", value: "Save", name: "save", offsetLeft: 285, offsetTop: 15}
+				{type: "button", value: "Save", name: "saveTimeRecord", offsetLeft: 285, offsetTop: 15}
 			]}
 		];
 
 		myForm = w1.attachForm(formData, true);
+
+		myForm.attachEvent("onButtonClick", function(id) {
+			btnIds = id;
+			switch(id) {
+				case "saveTimeRecord":
+					saveTimeRecord(btnIds);
+					break;
+			}
+		});
 	}
 
 	function importRecords()
@@ -77,11 +89,25 @@
 			{type: "settings", position: "label-left", labelWidth: 100, inputWidth: 250},
 			{type: "block", inputWidth: "auto", offsetTop: 20, list: [
 				{type: "file", label: "Import File", name: "date_from", offsetTop: 10},
-				{type: "button", value: "Import", name: "import", offsetLeft: 262, offsetTop: 15}
+				{type: "button", value: "Import", name: "importRecord", offsetLeft: 262, offsetTop: 15}
 			]}
 		];
 
-		myForm = w1.attachForm(formData, true);
+		myImport = w1.attachForm(formData, true);
+
+		myImport.attachEvent("onButtonClick", function(id) {
+			btnIds = id;
+			switch(id) {
+				case "importRecord":
+					saveTimeRecord(btnIds);
+					break;
+			}
+		});
+	}
+
+	function saveTimeRecord(btnIds)
+	{
+		myTabbar.tabs("t2").attachURL("./module/DTR/save_time_record.html", true);
 	}
 	
 	mySidebar.progressOff();

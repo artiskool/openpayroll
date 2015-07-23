@@ -64,12 +64,12 @@
 
 	function reports()
 	{
-		myLayout.tabs("a").attachURL("./module/Admin/reports.html", true);
+		myLayout.tabs("a").attachURL("./module/Admin/Reports/reports.html", true);
 	}
 
 	function userManagement()
 	{
-		myUserTab.cells("tt1").attachURL("./module/Admin/user_management.html", true);
+		myUserTab.cells("tt1").attachURL("./module/Admin/User_management/user_management.html", true);
 	}
 
 	function users()
@@ -150,4 +150,6 @@
 		myGrid.attachHeader("#master_checkbox,#text_filter");
 		myGrid.setStyle("font-weight: bold;");
 	}
+
+	mySidebar.progressOff();
 </script>

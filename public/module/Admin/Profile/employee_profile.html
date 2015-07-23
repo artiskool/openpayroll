@@ -3,9 +3,11 @@
 		mode: "bottom",
 		tabs: [
 			{id: "t1", text: "Basic Information", active: true},
-			{id: "t2", text: "Work Schedules"}
+			{id: "t2", text: "Work Schedules"},
+			{id: "t3"}			
 		],
 	});
+	myTabbar.tabs("t3").hide();
 
 
 	// employee details
@@ -16,7 +18,7 @@
 				{type: "upload", name: "myFiles", offsetTop: 15, inputWidth: 330, url: "php/dhtmlxform_item_upload.php", _swfLogs: "enabled", swfPath: "uploader.swf", swfUrl: "php/dhtmlxform_item_upload.php"}
 			]},
 			{ type:"block", width: 550, list: [
-				{type: "input", name: "employee_id", value: 1, offsetLeft: 20, label: "Employee No.", inputWidth: 200, position: "label-top"},
+				{type: "input", name: "employeeId", value: 1, offsetLeft: 20, label: "Employee No.", inputWidth: 200, position: "label-top"},
 				{ type: "newcolumn" },
 				{type: "input", name: "Fname", value: "Ray", offsetLeft: 80, label: "First Name", inputWidth: 200, position: "label-top"}
 			]},
@@ -28,19 +30,19 @@
 			{ type:"block", width: 550, list: [
 				{type: "password", name: "password", offsetLeft: 20, label: "Password", inputWidth: 200, position: "label-top" },
 				{ type: "newcolumn" },
-				{type: "password", name: "re_password", offsetLeft: 80, label: "Retype Password", inputWidth: 200, position: "label-top" }
+				{type: "password", name: "retypePassword", offsetLeft: 80, label: "Retype Password", inputWidth: 200, position: "label-top" }
 			]},
-			{ type: "button", value: "Update", name: "basic_button", className: "btnUpdate"}
+			{ type: "button", value: "Update", name: "basicUpdate", className: "btnUpdate"}
 		];
 
-	contact_details = [
+	contactDetails = [
 			{ type:"block", width: 550, list: [
 				{type: "input", name: "email", offsetLeft: 20, label: "Email", inputWidth: 200, position: "label-top" },
 				{ type: "newcolumn" },
-				{type: "input", name: "phone_no", offsetLeft: 80, label: "Phone No.", inputWidth: 200, position: "label-top" }
+				{type: "input", name: "phoneNo", offsetLeft: 80, label: "Phone No.", inputWidth: 200, position: "label-top" }
 			]},
 			{ type:"block", width: 550, list: [
-				{type: "input", name: "mobile_no", offsetLeft: 20, label: "Mobile No.", inputWidth: 200, position: "label-top" },
+				{type: "input", name: "mobileNo", offsetLeft: 20, label: "Mobile No.", inputWidth: 200, position: "label-top" },
 				{ type: "newcolumn" },
 				{type: "input", name: "address1", offsetLeft: 80, label: "Address Line 1", inputWidth: 200, position: "label-top" }
 			]},
@@ -55,24 +57,24 @@
 				{type: "select", name: "country", offsetLeft: 85, label: "Country", inputWidth: 200, position: "label-top" }
 			]},
 
-			{ type: "button", value: "Update", className: "btnUpdate" }
+			{ type: "button", value: "Update", name: "contactUpdate", className: "btnUpdate"}
 		];
 
-	government_details = [
+	governmentDetails = [
 			{ type:"block", offsetTop: -10, width: 550, list: [
-				{type: "input", name: "sss_no", offsetLeft: 20, label: "SSS Number", inputWidth: 200, position: "label-top" },
+				{type: "input", name: "sssNo", offsetLeft: 20, label: "SSS Number", inputWidth: 200, position: "label-top" },
 				{ type: "newcolumn" },
-				{type: "input", name: "bir_no", offsetLeft: 80, label: "BIR Number", inputWidth: 200, position: "label-top" },
+				{type: "input", name: "birNo", offsetLeft: 80, label: "BIR Number", inputWidth: 200, position: "label-top" },
 			]},
 			{ type:"block", width: 550, list: [
 				{type: "input", name: "taxID", offsetLeft: 20, label: "Tax Identification No.", inputWidth: 200, position: "label-top" },
 				{ type: "newcolumn" },
-				{type: "input", name: "philheath_no", offsetLeft: 80, label: "Philhealth Number", inputWidth: 200, position: "label-top" },
+				{type: "input", name: "philheathNo", offsetLeft: 80, label: "Philhealth Number", inputWidth: 200, position: "label-top" },
 			]},
 			{ type:"block", width: 550, list: [
-				{type: "input", name: "hdmf_no", offsetLeft: 20, label: "HDMF Number", inputWidth: 200, position: "label-top" },
+				{type: "input", name: "hdmfNo", offsetLeft: 20, label: "HDMF Number", inputWidth: 200, position: "label-top" },
 			]},
-			{ type: "button", value: "Submit", className: "btnUpdate" }
+			{ type: "button", value: "Update", name: "govermentUpdate", className: "btnUpdate"}
 		];
 
 		basic = myTabbar.tabs("t1").attachLayout({
@@ -98,15 +100,47 @@
 		basic.cells("a").setWidth(560);
 		myBasicLayout.cells("a").setHeight(304);
 		basicInfo = basic.cells("a").attachForm(formData, true);
-		myBasicLayout.cells("a").attachForm(contact_details, true);
-		myBasicLayout.cells("b").attachForm(government_details, true);
+		contactInfo = myBasicLayout.cells("a").attachForm(contactDetails, true);
+		governmentInfo = myBasicLayout.cells("b").attachForm(governmentDetails, true);
 
 		scheduler.config.first_hour = 7;
 		scheduler.config.last_hour = 20;
 
 		myTabbar.tabs("t2").attachScheduler(new Date(), "week");
-		basicInfo.disableItem("employee_id");
+		basicInfo.disableItem("employeeId");
 	//end employee
+
+		basicInfo.attachEvent("onButtonClick", function(id) {
+			tabIds = id;
+			switch(id) {
+				case "basicUpdate":
+					updateEmployeeProfile(tabIds);
+					break;
+			}
+		});
+
+		contactInfo.attachEvent("onButtonClick", function(id) {
+			tabIds = id;
+			switch(id) {
+				case "contactUpdate":
+					updateEmployeeProfile(tabIds);
+					break;
+			}
+		});
+
+		governmentInfo.attachEvent("onButtonClick", function(id) {
+			tabIds = id;
+			switch(id) {
+				case "govermentUpdate":
+					updateEmployeeProfile(tabIds);
+					break;
+			}
+		});
+
+		function updateEmployeeProfile(tabIds)
+		{
+			myTabbar.tabs("t3").attachURL("./module/Admin/Profile/update_profile.html", true);
+		}
 
 	mySidebar.progressOff();
 </script>

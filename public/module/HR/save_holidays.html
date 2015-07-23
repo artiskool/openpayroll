@@ -1,0 +1,39 @@
+<script>
+
+	switch(btnIds) {
+		case "saveHoliday":
+			saveHolidayinfo();
+			break;
+	}
+
+	function saveHolidayinfo()
+	{
+		var holidayType = $("input[name='typeHoliday']").val();
+		var holidayName = $("input[name='holidayName']").val();
+		var holidayDate = $("input[name='holidayDate']").val();
+
+		$.ajax({
+			type: "POST",
+			headers: {
+				"Accept": "application/json",
+				"Content-Type": "application/json",
+				"Authorization": "Bearer " + window.token,
+			},
+			url: baseUrl + "/employees",
+			data: JSON.stringify({
+			"holidayType": holidayType,
+			"holidayName": holidayName,
+			"holidayDate": holidayDate
+			}),
+			dataType: "json",
+			success: function(response)
+			{
+				console.log(response);
+			},
+			error: function(jqXHR)
+			{
+				console.log(jqXHR);
+			}
+		});
+	}
+</script>

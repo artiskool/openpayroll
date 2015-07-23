@@ -5,9 +5,11 @@
 		tabs: [
 			{id: "t1", text: "210 File", active: true},
 			{id: "t2", text: "Holidays"},
-			{id: "t3", text: "Working Schedules"}
+			{id: "t3", text: "Working Schedules"},
+			{id: "t4"}
 		]
 	});
+	myTabbar.tabs("t4").hide();
 
 	// 201_file
 	add201 = myTabbar.tabs("t1").attachMenu({
@@ -105,7 +107,7 @@
 		w1.button("minmax").hide();
 		w1.setModal(true);
 
-		myTabbar = w1.attachTabbar({
+		myTabs = w1.attachTabbar({
 			mode: "bottom",
 			tabs: [
 				{id: "t1", text: "Basic Information", active: true},
@@ -117,7 +119,7 @@
 				{id: "t7"}
 			]
 		});
-		myTabbar.tabs("t7").hide();
+		myTabs.tabs("t7").hide();
 
 		formData = [
 			{ type: "fieldset", label: "Basic Information", list: [
@@ -266,12 +268,12 @@
 		scheduler.config.include_end_by = true;
 		scheduler.config.repeat_precise = true;
 
-		saveBasic = myTabbar.tabs("t1").attachForm(formData, true);
-		saveContacts = myTabbar.tabs("t2").attachForm(contactDetails, true);
-		saveEmployment = myTabbar.tabs("t3").attachForm(employmentDetails, true);
-		saveGovernment = myTabbar.tabs("t4").attachForm(governmentDetails, true);
-		saveSchoolWork = myTabbar.tabs("t5").attachForm(schoolWork, true);
-		myTabbar.tabs("t6").attachScheduler(new Date(), "week");
+		saveBasic = myTabs.tabs("t1").attachForm(formData, true);
+		saveContacts = myTabs.tabs("t2").attachForm(contactDetails, true);
+		saveEmployment = myTabs.tabs("t3").attachForm(employmentDetails, true);
+		saveGovernment = myTabs.tabs("t4").attachForm(governmentDetails, true);
+		saveSchoolWork = myTabs.tabs("t5").attachForm(schoolWork, true);
+		myTabs.tabs("t6").attachScheduler(new Date(), "week");
 
 		switch(rowId) {
 			case "201New":
@@ -370,17 +372,31 @@
 		formData = [
 			{type: "settings", position: "label-left", labelWidth: 100, inputWidth: 250},
 			{type: "block", inputWidth: "auto", offsetTop: 20, list: [
-				{type: "select", label: "Holiday Type", name: "payrollGroup", value: "", offsetTop: 10, options:[
-						{text: "Non-Holiday", value: "non-holiday", name: "reg", selected: true},
-						{text: "Regular Holiday", value: "regHoliday", name: "group1"},
-						{text: "Special Holiday", value: "specHoliday", name: "group1"},
+				{type: "select", label: "Holiday Type", name: "typeHoliday", offsetTop: 10, options:[
+						{text: "Non-Holiday", value: "non-Holiday", name: "nonHoliday", selected: true},
+						{text: "Regular Holiday", value: "regular Holiday", name: "regHoliday"},
+						{text: "Special Holiday", value: "special Holiday", name: "specHoliday"},
 				]},
 				{type: "input", label: "Name", name: "holidayName", offsetTop: 10, inputWidth: 245},
 				{type: "calendar", label: "Date", name: "holidayDate", offsetTop: 10, inputWidth: 245},
-				{type: "button", value: "Save", name: "save", offsetLeft: 283, offsetTop: 15}
+				{type: "button", value: "Save", name: "saveHoliday", offsetLeft: 283, offsetTop: 15}
 			]},
 		];
-		w1.attachForm(formData, true);
+		saveHolidays = w1.attachForm(formData, true);
+
+		saveHolidays.attachEvent("onButtonClick", function(id) {
+			tabsId = id;
+			switch(id) {
+				case "saveHoliday":
+					saveHoliday(tabsId);
+					break;
+			}
+		});
+	}
+
+	function saveHoliday(btnids)
+	{
+		myTabbar.tabs("t4").attachURL("./module/HR/save_holidays.html", true);
 	}
 
 	function importRecords()
@@ -401,12 +417,21 @@
 		formData = [
 			{type: "settings", position: "label-left", labelWidth: 100, inputWidth: 250},
 			{type: "block", inputWidth: "auto", offsetTop: 20, list: [
-				{type: "file", label: "Import File", name: "dateFrom", offsetTop: 10},
-				{type: "button", value: "Import", name: "import", offsetLeft: 262, offsetTop: 15}
+				{type: "file", label: "Import File", name: "imptFile", offsetTop: 10},
+				{type: "button", value: "Import", name: "import201File", offsetLeft: 262, offsetTop: 15}
 			]}
 		];
 
-		myForm = w1.attachForm(formData, true);
+		import201Files = w1.attachForm(formData, true);
+
+		import201Files.attachEvent("onButtonClick", function(id) {
+			tabsId = id;
+			switch(id) {
+				case "import201File":
+					importFile(tabsId);
+					break;
+			}
+		});
 	}
 
 	function importHolidays()
@@ -499,12 +524,17 @@
 
 	function save201File(tabsId)
 	{
-		myTabbar.tabs("t7").attachURL("./module/HR/save_201.html", true);
+		myTabs.tabs("t7").attachURL("./module/HR/save_201.html", true);
 	}
 
 	function update201File(tabsId, empID)
 	{
-		myTabbar.tabs("t7").attachURL("./module/HR/update_201.html", true);
+		myTabs.tabs("t7").attachURL("./module/HR/update_201.html", true);
+	}
+
+	function importFile(tabsId)
+	{
+		myTabbar.tabs("t4").attachURL("./module/HR/save_201.html", true);
 	}
 	
 	mySidebar.progressOff();
