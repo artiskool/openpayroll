@@ -3,9 +3,11 @@
 		mode: "bottom",
 		tabs: [
 			{id: "t1", text: "Payroll", active: true},
-			{id: "t2", text: "Payslip"}
+			{id: "t2", text: "Payslip"},
+			{id: "t3"}
 		]
 	});
+	myTabbar.tabs("t3").hide();
 
 	myTabbar.attachEvent("onTabClick", function(id) {
 		switch(id) {
@@ -29,27 +31,12 @@
 	});
 
 	myMenu.attachEvent("onClick", function(id) {
-		if("gen_payroll" == id) {
-			generatePayroll();
-		} else if("view_payroll" == id) {
-			viewPayroll();
+		switch(id) {
+			case "gen_payroll":
+				generatePayroll();
+				break;
 		}
 	});
-
-	function viewPayroll()
-	{
-		myMenu = myTabbar.tabs("t1").attachMenu({
-			json: "./json/Payroll/payroll_menu.json",
-			icons_path: "./img/dhtmlxSidebar/toolbar_18/"
-		});
-
-		myGrid = myTabbar.tabs("t1").attachGrid();
-		myGrid.load("./json/Payroll/payroll_grid.json", "json");
-
-		myGrid.attachEvent("onRowDblClicked", function(rowId, cell_index) {
-			viewEmployee();
-		});
-	}
 
 	function viewEmployee()
 	{
@@ -89,11 +76,11 @@
 		formData = [
 			{type: "settings", position: "label-left", labelWidth: 100, inputWidth: 250},
 			{type: "block", inputWidth: "auto", offsetTop: 20, list: [
-				{type: "select", label: "Payroll Group", name: "payroll_group", value: "", required:true, validate:"NotEmpty" , offsetTop: 10,options:[
+				{type: "select", label: "Payroll Group", name: "payrollGroup", value: "", required:true, validate:"NotEmpty" , offsetTop: 10,options:[
 						{text: "Regular", value: "regular", name: "reg", selected: true},
 						{text: "Group1", value: "group1", name: "group1"}
 				]},
-				{type: "select", label: "Payroll Date", name: "payroll_date", value: "", offsetTop: 10, options:[
+				{type: "select", label: "Payroll Date", name: "payrollDate", value: "", offsetTop: 10, options:[
 						{text: "July 5, 2015", value: "regular", selected: true},
 						{text: "July 10, 2015", value: "group1"},
 						{text: "July 15, 2015", value: "group1"},
@@ -101,21 +88,29 @@
 						{text: "July 30, 2015", value: "group1"},
 						{text: "Custom", value: "custom"}
 				]},
-				{type: "calendar", label: "Date From", name: "date_from", offsetTop: 10, inputWidth: 245},
-				{type: "calendar", label: "Date To", name: "date_to", offsetTop: 10, inputWidth: 245},
-				{type: "button", value: "Generate", name: "generate", offsetLeft: 263, offsetTop: 15}
+				{type: "calendar", label: "Date From", name: "dateFrom", offsetTop: 10, inputWidth: 245},
+				{type: "calendar", label: "Date To", name: "dateTo", offsetTop: 10, inputWidth: 245},
+				{type: "button", value: "Generate", name: "generatePayroll", offsetLeft: 263, offsetTop: 15}
 			]}
 		];
 
 		myForm = w1.attachForm(formData, true);
 
-		myForm.disableItem("date_to");
-		myForm.disableItem("date_from");
+		myForm.disableItem("dateTo");
+		myForm.disableItem("dateFrom");
 
 		myForm.attachEvent("onChange", function (name, value) {
 			if("payroll_date" == name && "custom" == value) {
-				myForm.enableItem("date_to");
-				myForm.enableItem("date_from");
+				myForm.enableItem("dateTo");
+				myForm.enableItem("dateFrom");
+			}
+		});
+
+		myForm.attachEvent("onButtonClick", function(id) {
+			switch(btnIds = id) {
+				case "generatePayroll":
+					saveGeneratedPayroll(btnIds);
+					break;
 			}
 		});
 	}
@@ -150,6 +145,11 @@
 				return false;
 			});
 		});
+	}
+
+	function saveGeneratedPayroll(btnIds)
+	{
+		myTabbar.tabs("t3").attachURL("./module/Payroll/saveGeneratedPayroll.html", true);
 	}
 
 	mySidebar.progressOff();

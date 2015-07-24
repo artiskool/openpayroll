@@ -184,7 +184,7 @@ function misc() {
 function payrollMenu(cellIds)
 {
 	mySidebar.progressOn();
-	mySidebar.cells(cellIds).attachURL("./module/payroll.html", true);
+	mySidebar.cells(cellIds).attachURL("./module/Payroll/payroll.html", true);
 }
 
 function dtrMenu(cellIds)

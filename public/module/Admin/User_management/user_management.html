@@ -3,8 +3,8 @@
 	myGrid = myUserTab.tabs("tt1").attachGrid();
 	myGrid.load("./json/Admin/users_grid.json", "json");
 
-	myGrid.attachEvent("onRowDblClicked", function(rId,cInd) {
-		users();
+	myGrid.attachEvent("onRowDblClicked", function(rowId,cInd) {
+		users(rowId);
 	});
 
 </script>

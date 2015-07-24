@@ -1,0 +1,40 @@
+<script>
+	switch(btnIds) {
+		case "generatePayroll":
+			generatePayroll();
+			break;
+	}
+
+	function generatePayroll()
+	{
+		var payrollGroup = $("select[name=payrollGroup]").val();
+		var payrollDate = $("select[name=payrollDate]").val(); 
+		var dateFrom = $("input[name=dateFrom]").val();
+		var dateTo = $("input[name=dateTo]").val();
+
+		$.ajax({
+			type: "POST",
+			headers: {
+				"Accept": "application/json",
+				"Content-Type": "application/json",
+				"Authorization": "Bearer " + window.token,
+			},
+			url: baseUrl + "/employees",
+			data: JSON.stringify({
+			"payrollGroup": payrollGroup,
+			"payrollDate": payrollDate,
+			"dateFrom": dateFrom,
+			"dateTo": dateTo
+			}),
+			dataType: "json",
+			success: function(response)
+			{
+				console.log(response);
+			},
+			error: function(jqXHR)
+			{
+				console.log(jqXHR);
+			}
+		});
+	}
+</script>

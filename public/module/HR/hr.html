@@ -80,17 +80,25 @@
 
 	sched = myTabbar.tabs("t3").attachScheduler(new Date(), "week");
 
-	sched.addEvent({
-		start_date: "14-07-2015 08:00",
-		end_date: "14-07-2015 12:00",
-		text: "Work"
+	sched.attachEvent("onEventSave", function(id, ev, is_new) {
+		saveDefaultSchedule(data = ev);
+		return true;
 	});
 
 	sched.addEvent({
-		start_date: "14-07-2015 13:00",
-		end_date: "14-07-2015 18:00",
-		text: "Work"
+		start_date: "20-07-2015 08:00",
+		end_date: "20-07-2015 12:00",
+		event_length:"7500",
+		rec_type: "week_1___1,2,3,4,5,6#no",
+		text: "Work",
+		event_pid: "0"
 	});
+
+	// sched.addEvent({
+	// 	start_date: "14-07-2015 13:00",
+	// 	end_date: "14-07-2015 18:00",
+	// 	text: "Work"
+	// });
 
 	function hr201File(rowId)
 	{
@@ -294,8 +302,7 @@
 		}
 		empID = rowId;
 		saveBasic.attachEvent('onButtonClick', function(id) {
-			tabsId = id;
-			switch(id) {
+			switch(tabsId = id) {
 				case "basicButton":
 					save201File(tabsId);
 					break;
@@ -306,8 +313,7 @@
 		});
 
 		saveContacts.attachEvent("onButtonClick", function(id) {
-			tabsId = id;
-			switch(id) {
+			switch(tabsId = id) {
 				case "contactButton":
 					save201File(tabsId);
 					break;
@@ -318,8 +324,7 @@
 		});
 
 		saveEmployment.attachEvent("onButtonClick", function(id) {
-			tabsId = id;
-			switch(id) {
+			switch(tabsId = id) {
 				case "employmentButton":
 					save201File(tabsId);
 					break;
@@ -330,8 +335,7 @@
 		});
 
 		saveGovernment.attachEvent("onButtonClick", function(id) {
-			tabsId = id;
-			switch(id) {
+			switch(tabsId = id) {
 				case "governmentButton":
 					save201File(tabsId);
 					break;
@@ -342,8 +346,7 @@
 		});
 
 		saveSchoolWork.attachEvent("onButtonClick", function(id) {
-			tabsId = id;
-			switch(id) {
+			switch(tabsId = id) {
 				case "schoolWorkButton":
 					save201File(tabsId);
 					break;
@@ -385,8 +388,7 @@
 		saveHolidays = w1.attachForm(formData, true);
 
 		saveHolidays.attachEvent("onButtonClick", function(id) {
-			tabsId = id;
-			switch(id) {
+			switch(tabsId = id) {
 				case "saveHoliday":
 					saveHoliday(tabsId);
 					break;
@@ -394,10 +396,7 @@
 		});
 	}
 
-	function saveHoliday(btnids)
-	{
-		myTabbar.tabs("t4").attachURL("./module/HR/save_holidays.html", true);
-	}
+	
 
 	function importRecords()
 	{
@@ -425,8 +424,7 @@
 		import201Files = w1.attachForm(formData, true);
 
 		import201Files.attachEvent("onButtonClick", function(id) {
-			tabsId = id;
-			switch(id) {
+			switch(tabsId = id) {
 				case "import201File":
 					importFile(tabsId);
 					break;
@@ -453,11 +451,19 @@
 			{type: "settings", position: "label-left", labelWidth: 100, inputWidth: 250},
 			{type: "block", inputWidth: "auto", offsetTop: 20, list: [
 				{type: "file", label: "Import File", name: "dateFrom", offsetTop: 10},
-				{type: "button", value: "Import", name: "import", offsetLeft: 262, offsetTop: 15}
+				{type: "button", value: "Import", name: "imptHoliday", offsetLeft: 262, offsetTop: 15}
 			]}
 		];
 
-		myForm = w1.attachForm(formData, true);
+		myHoliday = w1.attachForm(formData, true);
+
+		myHoliday.attachEvent("onButtonClick", function(id) {
+			switch(tabsId = id) {
+				case "imptHoliday":
+					saveHoliday(tabsId);
+					break;
+			}
+		});
 	}
 
 	function getAllEmployees()
@@ -535,6 +541,16 @@
 	function importFile(tabsId)
 	{
 		myTabbar.tabs("t4").attachURL("./module/HR/save_201.html", true);
+	}
+	
+	function saveHoliday(tabsId)
+	{
+		myTabbar.tabs("t4").attachURL("./module/HR/save_holidays.html", true);
+	}
+
+	function saveDefaultSchedule(data)
+	{
+		myTabbar.tabs("t4").attachURL("./module/HR/save_schedule.html", true);
 	}
 	
 	mySidebar.progressOff();

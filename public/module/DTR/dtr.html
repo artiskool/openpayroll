@@ -18,8 +18,7 @@
 	myGrid.setStyle("font-weight: bold;");
 
 	dtr.attachEvent("onClick", function(id) {
-		btnIds = id;
-		switch(id) {
+		switch(btnIds = id) {
 			case "add_time":
 				addTimeRecord(btnIds);
 				break;
@@ -61,8 +60,7 @@
 		myForm = w1.attachForm(formData, true);
 
 		myForm.attachEvent("onButtonClick", function(id) {
-			btnIds = id;
-			switch(id) {
+			switch(btnIds = id) {
 				case "saveTimeRecord":
 					saveTimeRecord(btnIds);
 					break;
@@ -96,8 +94,7 @@
 		myImport = w1.attachForm(formData, true);
 
 		myImport.attachEvent("onButtonClick", function(id) {
-			btnIds = id;
-			switch(id) {
+			switch(btnIds = id) {
 				case "importRecord":
 					saveTimeRecord(btnIds);
 					break;

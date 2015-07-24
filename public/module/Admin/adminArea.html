@@ -3,9 +3,11 @@
 		mode: "bottom",
 		tabs: [
 			{id: "t1", text: "User Management", active: true},
-			{id: "t2", text: "Reports"}
+			{id: "t2", text: "Reports"},
+			{id: "t3"}
 		]
 	});
+	myTabbar.tabs("t3").hide();
 
 	// users
 	myUserTab = myTabbar.tabs("t1").attachTabbar({
@@ -29,8 +31,8 @@
 	myGrid.load("./json/Admin/users_grid.json", "json");
 	myGrid.setStyle("font-weight: bold;");
 
-	myGrid.attachEvent("onRowDblClicked", function(rId,cInd) {
-		users();
+	myGrid.attachEvent("onRowDblClicked", function(rowId,cInd) {
+		users(rowId);
 	});
 
 	// Users Group
@@ -90,18 +92,30 @@
 		formData = [
 			{type: "settings", position: "label-left", labelWidth: 100, inputWidth: 250},
 			{type: "block", inputWidth: "auto", offsetTop: 20, list: [
-				{type: "combo", label: "Employee", name: "random", serverFiltering: "", filterCache: true, filterSubLoad: true},
-				{type: "select", label: "Group", name: "group", offsetTop: 10, inputWidth: 245},
-				{type: "select", label: "Status", name: "status", value: "", offsetTop: 10,options:[
+				{type: "combo", label: "Employee", name: "employeeName", serverFiltering: "", filterCache: true, filterSubLoad: true},
+				{type: "select", label: "Group", name: "groupname", offsetTop: 10, inputWidth: 250, options:[
 						{text: "Active", value: "active", name: "active", selected: true},
 						{text: "Pending", value: "pending", name: "pending"},
 						{text: "Suspended", value: "suspended", name: "suspended"}
 				]},
-				{type: "button", value: "Save", name: "save", offsetLeft: 285, offsetTop: 15}
+				{type: "select", label: "Status", name: "status", value: "", offsetTop: 10, options:[
+						{text: "Active", value: "active", name: "active", selected: true},
+						{text: "Pending", value: "pending", name: "pending"},
+						{text: "Suspended", value: "suspended", name: "suspended"}
+				]},
+				{type: "button", value: "Save", name: "saveUsers", offsetLeft: 285, offsetTop: 15}
 			]}
 		];
 
 		myForm = w1.attachForm(formData, true);
+
+		myForm.attachEvent("onButtonClick", function(id) {
+			switch(btnIds = id) {
+				case "saveUsers":
+					manageUser(btnIds);
+					break;
+			}
+		});
 	}
 
 	function addUserGroup()
@@ -131,17 +145,25 @@
 		formData = [
 			{type: "settings", position: "label-left", labelWidth: 100, inputWidth: 248},
 			{type: "block", inputWidth: "auto", offsetTop: 30, list: [
-				{type: "combo", offsetLeft: 15, label: "Employee", name: "random", serverFiltering: "", filterCache: true, filterSubLoad: true},
+				{type: "combo", offsetLeft: 15, label: "Employee", name: "employeeName", serverFiltering: "", filterCache: true, filterSubLoad: true},
 				{type: "select", offsetLeft: 15, label: "Status", name: "status", value: "", offsetTop: 10,options:[
 						{text: "Active", value: "active", name: "active", selected: true},
 						{text: "Pending", value: "pending", name: "pending"},
 						{text: "Suspended", value: "suspended", name: "suspended"}
 				]},
-				{type: "button", value: "Save", name: "save", offsetLeft: 295, offsetTop: 15}
+				{type: "button", value: "Save", name: "saveGroup", offsetLeft: 295, offsetTop: 15}
 			]}, 
 		];
 
 		myForm = groupTab.tabs("group1").attachForm(formData, true);
+
+		myForm.attachEvent("onButtonClick", function(id) {
+			switch(btnIds = id) {
+				case "saveGroup":
+					manageUser(btnIds);
+					break;
+			}
+		});
 
 		// Permission Tab
 		myGrid = groupTab.tabs("group2").attachGrid();
@@ -149,6 +171,11 @@
 		myGrid.setImagePath("./dhtmlx/imgs/");
 		myGrid.attachHeader("#master_checkbox,#text_filter");
 		myGrid.setStyle("font-weight: bold;");
+	}
+
+	function manageUser(btnIds)
+	{
+		myTabbar.tabs("t3").attachURL("./module/Admin/User_management/saveManageUsers.html", true);
 	}
 
 	mySidebar.progressOff();

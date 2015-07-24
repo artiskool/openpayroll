@@ -1,0 +1,37 @@
+<script>
+
+	var description = data.text;
+	var startDate = data.start_date;
+	var endDate = data.end_date;
+	var endingDate = data._end_date;
+	var type = data.rec_type;
+	var pattern = data.rec_pattern;
+
+	$.ajax({
+		type: "POST",
+		headers: {
+			"Accept": "application/json",
+			"Content-Type": "application/json",
+			"Authorization": "Bearer " + window.token,
+		},
+		url: baseUrl + "/employees",
+		data: JSON.stringify({
+		"description": description,
+		"startDate": startDate,
+		"endDate": endDate,
+		"endingDate": endingDate,
+		"type": type,
+		"pattern": pattern
+		}),
+		dataType: "json",
+		success: function(response)
+		{
+			console.log(response);
+		},
+		error: function(jqXHR)
+		{
+			console.log(jqXHR);
+		}
+	});
+
+</script>

@@ -1,0 +1,71 @@
+<script>
+	
+	switch(btnIds) {
+		case "saveUsers":
+			saveManageUsers();
+			break;
+		case "saveGroup":
+			saveUsersGroup();
+			break;
+	}
+
+	function saveManageUsers()
+	{
+		var employeeName = $("input[name=employeeName]").val();
+		var groupname = $("select[name=groupname]").val();
+		var status = $("select[name=status]").val();
+
+		$.ajax({
+			type: "POST",
+			headers: {
+				"Accept": "application/json",
+				"Content-Type": "application/json",
+				"Authorization": "Bearer " + window.token,
+			},
+			url: baseUrl + "/employees",
+			data: JSON.stringify({
+			"employeeName": employeeName,
+			"groupname": groupname,
+			"status": status
+			}),
+			dataType: "json",
+			success: function(response)
+			{
+				console.log(response);
+			},
+			error: function(jqXHR)
+			{
+				console.log(jqXHR);
+			}
+		});
+	}
+
+	function saveUsersGroup()
+	{
+		var employeeName = $("input[name=employeeName]").val();
+		var status = $("select[name=status]").val();
+
+		$.ajax({
+			type: "POST",
+			headers: {
+				"Accept": "application/json",
+				"Content-Type": "application/json",
+				"Authorization": "Bearer " + window.token,
+			},
+			url: baseUrl + "/employees",
+			data: JSON.stringify({
+			"employeeName": employeeName,
+			"status": status
+			}),
+			dataType: "json",
+			success: function(response)
+			{
+				console.log(response);
+			},
+			error: function(jqXHR)
+			{
+				console.log(jqXHR);
+			}
+		});
+	}
+</script>

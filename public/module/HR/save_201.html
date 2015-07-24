@@ -28,9 +28,9 @@
 		var lastName = $("input[name='Lname']").val();
 		var middleName = $("input[name='Mname']").val();
 		var birthdate = $("input[name='birthdate']").val();
-		var gender = $("input[name=gender]").val();
-		var maritalStatus = $("input[name=maritalStatus]").val();
-		var active = $("input[name=active]").val();
+		var gender = $("select[name=gender]").val();
+		var maritalStatus = $("select[name=maritalStatus]").val();
+		var active = $("select[name=active]").val();
 
 		$.ajax({
 			type: "POST",
@@ -72,9 +72,9 @@
 		var mobileNo = $("input[name=mobileNo]").val();
 		var address1 = $("input[name=address1]").val();
 		var address2 = $("input[name=address2]").val();
-		var city = $("input[name=city]").val();
-		var province = $("input[name=province]").val();
-		var country = $("input[name=country]").val();
+		var city = $("select[name=city]").val();
+		var province = $("select[name=province]").val();
+		var country = $("select[name=country]").val();
 
 		$.ajax({
 			type: "POST",
@@ -111,10 +111,10 @@
 
 	function saveEmploymentInfo()
 	{
-		var employmentType = $("input[name=employmentType]").val();
-		var department = $("input[name=department]").val();
-		var position = $("input[name=position]").val();
-		var rank = $("input[name=rank]").val();
+		var employmentType = $("select[name=employmentType]").val();
+		var department = $("select[name=department]").val();
+		var position = $("select[name=position]").val();
+		var rank = $("select[name=rank]").val();
 		var dateHired = $("input[name=dateHired]").val();
 		var dateEnded = $("input[name=dateEnded]").val();
 
@@ -220,6 +220,6 @@
 
 	function saveImportFile()
 	{
-		alert("test");
+		alert("Import 201 File");
 	}
 </script>

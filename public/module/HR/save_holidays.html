@@ -1,14 +1,17 @@
 <script>
 
-	switch(btnIds) {
+	switch(tabsId) {
 		case "saveHoliday":
 			saveHolidayinfo();
+			break;
+		case "imptHoliday":
+			saveImptHoliday();
 			break;
 	}
 
 	function saveHolidayinfo()
 	{
-		var holidayType = $("input[name='typeHoliday']").val();
+		var holidayType = $("select[name='typeHoliday']").val();
 		var holidayName = $("input[name='holidayName']").val();
 		var holidayDate = $("input[name='holidayDate']").val();
 
@@ -35,5 +38,10 @@
 				console.log(jqXHR);
 			}
 		});
+	}
+
+	function saveImptHoliday()
+	{
+		alert("Save Holiday");
 	}
 </script>
